@@ -1,0 +1,196 @@
+{
+  "source": "KennCo UI (Antti) (Copy).fig",
+  "assets": [
+    {
+      "name": "kennco-logo",
+      "hash": "6946edfb5c33428e0fe40f4bee90ffda399c97f3",
+      "kind": "logo",
+      "node": "2003:427",
+      "original": {
+        "width": 2000,
+        "height": 1039,
+        "format": "png"
+      },
+      "files": [
+        "kennco-logo.png"
+      ]
+    },
+    {
+      "name": "cover-car",
+      "hash": "5f34625018e50121d41ba6597b7628dfcdb29afa",
+      "kind": "icon",
+      "node": "2003:1020",
+      "original": {
+        "width": 1600,
+        "height": 1600,
+        "format": "png"
+      },
+      "files": [
+        "cover-car.png"
+      ]
+    },
+    {
+      "name": "cover-van",
+      "hash": "55777502646c14ea6f62891db7df7389e5953ed6",
+      "kind": "icon",
+      "node": "2003:1024",
+      "original": {
+        "width": 1600,
+        "height": 1600,
+        "format": "png"
+      },
+      "files": [
+        "cover-van.png"
+      ]
+    },
+    {
+      "name": "cover-travel",
+      "hash": "61453aa23b27553b72c2308cb9fe2d8d1c3cd06b",
+      "kind": "icon",
+      "node": "2003:1022",
+      "original": {
+        "width": 1600,
+        "height": 1600,
+        "format": "png"
+      },
+      "files": [
+        "cover-travel.png"
+      ]
+    },
+    {
+      "name": "cover-home",
+      "hash": "5b0a402b498a18860cf05c0c5f68bbe800aa2838",
+      "kind": "icon",
+      "node": "2003:1018",
+      "original": {
+        "width": 1600,
+        "height": 1600,
+        "format": "png"
+      },
+      "files": [
+        "cover-home.png"
+      ]
+    },
+    {
+      "name": "hero",
+      "hash": "c2bcffb6797fc5f3a53af6158287b92c14bb3b61",
+      "kind": "photo",
+      "node": "2003:1326",
+      "widths": [
+        960,
+        1600
+      ],
+      "original": {
+        "width": 4096,
+        "height": 1843,
+        "format": "jpeg"
+      },
+      "files": [
+        "hero-960.webp",
+        "hero-1600.webp"
+      ]
+    },
+    {
+      "name": "news-driving",
+      "hash": "20b602710576f653ebc6f6c77aedc5eda7ada1f7",
+      "kind": "photo",
+      "widths": [
+        480,
+        800
+      ],
+      "original": {
+        "width": 4096,
+        "height": 2731,
+        "format": "jpeg"
+      },
+      "files": [
+        "news-driving-480.webp",
+        "news-driving-800.webp"
+      ]
+    },
+    {
+      "name": "news-scooter",
+      "hash": "fc43446c723294c1ff6fa7b8402421a2852c8f3b",
+      "kind": "photo",
+      "widths": [
+        480,
+        800
+      ],
+      "original": {
+        "width": 3504,
+        "height": 2336,
+        "format": "jpeg"
+      },
+      "files": [
+        "news-scooter-480.webp",
+        "news-scooter-800.webp"
+      ]
+    },
+    {
+      "name": "news-home",
+      "hash": "bf1a9617fec02cac278cfc7e148cdba515621f97",
+      "kind": "photo",
+      "widths": [
+        480,
+        800
+      ],
+      "original": {
+        "width": 3000,
+        "height": 2000,
+        "format": "jpeg"
+      },
+      "files": [
+        "news-home-480.webp",
+        "news-home-800.webp"
+      ]
+    }
+  ],
+  "supplementalAssets": {
+    "hero": {
+      "file": "hero-original.svg",
+      "node": "2003:1319",
+      "width": 624,
+      "height": 522,
+      "originalGeometry": true
+    },
+    "desktopBackground": {
+      "file": "hero-background.webp",
+      "hash": "7a55e394bc1cdffcefc76880b03ecb99cc8de2e3"
+    },
+    "mobileBackground": {
+      "file": "hero-background-mobile.webp",
+      "hash": "dea0f3b4219c5c2ec14f1f124cf28e9cb193f1af"
+    },
+    "trustpilot": {
+      "file": "trustpilot-rating.png",
+      "node": "2003:1191",
+      "hash": "5d5def4e5d1bedb633a3d7f80efb757a7162a962",
+      "crop": {
+        "left": 106,
+        "top": 46,
+        "width": 380,
+        "height": 292
+      }
+    },
+    "floatingHero": {
+      "source": "https://github.com/sapaqi/Kennco/blob/main/hero-tailwind.html",
+      "photo": "hero-floating-photo-clean.png",
+      "frame": "hero-floating-frame.svg",
+      "photoDimensions": [
+        1254,
+        1254
+      ],
+      "transparent": true,
+      "photoEdit": "Removed baked-in interior star with built-in imagegen; original Figma vector stars rendered in frame SVG.",
+      "stars": {
+        "file": "hero-stars-figma.png",
+        "source": "User supplied hero image (2).png",
+        "dimensions": [
+          1016,
+          768
+        ],
+        "note": "Exact supplied PNG, uniformly scaled as one layer; no redrawing or color changes."
+      }
+    }
+  }
+}
