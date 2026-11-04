@@ -189,7 +189,11 @@ function ReviewsSection() {
   }, [])
   const scrollReviews = (direction: number) => {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
-    track.current?.scrollBy({ left: direction * 332, behavior: reduced ? 'instant' : 'smooth' })
+    const element = track.current
+    const card = element?.querySelector<HTMLElement>('.review-card')
+    if (!element || !card) return
+    const step = card.getBoundingClientRect().width + parseFloat(getComputedStyle(element).columnGap)
+    element.scrollBy({ left: direction * step, behavior: reduced ? 'instant' : 'smooth' })
   }
   return <section className="reviews-section section-space" aria-labelledby="reviews-heading">
     <div className="container-shell">
@@ -197,7 +201,7 @@ function ReviewsSection() {
       <Reveal><div className="reviews-layout">
         <a className="trustpilot-summary" href="https://ie.trustpilot.com/review/kennco.ie"><img src="/assets/trustpilot-rating.png" width="380" height="292" alt="Excellent. Based on 1,882 reviews. Trustpilot." /></a>
         <div className="min-w-0"><div ref={track} className="review-track" role="region" aria-label="Customer testimonials" tabIndex={0}>
-          {reviews.map(review => <figure key={review.name} className="review-card"><div className="mb-6 flex items-center justify-between gap-4"><Stars /><span className="quote-mark" aria-hidden="true">“</span></div><blockquote className="grow text-[14px] leading-[1.85] text-ink">{review.text}</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-brand-blue/10 pt-5"><span className="review-avatar">{review.initials}</span><span className="font-heading text-sm font-bold">{review.name}</span></figcaption></figure>)}
+          {reviews.map(review => <figure key={review.name} className="review-card"><div className="mb-6 flex items-center justify-between gap-4"><Stars /><span className="quote-mark" aria-hidden="true">“</span></div><blockquote className="grow text-[.875rem] leading-[1.85] text-ink">{review.text}</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-brand-blue/10 pt-5"><span className="review-avatar">{review.initials}</span><span className="font-heading text-sm font-bold">{review.name}</span></figcaption></figure>)}
         </div><div className="review-controls"><button type="button" className="icon-button" aria-label="Previous testimonial" onClick={() => scrollReviews(-1)} disabled={!canScrollBack}><Icon name="arrow" className="rotate-180" /></button><button type="button" className="icon-button" aria-label="Next testimonial" onClick={() => scrollReviews(1)} disabled={!canScrollForward}><Icon name="arrow" /></button></div></div>
       </div></Reveal>
     </div>

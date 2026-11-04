@@ -26,7 +26,9 @@ The app is a frontend prototype. There is no backend, analytics, subscription se
 - Preserves the source logo, product icons, hero photograph, three article photographs, Plus Jakarta Sans headings and Poppins body text.
 - Retains the original blue/green brand. Amber is limited to the Travel card and small decorative accents.
 - Preserves the approved header and hero composition, with the stronger headline/underline and refreshed primary and outlined secondary buttons. The cover cards and Quick Links retain their accepted visual refresh.
-- Header and hero span the full viewport. The artwork uses the transparent photo and SVG frame from the supplied `hero-tailwind.html` reference. The six stars use the exact supplied `hero image (2).png` as one transparent layer, preserving the shapes, gradients and spacing. Its absolutely positioned 680 px desktop stage floats within the left column, revealing the full width on large screens and clipping at the viewport's left edge on smaller desktops. The fixed 544 px desktop hero clips the artwork precisely at its bottom edge. Reference screenshots are not used as page assets. Lower sections use a maximum 1200 px content area. Product cards have one column below 360 px, two from 360 px, and four from 1024 px.
+- Header and hero backgrounds span the viewport. From 1440 px, their inner layout shares the same fluid container as all lower sections, including the newsletter and footer. The logo aligns with this content grid instead of the viewport edge. The hero artwork widens progressively, stays clear of the text, and remains clipped exactly at the bottom of its section. The supplied star PNG preserves its original shapes, gradients and spacing.
+- Desktop dimensions use rem units alongside Tailwind's rem utilities. The root scale grows smoothly from 16 px at 1440 px to 20 px at 2560 px, capped at 22 px. The shared container grows between 83 rem and 110 rem using an 81 vw target. This fills wider screens while allowing the outer margins to grow, particularly above 1920 px. Below 1440 px, the original 16 px scale and responsive layouts are retained.
+- The desktop newsletter has 50% more vertical padding (4.5 rem per side), making the whole banner roughly 30% taller. Its fields stay in one row on desktop. Mobile keeps its stacked layout. Product cards have one column below 360 px, two from 360 px, and four from 1024 px.
 - Section taglines and the FAQ introduction/help block are restored as requested. Enabled testimonial arrows have matching hover, active and keyboard-focus states.
 - Uses CSS transitions and IntersectionObserver for one-time section reveals. `prefers-reduced-motion` removes animations, smooth scrolling and hover movement; content defaults to visible before enhancement.
 - Mobile navigation supports focus containment, Escape, focus restoration and scroll locking. FAQ buttons expose their expanded state and reference the controlled answer regions.
@@ -54,8 +56,8 @@ The extraction script reads the embedded Kiwi schema and original image files di
 ## Verification
 
 - TypeScript check and production Vite build.
-- Browser layout checks at 320, 360, 390, 768, 1024, 1280 and 1440 px; no horizontal document overflow.
-- Desktop and mobile screenshot inspection, local asset loading and console checks.
+- Latest browser layout checks at 320, 390, 768, 1024, 1280, 1440, 1920, 2560 and 3840 px: no horizontal document overflow, hero copy contained, artwork clear of copy and clipped at the section bottom, and shared desktop container alignment.
+- Desktop and mobile screenshot inspection, local asset loading and console checks. Desktop carousel advances using the measured card width and gap so navigation follows the fluid scale.
 - Mobile menu opening, reverse Tab containment, Escape and focus restoration.
 - FAQ exclusive opening/collapse, invalid-email rejection and required newsletter consent.
 - Key text contrast ratios: body 5.87:1, primary CTA 5.47:1, brand-blue headings 8.41:1 and white newsletter headings 8.41:1.
