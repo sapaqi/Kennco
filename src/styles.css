@@ -179,7 +179,7 @@ img { display: block; max-width: 100%; }
 .newsletter-section { background: #035086; position: relative; isolation: isolate; overflow: hidden; }
 .newsletter-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 0% 0%, rgb(117 192 68 / 35%), transparent 60%); z-index: -1; }
 .newsletter-ring { position: absolute; width: 35rem; height: 35rem; border: 0.0625rem solid rgb(255 255 255 / 12%); border-radius: 50%; right: -10.625rem; bottom: -25.625rem; box-shadow: 0 0 0 2.1875rem rgb(255 255 255 / 3%), 0 0 0 4.375rem rgb(255 255 255 / 3%); }
-.newsletter-layout { position: relative; display: grid; grid-template-columns: minmax(0, 18.625rem) minmax(0, 1fr); gap: 3rem; align-items: center; padding-block: 3rem; }
+.newsletter-layout { position: relative; display: grid; grid-template-columns: minmax(0, 18.625rem) minmax(0, 1fr); gap: 3rem; align-items: center; padding-block: 5.45rem; }
 .newsletter-section .eyebrow { color: #fff; }
 .newsletter-section h2 { font-size: 1.5rem; line-height: 1.875rem; }
 .newsletter-fields { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.3fr) auto; gap: 0.5rem; align-items: end; }
@@ -282,6 +282,7 @@ img { display: block; max-width: 100%; }
   .review-card { padding: 1.5rem; }
   .reviews-layout { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
   .trustpilot-summary { width: 13.75rem; justify-self: center; }
+  .hero-copy { max-width: none; }
   .review-track .review-card { flex-basis: calc(100% - 1.25rem); }
   .rating-stars svg { width: 1.125rem; height: 1.125rem; }
   .faq-trigger { font-size: 0.8125rem; padding-block: 1.3125rem; gap: 1rem; }
@@ -323,7 +324,7 @@ img { display: block; max-width: 100%; }
   :root {
     font-size: clamp(1rem, calc(.678571rem + .357143vw), 1.375rem);
     --layout-width: clamp(83rem, 81vw, 110rem);
-    --hero-art-size: clamp(42.5rem, 42vw, 51.25rem);
+    --hero-art-size: 40.625rem; /* Reveal 80% of the artwork, keeping fingertips above the bottom crop. */
   }
   .container-shell, .header-inner, .hero-layout {
     width: min(100%, var(--layout-width));
@@ -331,16 +332,26 @@ img { display: block; max-width: 100%; }
     margin-inline: auto;
     padding-inline: 4rem;
   }
-  .hero-layout { gap: 3.5rem; }
+  .hero-layout { grid-template-columns: minmax(0, .82fr) minmax(0, 1.18fr); gap: 2.25rem; }
   .hero-floating {
     width: var(--hero-art-size);
-    height: var(--hero-art-size);
-    left: min(calc(50% - 2.5rem), calc(100% - var(--hero-art-size) / 2));
+    height: auto;
+    aspect-ratio: 1;
+    top: 0;
+    right: 0;
+    left: auto;
+    transform: none;
   }
+  .hero-copy { max-width: none; width: 100%; }
+  .hero-copy h1 { text-wrap: balance; }
   .review-track .review-card { flex-basis: clamp(19.5rem, 22vw, 24rem); }
 }
 @media (min-width: 1024px) {
-  .newsletter-layout { padding-block: 4.5rem; }
+  .newsletter-layout { padding-block: 6.4rem; }
+}
+
+@media (max-width: 767px) {
+  .newsletter-layout { padding-block: 6.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
