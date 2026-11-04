@@ -1,50 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
-import type { CSSProperties, FormEvent, ReactNode } from 'react'
+import type { FormEvent } from 'react'
+import { ButtonLink, Icon, Reveal } from './ui'
+import { HomeInsuranceContent, homeQuoteUrl } from './HomeInsurance'
 import { articles, covers, faqs, footerGroups, guideLinks, links, reviews, supportLinks } from './content'
-
-type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login'
-
-function Icon({ name, className = '' }: { name: IconName; className?: string }) {
-  const paths: Record<IconName, ReactNode> = {
-    arrow: <><path d="M4 12h15M13 5l7 7-7 7" /></>,
-    chevron: <path d="m7 10 5 5 5-5" />,
-    phone: <path d="m8 3-3 1C2 5 4 12 8 16s11 6 12 3l1-3-5-2-2 2c-2-1-5-4-6-6l2-2-2-5Z" />,
-    document: <><path d="M14 3H6a1 1 0 0 0-1 1v16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8l-5-5Z" /><path d="M14 3v5h5M9 12h6M9 16h6" /></>,
-    help: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 17h.01" /></>,
-    chat: <><path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a9 9 0 0 1 18 0Z" /><path d="M8 10h8M8 14h5" /></>,
-    book: <><path d="M12 5v15M3 4c4-1 6-1 9 1 3-2 5-2 9-1v14c-4-1-6-1-9 2-3-3-5-3-9-2V4Z" /></>,
-    check: <path d="m5 12 4 4L19 6" />,
-    close: <path d="m6 6 12 12M6 18 18 6" />,
-    menu: <path d="M4 7h16M4 12h16M4 17h16" />,
-    mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
-    shield: <><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z" /><path d="m8 12 3 3 5-6" /></>,
-    external: <><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" /></>,
-    login: <><path d="m10 7 5 5-5 5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></>,
-  }
-  return <svg viewBox={name === 'chevron' ? '6 8 12 8' : '0 0 24 24'} width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>{paths[name]}</svg>
-}
-
-function ButtonLink({ href, children, variant = 'primary', className = '', arrow = true }: { href: string; children: ReactNode; variant?: 'primary' | 'outline' | 'white'; className?: string; arrow?: boolean }) {
-  return <a href={href} className={`button button-${variant} ${className}`}>{children}{arrow && <Icon name="arrow" className="button-arrow" />}</a>
-}
-
-function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
-  const ref = useRef<HTMLDivElement>(null)
-  useEffect(() => {
-    const element = ref.current
-    if (!element || !('IntersectionObserver' in window) || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const rect = element.getBoundingClientRect()
-    // Only hide content below the current viewport; the first screen is always immediately readable.
-    if (rect.top < window.innerHeight) return
-    element.classList.add('reveal-pending')
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) { element.classList.remove('reveal-pending'); observer.disconnect() }
-    }, { threshold: 0.08 })
-    observer.observe(element)
-    return () => { observer.disconnect(); element.classList.remove('reveal-pending') }
-  }, [])
-  return <div ref={ref} className={`reveal ${className}`} style={{ '--reveal-delay': `${delay}ms` } as CSSProperties}>{children}</div>
-}
 
 function HeaderDropdown({ label, items }: { label: string; items: { name: string; href: string }[] }) {
   const details = useRef<HTMLDetailsElement>(null)
@@ -66,7 +24,8 @@ function HeaderDropdown({ label, items }: { label: string; items: { name: string
   </details>
 }
 
-function Header() {
+function Header({ productPage = false }: { productPage?: boolean }) {
+  const quoteHref = productPage ? homeQuoteUrl : links.quote
   const [menuOpen, setMenuOpen] = useState(false)
   const trigger = useRef<HTMLButtonElement>(null)
   const menu = useRef<HTMLDivElement>(null)
@@ -95,18 +54,18 @@ function Header() {
 
   return <header className="site-header">
     <div className="header-inner">
-      <a href="#top" aria-label="KennCo Insurance home" className="shrink-0"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" /></a>
+      <a href={productPage ? '/' : '#top'} aria-label="KennCo Insurance home" className="shrink-0"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" /></a>
       <nav aria-label="Main navigation" className="header-nav hidden lg:flex">
         {['car', 'van', 'home', 'travel'].map(key => {
           const cover = covers.find(cover => cover.key === key)!
-          return <a className="nav-link" key={cover.key} href={cover.href}>{cover.name}</a>
+          return <a className="nav-link" key={cover.key} href={cover.href} aria-current={productPage && cover.key === 'home' ? 'page' : undefined}>{cover.name}</a>
         })}
         <HeaderDropdown label="About Us" items={footerGroups.find(group => group.title === 'About us')!.items} />
         <HeaderDropdown label="Help Centre" items={supportLinks.map(link => ({ name: link.name, href: link.href }))} />
         <a href={links.renew} className="nav-link">Renew Now</a>
       </nav>
       <div className="header-actions hidden lg:flex">
-        <ButtonLink href={links.quote} arrow={false}>Get a Quote</ButtonLink>
+        <ButtonLink href={quoteHref} arrow={false}>Get a Quote</ButtonLink>
         <a href={links.portal} className="button button-outline login-button"><Icon name="login" />Login</a>
       </div>
       <div className="mobile-header-actions flex lg:hidden">
@@ -123,7 +82,7 @@ function Header() {
             return <a key={cover.key} href={cover.href} className="mobile-nav-link" onClick={closeMenu}>{cover.name}<Icon name="arrow" /></a>
           })}
           <a className="mobile-nav-link" href={links.about} onClick={closeMenu}>About Us<Icon name="arrow" /></a>
-          <a className="mobile-nav-link" href="#quick-links" onClick={closeMenu}>Help Centre<Icon name="arrow" /></a>
+          <a className="mobile-nav-link" href={productPage ? '/#quick-links' : '#quick-links'} onClick={closeMenu}>Help Centre<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.renew} onClick={closeMenu}>Renew Now<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.portal} onClick={closeMenu}>Login<Icon name="external" /></a>
         </nav>
@@ -263,9 +222,9 @@ function NewsletterSection() {
   </div></section>
 }
 
-function Footer() {
+function Footer({ productPage = false }: { productPage?: boolean }) {
   return <footer className="site-footer"><div className="container-shell">
-    <div className="footer-top"><a href="#top" aria-label="KennCo Insurance home"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" loading="lazy" /></a><div className="flex flex-wrap gap-2"><a className="social-link" href="https://www.facebook.com/KennCoInsurance/" aria-label="KennCo on Facebook">f</a><a className="social-link" href="https://www.linkedin.com/company/kennco-underwriting-limited/" aria-label="KennCo on LinkedIn">in</a><a className="social-link" href="https://www.instagram.com/kenncoinsurance/" aria-label="KennCo on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" /></svg></a></div></div>
+    <div className="footer-top"><a href={productPage ? '/' : '#top'} aria-label="KennCo Insurance home"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" loading="lazy" /></a><div className="flex flex-wrap gap-2"><a className="social-link" href="https://www.facebook.com/KennCoInsurance/" aria-label="KennCo on Facebook">f</a><a className="social-link" href="https://www.linkedin.com/company/kennco-underwriting-limited/" aria-label="KennCo on LinkedIn">in</a><a className="social-link" href="https://www.instagram.com/kenncoinsurance/" aria-label="KennCo on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" /></svg></a></div></div>
     <div className="footer-columns"><div className="footer-contact"><h2>Contact us</h2><a href="tel:+35314092600"><Icon name="phone" />01 409 2600</a><a href="mailto:Insurance@Kennco.ie"><Icon name="mail" />Insurance@Kennco.ie</a><a href="mailto:Claims@Kennco.ie"><Icon name="mail" />Claims@Kennco.ie</a><address className="mt-3 text-xs not-italic leading-6 text-muted">Suite 5, 6 &amp; 7<br />Grange Road Office Park<br />Grange Road, Rathfarnham<br />Dublin 16, Ireland.</address></div>{footerGroups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.items.map(item => <li key={item.name}><a href={item.href}>{item.name}</a></li>)}</ul></div>)}</div>
     <div className="mt-6 flex justify-end"><a className="text-link text-xs" href="https://brokers.kennco.ie/">Broker Website<Icon name="external" /></a></div>
     <div className="footer-legal"><p>KennCo Underwriting Ltd T/A KennCo Insurance is regulated by The Central Bank of Ireland. Directors: J. Kennedy (Managing), S. Merity, M. Stapleton, C. McDonagh. Co. Reg. No. 454673. Registered at Suite 7, Grange Road Office Park, Rathfarnham, Dublin 16.</p><div className="mt-5 flex flex-wrap items-start justify-between gap-5"><div><span>KennCo © 2026</span><div className="legal-links"><a href={links.documents}>User Guide</a><a href={links.privacy}>Privacy Policy</a><a href={links.terms}>Terms of Business</a><a href="https://www.kennco.ie/accessibility-statement/">Accessibility</a><a href="https://www.kennco.ie/distance-sales-information/">Distance Sales</a><a href="https://www.kennco.ie/duty-of-disclosure/">Honesty &amp; Accuracy</a></div></div><a className="shrink-0" href="https://www.matrixinternet.ie/">Designed &amp; Developed by <span className="font-semibold">Matrix Internet</span></a></div></div>
@@ -273,5 +232,9 @@ function Footer() {
 }
 
 export function App() {
-  return <><a href="#main" className="skip-link">Skip to content</a><div id="top" /><Header /><main id="main"><Hero /><CoverSection /><ReviewsSection /><FaqSection /><QuickLinksSection /><NewsSection /><NewsletterSection /></main><Footer /></>
+  const productPage = /^\/home-insurance\/?$/.test(window.location.pathname)
+  useEffect(() => {
+    document.title = productPage ? 'Home Insurance — KennCo Insurance' : "KennCo Insurance — Cover for life's journeys"
+  }, [productPage])
+  return <div className={productPage ? 'home-insurance-page' : undefined}><a href="#main" className="skip-link">Skip to content</a><div id="top" /><Header productPage={productPage} /><main id="main">{productPage ? <HomeInsuranceContent /> : <><Hero /><CoverSection /><ReviewsSection /><FaqSection /><QuickLinksSection /><NewsSection /><NewsletterSection /></>}</main><Footer productPage={productPage} /></div>
 }

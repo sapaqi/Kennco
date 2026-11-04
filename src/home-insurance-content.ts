@@ -1,0 +1,128 @@
+// Verbatim content from Figma frame 2021:2096, including draft/duplicated source copy.
+export const homeInsurance = {
+  "hero": {
+    "title": "Cover for the place that matters most",
+    "intro": "Buildings and contents cover with accidental damage and Family Legal Protection included as standard, plus up to 30% off with your no claims bonus.",
+    "cta": "Get a secure quote"
+  },
+  "glance": [
+    [
+      "No claims discount",
+      "Up to 10%"
+    ],
+    [
+      "Accidental damage",
+      "Included"
+    ],
+    [
+      "Family Legal Protection",
+      "Included"
+    ]
+  ],
+  "eligibility": [
+    "Owner-occupied homes built after 1930",
+    "Buildings value €75,000 to €800,000",
+    "Minimum contents sum insured of €10,000",
+    "Homes with an acceptable claims record"
+  ],
+  "savings": {
+    "tag": "Save on your premium",
+    "title": "Up to 30% off, and more ways to save",
+    "intro": "We reward low-risk homes and loyal customers. Stack these discounts to bring your premium down.",
+    "items": [
+      "30%: With 3 or more years no claims bonus",
+      "Alarm: Discount where a monitored burglar alarm is fitted",
+      "Age 46+: Reduced premium if the proposer is 46 or older",
+      "Excess: Choose a €500 or €1,000 voluntary excess to save more"
+    ]
+  },
+  "included": {
+    "tag": "Included",
+    "title": "Standard cover, done properly",
+    "intro": "Every KennCo home policy comes with these built in, no hunting through add-ons.",
+    "cards": [
+      {
+        "title": "Buildings & contents",
+        "body": "Lock in your full bonus after 5+ claim-free years.",
+        "icon": "shield"
+      },
+      {
+        "title": "Accidental damage",
+        "body": "Third-party cover to drive other vehicles (over-25s, criteria apply).",
+        "icon": "check"
+      },
+      {
+        "title": "Family Legal Protection",
+        "body": "Choose a higher excess to reduce your premium.",
+        "icon": "document"
+      },
+      {
+        "title": "Fire brigade & garden",
+        "body": "Add up to 4 named drivers to your policy.",
+        "icon": "help"
+      },
+      {
+        "title": "Money & credit cards",
+        "body": "Add up to 4 named drivers to your policy.",
+        "icon": "book"
+      },
+      {
+        "title": "All-risks options",
+        "body": "Add up to 4 named drivers to your policy.",
+        "icon": "shield"
+      }
+    ]
+  },
+  "faqs": [
+    {
+      "question": "What am I covered for under buildings and contents insurance?",
+      "answer": "Typically loss or damage to buildings and contents caused by fire, storm, flood, escape of water and theft. Accidental damage to buildings and contents is included as standard, and a full summary of covers is available on request."
+    },
+    {
+      "question": "What discounts can I get?",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "question": "What homes can be insured?",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "question": "What homes can be insured?",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "question": "What is Family Legal Protection?",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "question": "Is your home under insured? ",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    },
+    {
+      "question": "Can I pay monthly?",
+      "answer": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+    }
+  ],
+  "related": [
+    [
+      "Buildings insurance",
+      "Buildings and contents",
+      "Contents only insurance"
+    ],
+    [
+      "Landlord insurance",
+      "Holiday home"
+    ],
+    [
+      "New build home insurance",
+      "Second home insurance"
+    ]
+  ]
+} as const
+// Verbatim copy from the supplied das.jpg section; decorative icons follow the existing UI set.
+export const homeOptionalExtras = [
+  { title: 'Protected no claims bonus', body: 'Lock in your discount after 3 or more claim-free years — up to 30% off.', icon: 'shield', tone: 'blue' },
+  { title: 'Monitored alarm', body: 'A discount where a monitored burglar alarm is fitted.', icon: 'alarm', tone: 'green' },
+  { title: 'Higher voluntary excess', body: 'Choose a €500 or €1,000 voluntary excess to reduce your premium.', icon: 'sliders', tone: 'teal' },
+  { title: 'All-risks options', body: 'Cover specified personal items, including away from the home.', icon: 'personal-items', tone: 'amber' },
+] as const

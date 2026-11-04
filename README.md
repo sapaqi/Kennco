@@ -1,4 +1,4 @@
-# KennCo homepage
+# KennCo — Homepage & Home Insurance
 
 Local React + TypeScript + Vite prototype, styled with Tailwind CSS 4 and its official Vite plugin. The design is based on the supplied **KennCo UI (Antti) (Copy).fig**, frames **Homepage 1281** (`2003:1165`) and **Homepage 390** (`2007:2791`).
 
@@ -69,3 +69,17 @@ Local QA screenshots and reports are in `.qa/` and are intentionally excluded fr
 The source ZIP contains repository files, source code, local assets and optional asset extraction scripts. It excludes dependencies, build output, QA captures, machine-specific files and superseded hero artwork. Extract the ZIP and upload its contents to the repository root. Install with `pnpm install --frozen-lockfile`, then run `pnpm typecheck` and `pnpm build`.
 
 The original Figma file is not required to run or build the app. Asset provenance in the source manifest includes historical references used during extraction.
+
+## Home Insurance
+
+Open `/home-insurance/` or use Home in the header or cover cards. The product page uses the supplied frame **Home Insurance** (`2021:2096`, 1280 × 3745), preserving the section order and all 64 extracted text strings. Shared UI primitives live in `src/ui.tsx`; page-specific copy and styles are in `src/home-insurance-content.ts` and `src/home-insurance.css`. No extra photography was added: the source frame contains a summary table rather than a hero photograph.
+
+The original source has unfinished copy: 10% in the summary versus 30% in the intro, car-related descriptions in several Home cover cards, a duplicated FAQ, six Lorem ipsum answers, and a Claims form badge on the Policy Booklet. These remain unchanged as requested. The source snapshot is in `public/assets/home-insurance-source.json`. Related links without a separate verified destination use the main KennCo Home Insurance page or the local standard-cover section.
+
+The header quote button uses the Home quote destination on this page; the logo and breadcrumb return to the local homepage. Quote and PDF destinations were verified on KennCo. The Netlify `_redirects` file supports direct entry and refresh on the product URL. There is no new API or backend.
+
+Validation: TypeScript and production build; DOM layout checks at 320, 360, 390, 768, 1024, 1280, 1440, 1920, 2560 and 3840 px; no horizontal overflow or table/copy overlap. Desktop screenshots inspected across hero, cover cards and documents. Mobile geometry and keyboard interactions verified; the browser screenshot service failed under viewport overrides, so no mobile visual screenshot was available in this run. FAQ exclusive expansion, expand-all, menu Escape/focus restoration, local cross-page navigation and product-route refresh passed. The page loaded both logo instances correctly and had no console errors.
+
+### Optional extras update
+
+The supplied `das.jpg` adds Optional extras / Tailor your policy as the first section immediately after the product hero. Four cards preserve its wording, with large vector icons, layered circular motifs and blue, green, teal and amber accents. Layout uses four columns on desktop, two on tablet and one below 600 px. Related links above the footer use inline arrows with a 0.625 rem gap. Layout checks passed at 320, 390, 600, 768, 1024, 1440 and 2560 px without document overflow; four cards remain present at every size.

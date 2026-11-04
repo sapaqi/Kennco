@@ -2,7 +2,7 @@ export const links = {
   car: 'https://www.kennco.ie/car-insurance-quote/',
   van: 'https://www.kennco.ie/van-insurance/',
   travel: 'https://www.kennco.ie/travel-insurance/',
-  home: 'https://www.kennco.ie/home-insurance/',
+  home: '/home-insurance/',
   quote: '#choose-cover',
   renew: 'https://www.kennco.ie/renewals/',
   contact: 'https://www.kennco.ie/contact-us/',
