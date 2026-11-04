@@ -21,7 +21,7 @@ function Icon({ name, className = '' }: { name: IconName; className?: string }) 
     external: <><path d="M14 3h7v7M21 3l-9 9M10 5H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-5" /></>,
     login: <><path d="m10 7 5 5-5 5M15 12H3M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4" /></>,
   }
-  return <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>{paths[name]}</svg>
+  return <svg viewBox={name === 'chevron' ? '6 8 12 8' : '0 0 24 24'} width="20" height="20" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" className={className}>{paths[name]}</svg>
 }
 
 function ButtonLink({ href, children, variant = 'primary', className = '', arrow = true }: { href: string; children: ReactNode; variant?: 'primary' | 'outline' | 'white'; className?: string; arrow?: boolean }) {
