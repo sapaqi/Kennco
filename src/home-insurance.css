@@ -25,19 +25,18 @@
   position: relative;
   width: min(100%, 24rem);
   margin-inline-start: auto;
-  border: 1px solid var(--color-brand-blue);
+  border: 1px solid #e0e3e6;
   border-radius: 1rem;
-  color: var(--color-ink);
-  background: color-mix(in srgb, var(--color-brand-green) 45%, var(--color-pale-green));
+  color: #30363b;
+  background: #fff;
   overflow: hidden;
   box-shadow: var(--shadow-card);
 }
 .insurance-glance table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: .8125rem; }
 .insurance-glance caption {
   padding: .875rem 1.25rem;
-  border-bottom: 1px solid rgb(255 255 255 / 25%);
-  color: #fff;
-  background: var(--brand-green-glow) var(--color-brand-blue);
+  border-bottom: 1px solid #e0e3e6;
+  background: #f4f5f6;
   font-family: var(--font-heading);
   font-size: 1rem;
   font-weight: 700;
@@ -45,7 +44,7 @@
 }
 .insurance-glance th, .insurance-glance td { padding: .875rem 1.25rem; text-align: left; vertical-align: middle; line-height: 1.7; }
 .insurance-glance th { width: 59%; font-weight: 500; }
-.insurance-glance tr + tr > * { border-top: 1px solid rgb(6 56 91 / 20%); }
+.insurance-glance tr + tr > * { border-top: 1px solid #e0e3e6; }
 .insurance-glance td { white-space: nowrap; }
 .insurance-glance td strong { font-size: .875rem; }
 .included-value { display: inline-flex; align-items: center; gap: .375rem; }
