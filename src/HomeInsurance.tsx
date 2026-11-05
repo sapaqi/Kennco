@@ -15,7 +15,6 @@ const relatedHref = (name: string) => name === 'Landlord insurance'
 
 function HomeInsuranceHero() {
   return <section className="insurance-hero" aria-labelledby="insurance-title">
-    <div className="insurance-hero-orbit" aria-hidden="true" />
     <div className="container-shell insurance-hero-layout">
       <div className="insurance-hero-copy">
         <nav aria-label="Breadcrumb" className="insurance-breadcrumb"><ol><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Home Insurance</li></ol></nav>
@@ -23,9 +22,22 @@ function HomeInsuranceHero() {
         <p>{content.hero.intro}</p>
         <ButtonLink href={homeQuoteUrl}>{content.hero.cta}</ButtonLink>
       </div>
-      <Reveal className="insurance-glance-wrap"><div className="insurance-glance">
-        <table><caption>At A Glance</caption><tbody>{content.glance.map(([label, value], index) => <tr key={label}><th scope="row">{label}</th><td>{index === 0 ? <strong>{value}</strong> : <span className="included-value"><Icon name="check" />{value}</span>}</td></tr>)}</tbody></table>
-      </div></Reveal>
+      <Reveal className="insurance-glance-scene">
+        <div className="insurance-glance-photo">
+          <img src="/assets/home-insurance-house.png" width="1121" height="548" alt="" fetchPriority="high" />
+        </div>
+        <div className="insurance-glance">
+          <table>
+            <caption>At A Glance</caption>
+            <tbody>{content.glance.map(([label, value], index) => (
+              <tr key={label}>
+                <th scope="row">{label}</th>
+                <td>{index === 0 ? <strong>{value}</strong> : <span className="included-value"><Icon name="check" />{value}</span>}</td>
+              </tr>
+            ))}</tbody>
+          </table>
+        </div>
+      </Reveal>
     </div>
   </section>
 }

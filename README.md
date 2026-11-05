@@ -72,7 +72,7 @@ The original Figma file is not required to run or build the app. Asset provenanc
 
 ## Home Insurance
 
-Open `/home-insurance/` or use Home in the header or cover cards. The product page uses the supplied frame **Home Insurance** (`2021:2096`, 1280 × 3745), preserving the section order and all 64 extracted text strings. Shared UI primitives live in `src/ui.tsx`; page-specific copy and styles are in `src/home-insurance-content.ts` and `src/home-insurance.css`. No extra photography was added: the source frame contains a summary table rather than a hero photograph.
+Open `/home-insurance/` or use Home in the header or cover cards. The product page uses the supplied frame **Home Insurance** (`2021:2096`, 1280 × 3745), preserving the section order and all 64 extracted text strings. Shared UI primitives live in `src/ui.tsx`; page-specific copy and styles are in `src/home-insurance-content.ts` and `src/home-insurance.css`. The product hero uses the supplied house2.png as a softly faded backdrop behind the original summary table.
 
 The original source has unfinished copy: 10% in the summary versus 30% in the intro, car-related descriptions in several Home cover cards, a duplicated FAQ, six Lorem ipsum answers, and a Claims form badge on the Policy Booklet. These remain unchanged as requested. The source snapshot is in `public/assets/home-insurance-source.json`. Related links without a separate verified destination use the main KennCo Home Insurance page or the local standard-cover section.
 

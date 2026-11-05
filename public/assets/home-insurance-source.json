@@ -135,5 +135,10 @@
       "title": "Tailor your policy",
       "note": "Four descriptions retained verbatim from the supplied screenshot. UI icons use the project vector icon set."
     }
-  ]
+  ],
+  "heroPhoto": {
+    "file": "home-insurance-house.png",
+    "source": "User-supplied house2.png",
+    "compositionReference": "house1.jpg"
+  }
 }

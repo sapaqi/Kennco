@@ -1,17 +1,30 @@
-.insurance-hero { position: relative; isolation: isolate; overflow: hidden; background: #eef8fa url('/assets/hero-background.webp') center -6.875rem / 100% calc(100% + 6.875rem) no-repeat; }
-.insurance-hero-layout { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 4rem; align-items: center; padding-block: 3.75rem 4.25rem; }
-.insurance-hero-orbit { position: absolute; z-index: -1; width: 35rem; height: 35rem; right: -15rem; top: -10rem; border: 1px solid rgb(3 80 134 / 8%); border-radius: 50%; box-shadow: 0 0 0 2rem rgb(255 255 255 / 20%), 0 0 0 4rem rgb(255 255 255 / 15%); }
+.home-insurance-page { --insurance-hero-background: linear-gradient(105deg, #edf9e7, #e0f2ee 46%, #d1eafa); }
+.home-insurance-page .site-header, .insurance-hero { background: var(--insurance-hero-background); }
+.insurance-hero { position: relative; isolation: isolate; overflow: hidden; }
+.insurance-hero-layout { --hero-bottom-space: 2.5rem; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 4rem; align-items: center; padding-block: .75rem var(--hero-bottom-space); }
 .insurance-breadcrumb { margin-bottom: 1.5rem; font-size: .75rem; color: #526779; }
 .insurance-breadcrumb ol { display: flex; flex-wrap: wrap; align-items: center; gap: .75rem; }
 .insurance-breadcrumb a { display: inline-flex; align-items: center; min-height: 2.75rem; color: #035086; }
 .insurance-breadcrumb a:hover { text-decoration: underline; text-underline-offset: .25rem; }
 .insurance-breadcrumb [aria-current] { color: #06385b; }
 .insurance-hero h1 { font-family: var(--font-heading); color: #035086; font-weight: 800; font-size: 2.625rem; line-height: 1.24; letter-spacing: -.04em; text-wrap: balance; }
-.insurance-hero-copy > p { margin-block: 1.5rem 2rem; font-size: 1rem; line-height: 1.85; max-width: 41rem; }
-.insurance-glance { position: relative; padding: .125rem; background: linear-gradient(130deg, #75c044, #0f83b1); border-radius: 1.25rem; box-shadow: 0 1rem 3rem -1.5rem rgb(3 80 134 / 28%); }
-.insurance-glance table { border-collapse: separate; border-spacing: 0; width: 100%; background: #fff; border-radius: 0 0 .875rem .875rem; overflow: hidden; font-size: .8125rem; }
-.insurance-glance caption { text-align: left; background: #06385b; color: #fff; font-family: var(--font-heading); font-size: 1rem; font-weight: 700; padding: 1.25rem 1.5rem; border-radius: .875rem .875rem 0 0; }
-.insurance-glance th, .insurance-glance td { padding: 1.125rem 1.25rem; text-align: left; vertical-align: middle; line-height: 1.7; }
+.insurance-hero-copy > p { margin-block: 1.5rem 2rem; font-size: 1rem; line-height: 1.85; max-width: 35rem; }
+.insurance-hero-copy { position: relative; z-index: 1; }
+.insurance-glance-scene { position: relative; align-self: stretch; padding-top: clamp(8.5rem, 14vw, 15rem); }
+.insurance-glance-photo {
+  position: absolute;
+  inset: -.5rem -5rem calc(-1 * var(--hero-bottom-space)) clamp(-24rem, -21vw, -9rem);
+  overflow: hidden;
+  pointer-events: none;
+  translate: clamp(1.5rem, 3.75vw, 4rem) 0;
+  mask-image: linear-gradient(to right, transparent, #000 32% 77%, transparent), linear-gradient(to bottom, transparent, #000 23%);
+  mask-composite: intersect;
+}
+.insurance-glance-photo img { position: absolute; bottom: 0; width: 100%; height: 108%; object-fit: cover; object-position: center bottom; }
+.insurance-glance { position: relative; width: min(100%, 24rem); margin-inline-start: auto; border: 1px solid #d8e8f2; border-radius: 1rem; background: linear-gradient(155deg, #fff 30%, #f3f9fc); overflow: hidden; box-shadow: var(--shadow-card); }
+.insurance-glance table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: .8125rem; }
+.insurance-glance caption { text-align: left; color: #06385b; font-family: var(--font-heading); font-size: 1rem; font-weight: 700; padding: .875rem 1.25rem; border-bottom: 1px solid #e2edf2; }
+.insurance-glance th, .insurance-glance td { padding: .875rem 1.25rem; text-align: left; vertical-align: middle; line-height: 1.7; }
 .insurance-glance th { width: 59%; font-weight: 500; }
 .insurance-glance tr + tr > * { border-top: 1px solid #e2edf2; }
 .insurance-glance td { white-space: nowrap; }
@@ -86,7 +99,7 @@
   .insurance-savings-layout { gap: 3rem; }
 }
 @media (max-width: 1023px) {
-  .insurance-hero-layout { padding-block: 2.5rem 3rem; gap: 1.5rem; }
+  .insurance-hero-layout { gap: 1.5rem; }
   .insurance-hero h1 { font-size: 2rem; }
   .insurance-glance table { font-size: .75rem; }
   .insurance-glance td strong { font-size: .8125rem; }
@@ -98,12 +111,14 @@
   .insurance-document { padding: 1.5rem; gap: 1rem; }
 }
 @media (max-width: 767px) {
-  .insurance-hero-layout { grid-template-columns: 1fr; gap: 2.25rem; padding-block: 1rem 2.75rem; }
-  .insurance-hero { background-position-y: -5.25rem; background-size: 100% calc(100% + 5.25rem); }
+  .insurance-hero-layout { --hero-bottom-space: 2rem; grid-template-columns: 1fr; gap: 2.25rem; padding-block-start: .25rem; }
   .insurance-breadcrumb { margin-bottom: 1rem; }
   .insurance-hero h1 { font-size: 2rem; }
   .insurance-hero-copy > p { font-size: .9375rem; line-height: 1.85; margin-block: 1.25rem 1.5rem; }
   .insurance-hero-copy > .button { width: 100%; }
+  .insurance-glance-scene { padding-top: clamp(8.5rem, 36vw, 14rem); }
+  .insurance-glance-photo { inset: 0 -1.5rem calc(-1 * var(--hero-bottom-space)); translate: none; mask-image: linear-gradient(to right, transparent, #000 23% 77%, transparent), linear-gradient(to bottom, transparent, #000 23%); }
+  .insurance-glance { width: 100%; }
   .insurance-glance table { font-size: .8125rem; }
   .insurance-glance th, .insurance-glance td { padding: 1rem; }
   .insurance-talk, .insurance-eligibility { padding: 1.5rem; }
