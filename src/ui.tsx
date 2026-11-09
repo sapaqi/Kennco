@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
-export type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login' | 'alarm' | 'sliders' | 'personal-items'
+export type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login' | 'alarm' | 'sliders' | 'personal-items' | 'calendar' | 'people' | 'star' | 'download' | 'clock' | 'pin' | 'edit'
 
 export function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
@@ -13,6 +13,13 @@ export function Icon({ name, className = '' }: { name: IconName; className?: str
     chat: <><path d="M21 11a8 8 0 0 1-8 8H7l-4 3V11a9 9 0 0 1 18 0Z" /><path d="M8 10h8M8 14h5" /></>,
     book: <><path d="M12 5v15M3 4c4-1 6-1 9 1 3-2 5-2 9-1v14c-4-1-6-1-9 2-3-3-5-3-9-2V4Z" /></>,
     check: <path d="m5 12 4 4L19 6" />,
+    download: <path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4" />,
+    clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+    pin: <><path d="M19 10c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2" /></>,
+    edit: <><path d="M12 5H5v14h14v-7M10 14l1-4 8-8 3 3-8 8-4 1Z" /></>,
+    calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M7 3v4m10-4v4M3 10h18" /></>,
+    people: <><circle cx="9" cy="8" r="3" /><path d="M3 20v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2m2-15a3 3 0 0 1 0 6m4 9v-2a4 4 0 0 0-3-4" /></>,
+    star: <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" />,
     close: <path d="m6 6 12 12M6 18 18 6" />,
     menu: <path d="M4 7h16M4 12h16M4 17h16" />,
     mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,

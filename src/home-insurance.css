@@ -1,5 +1,5 @@
-.home-insurance-page { --insurance-hero-background: linear-gradient(105deg, #edf9e7, #e0f2ee 46%, #d1eafa); }
-.home-insurance-page .site-header, .insurance-hero { background: var(--insurance-hero-background); }
+.home-insurance-page, .information-page { --insurance-hero-background: linear-gradient(105deg, #edf9e7, #e0f2ee 46%, #d1eafa); }
+.home-insurance-page .site-header, .information-page .site-header, .insurance-hero, .information-hero { background: var(--insurance-hero-background); }
 .insurance-hero { position: relative; isolation: isolate; overflow: hidden; }
 .insurance-hero-layout { --hero-bottom-space: 2.5rem; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 4rem; align-items: center; padding-block: .75rem var(--hero-bottom-space); }
 .insurance-breadcrumb { margin-bottom: 1.5rem; font-size: .75rem; color: #526779; }

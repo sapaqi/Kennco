@@ -2,9 +2,12 @@ import { useEffect, useRef, useState } from 'react'
 import type { FormEvent } from 'react'
 import { ButtonLink, Icon, Reveal } from './ui'
 import { HomeInsuranceContent, homeQuoteUrl } from './HomeInsurance'
+import { CoverSection } from './CoverSection'
+import { HelpCentre } from './HelpCentre'
+import { findInformationPage, InformationPage } from './InformationPage'
 import { articles, covers, faqs, footerGroups, guideLinks, links, reviews, supportLinks } from './content'
 
-function HeaderDropdown({ label, items }: { label: string; items: { name: string; href: string }[] }) {
+function HeaderDropdown({ label, items }: { label: string; items: readonly { name: string; href: string }[] }) {
   const details = useRef<HTMLDetailsElement>(null)
   useEffect(() => {
     const closeOutside = (event: PointerEvent) => {
@@ -20,12 +23,11 @@ function HeaderDropdown({ label, items }: { label: string; items: { name: string
     }
   }}>
     <summary className="nav-link">{label}<Icon name="chevron" /></summary>
-    <div className="header-dropdown-panel">{items.map(item => <a key={item.name} href={item.href} onClick={() => { if (details.current) details.current.open = false }}>{item.name}</a>)}</div>
+    <div className="header-dropdown-panel">{items.map(item => <a key={item.name} href={item.href} aria-current={item.href === window.location.pathname ? 'page' : undefined} onClick={() => { if (details.current) details.current.open = false }}>{item.name}</a>)}</div>
   </details>
 }
 
-function Header({ productPage = false }: { productPage?: boolean }) {
-  const quoteHref = productPage ? homeQuoteUrl : links.quote
+function Header({ productPage, homePrefix, quoteHref }: { productPage: boolean; homePrefix: string; quoteHref: string }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const trigger = useRef<HTMLButtonElement>(null)
   const menu = useRef<HTMLDivElement>(null)
@@ -54,14 +56,14 @@ function Header({ productPage = false }: { productPage?: boolean }) {
 
   return <header className="site-header">
     <div className="header-inner">
-      <a href={productPage ? '/' : '#top'} aria-label="KennCo Insurance home" className="shrink-0"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" /></a>
+      <a href={homePrefix || '#top'} aria-label="KennCo Insurance home" className="shrink-0"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" /></a>
       <nav aria-label="Main navigation" className="header-nav hidden lg:flex">
         {['car', 'van', 'home', 'travel'].map(key => {
           const cover = covers.find(cover => cover.key === key)!
           return <a className="nav-link" key={cover.key} href={cover.href} aria-current={productPage && cover.key === 'home' ? 'page' : undefined}>{cover.name}</a>
         })}
         <HeaderDropdown label="About Us" items={footerGroups.find(group => group.title === 'About us')!.items} />
-        <HeaderDropdown label="Help Centre" items={supportLinks.map(link => ({ name: link.name, href: link.href }))} />
+        <HeaderDropdown label="Help Centre" items={supportLinks} />
         <a href={links.renew} className="nav-link">Renew Now</a>
       </nav>
       <div className="header-actions hidden lg:flex">
@@ -82,7 +84,7 @@ function Header({ productPage = false }: { productPage?: boolean }) {
             return <a key={cover.key} href={cover.href} className="mobile-nav-link" onClick={closeMenu}>{cover.name}<Icon name="arrow" /></a>
           })}
           <a className="mobile-nav-link" href={links.about} onClick={closeMenu}>About Us<Icon name="arrow" /></a>
-          <a className="mobile-nav-link" href={productPage ? '/#quick-links' : '#quick-links'} onClick={closeMenu}>Help Centre<Icon name="arrow" /></a>
+          <a className="mobile-nav-link" href={links.help} onClick={closeMenu}>Help Centre<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.renew} onClick={closeMenu}>Renew Now<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.portal} onClick={closeMenu}>Login<Icon name="external" /></a>
         </nav>
@@ -111,25 +113,11 @@ function Hero() {
   </section>
 }
 
-function CoverSection() {
-  return <section id="choose-cover" className="cover-section section-space" aria-labelledby="cover-heading">
-    <div className="container-shell">
-      <Reveal><div className="mb-8 flex flex-wrap items-end justify-between gap-4 md:mb-10"><div><span className="eyebrow mb-3 block">A little peace of mind</span><h2 id="cover-heading" className="section-title">Choose your cover<span className="text-brand-green">.</span></h2></div><p className="max-w-72 text-sm leading-6 text-muted">Car, van, travel or home.<br />Find the cover that’s right for you.</p></div></Reveal>
-      <div className="cover-grid">
-        {covers.map((cover, index) => <Reveal key={cover.key} delay={index * 45}><a href={cover.href} className={`cover-card cover-${cover.key}`} aria-label={`Explore ${cover.name.toLowerCase()} insurance cover`}>
-          <div className="cover-illustration" aria-hidden="true"><span className="cover-disc" /><span className="cover-orbit" /><span className="cover-dot" /><img src={`/assets/${cover.image}.png`} alt="" width={cover.width} height={cover.height} className={`cover-icon cover-icon-${cover.key}`} /></div>
-          <div className="relative"><h3 className="font-heading text-[22px] font-bold md:text-2xl">{cover.name}</h3><span className="cover-link">Explore cover<Icon name="arrow" /></span></div>
-        </a></Reveal>)}
-      </div>
-    </div>
-  </section>
-}
-
 function Stars() {
   return <span className="rating-stars" role="img" aria-label="5 out of 5 stars">{[0, 1, 2, 3, 4].map(star => <svg key={star} viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="2" fill="#00875b" /><path fill="white" d="m12 3 2.5 5.4 5.9.7-4.4 4 1.2 5.9-5.2-3-5.2 3 1.2-5.9-4.4-4 5.9-.7Z" /></svg>)}</span>
 }
 
-function ReviewsSection() {
+function ReviewsSection({ about = false }: { about?: boolean }) {
   const track = useRef<HTMLDivElement>(null)
   const [canScrollBack, setCanScrollBack] = useState(false)
   const [canScrollForward, setCanScrollForward] = useState(true)
@@ -156,7 +144,7 @@ function ReviewsSection() {
   }
   return <section className="reviews-section section-space" aria-labelledby="reviews-heading">
     <div className="container-shell">
-      <Reveal><div className="mb-9 flex flex-wrap items-end justify-between gap-5"><div><span className="eyebrow mb-3 block">Real people. Real peace of mind.</span><h2 className="section-title" id="reviews-heading">What our customers say</h2></div><a className="text-link" href="https://ie.trustpilot.com/review/kennco.ie">View all testimonials<Icon name="arrow" /></a></div></Reveal>
+      <Reveal><div className="mb-9 flex flex-wrap items-end justify-between gap-5"><div>{!about && <span className="eyebrow mb-3 block">Real people. Real peace of mind.</span>}<h2 className="section-title" id="reviews-heading">What our customers say</h2></div><a className="text-link" href="https://ie.trustpilot.com/review/kennco.ie">View all testimonials<Icon name="arrow" /></a></div></Reveal>
       <Reveal><div className="reviews-layout">
         <a className="trustpilot-summary" href="https://ie.trustpilot.com/review/kennco.ie"><img src="/assets/trustpilot-rating.png" width="380" height="292" alt="Excellent. Based on 1,882 reviews. Trustpilot." /></a>
         <div className="min-w-0"><div ref={track} className="review-track" role="region" aria-label="Customer testimonials" tabIndex={0}>
@@ -175,12 +163,13 @@ function FaqSection() {
   </div></section>
 }
 
-function QuickLinksSection() {
+function QuickLinksSection({ about = false }: { about?: boolean }) {
+  const linkHref = (href: string) => about && href.startsWith('#') ? '/' + href : href
   return <section id="quick-links" className="quick-section section-space" aria-labelledby="quick-heading"><div className="quick-orbit" aria-hidden="true" /><div className="container-shell relative">
-    <Reveal><span className="eyebrow mb-3 block">Right this way</span><h2 id="quick-heading" className="section-title mb-9">Quick Links</h2></Reveal>
+    <Reveal>{!about && <span className="eyebrow mb-3 block">Right this way</span>}<h2 id="quick-heading" className="section-title mb-9">Quick Links</h2></Reveal>
     <div className="grid gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
-      <Reveal><h3 className="mb-4 font-heading text-lg font-bold">Support</h3><div className="grid gap-3 sm:grid-cols-2">{supportLinks.map(link => <a href={link.href} key={link.name} className="support-link"><span className="support-icon"><Icon name={link.icon} /></span><span>{link.name}</span><Icon name="arrow" className="ml-auto shrink-0" /></a>)}</div></Reveal>
-      <Reveal delay={60}><h3 className="mb-4 font-heading text-lg font-bold">Guides</h3><div className="guide-list">{guideLinks.map(link => <a key={link.name} href={link.href}>{link.name}<Icon name="arrow" /></a>)}</div></Reveal>
+      <Reveal><h3 className="mb-4 font-heading text-lg font-bold">Support</h3><div className="grid gap-3 sm:grid-cols-2">{supportLinks.map(link => <a href={linkHref(link.href)} key={link.name} className="support-link"><span className="support-icon"><Icon name={link.icon} /></span><span>{link.name}</span><Icon name="arrow" className="ml-auto shrink-0" /></a>)}</div></Reveal>
+      <Reveal delay={60}><h3 className="mb-4 font-heading text-lg font-bold">Guides</h3><div className="guide-list">{guideLinks.map(link => <a key={link.name} href={linkHref(link.href)}>{link.name}<Icon name="arrow" /></a>)}</div></Reveal>
     </div>
   </div></section>
 }
@@ -222,9 +211,9 @@ function NewsletterSection() {
   </div></section>
 }
 
-function Footer({ productPage = false }: { productPage?: boolean }) {
+function Footer({ homeHref }: { homeHref: string }) {
   return <footer className="site-footer"><div className="container-shell">
-    <div className="footer-top"><a href={productPage ? '/' : '#top'} aria-label="KennCo Insurance home"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" loading="lazy" /></a><div className="flex flex-wrap gap-2"><a className="social-link" href="https://www.facebook.com/KennCoInsurance/" aria-label="KennCo on Facebook">f</a><a className="social-link" href="https://www.linkedin.com/company/kennco-underwriting-limited/" aria-label="KennCo on LinkedIn">in</a><a className="social-link" href="https://www.instagram.com/kenncoinsurance/" aria-label="KennCo on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" /></svg></a></div></div>
+    <div className="footer-top"><a href={homeHref} aria-label="KennCo Insurance home"><img src="/assets/kennco-logo.png" alt="KennCo Insurance" width="2000" height="1039" className="brand-logo" loading="lazy" /></a><div className="flex flex-wrap gap-2"><a className="social-link" href="https://www.facebook.com/KennCoInsurance/" aria-label="KennCo on Facebook">f</a><a className="social-link" href="https://www.linkedin.com/company/kennco-underwriting-limited/" aria-label="KennCo on LinkedIn">in</a><a className="social-link" href="https://www.instagram.com/kenncoinsurance/" aria-label="KennCo on Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r=".8" /></svg></a></div></div>
     <div className="footer-columns"><div className="footer-contact"><h2>Contact us</h2><a href="tel:+35314092600"><Icon name="phone" />01 409 2600</a><a href="mailto:Insurance@Kennco.ie"><Icon name="mail" />Insurance@Kennco.ie</a><a href="mailto:Claims@Kennco.ie"><Icon name="mail" />Claims@Kennco.ie</a><address className="mt-3 text-xs not-italic leading-6 text-muted">Suite 5, 6 &amp; 7<br />Grange Road Office Park<br />Grange Road, Rathfarnham<br />Dublin 16, Ireland.</address></div>{footerGroups.map(group => <div key={group.title}><h2>{group.title}</h2><ul>{group.items.map(item => <li key={item.name}><a href={item.href}>{item.name}</a></li>)}</ul></div>)}</div>
     <div className="mt-6 flex justify-end"><a className="text-link text-xs" href="https://brokers.kennco.ie/">Broker Website<Icon name="external" /></a></div>
     <div className="footer-legal"><p>KennCo Underwriting Ltd T/A KennCo Insurance is regulated by The Central Bank of Ireland. Directors: J. Kennedy (Managing), S. Merity, M. Stapleton, C. McDonagh. Co. Reg. No. 454673. Registered at Suite 7, Grange Road Office Park, Rathfarnham, Dublin 16.</p><div className="mt-5 flex flex-wrap items-start justify-between gap-5"><div><span>KennCo © 2026</span><div className="legal-links"><a href={links.documents}>User Guide</a><a href={links.privacy}>Privacy Policy</a><a href={links.terms}>Terms of Business</a><a href="https://www.kennco.ie/accessibility-statement/">Accessibility</a><a href="https://www.kennco.ie/distance-sales-information/">Distance Sales</a><a href="https://www.kennco.ie/duty-of-disclosure/">Honesty &amp; Accuracy</a></div></div><a className="shrink-0" href="https://www.matrixinternet.ie/">Designed &amp; Developed by <span className="font-semibold">Matrix Internet</span></a></div></div>
@@ -232,9 +221,27 @@ function Footer({ productPage = false }: { productPage?: boolean }) {
 }
 
 export function App() {
-  const productPage = /^\/home-insurance\/?$/.test(window.location.pathname)
+  const path = window.location.pathname
+  const productPage = /^\/home-insurance\/?$/.test(path)
+  const helpPage = /^\/help-centre\/?$/.test(path)
+  const informationPage = findInformationPage(path)
+  const aboutPage = informationPage?.path === '/about'
+  const pageTitle = helpPage ? 'Help Centre' : aboutPage ? 'About Us' : informationPage?.title ?? (productPage ? 'Home Insurance' : undefined)
+  const homePrefix = pageTitle ? '/' : ''
+  const quoteHref = productPage ? homeQuoteUrl : aboutPage ? links.quote : homePrefix + links.quote
+  const pageClass = productPage ? 'home-insurance-page' : informationPage || helpPage ? 'information-page' : undefined
   useEffect(() => {
-    document.title = productPage ? 'Home Insurance — KennCo Insurance' : "KennCo Insurance — Cover for life's journeys"
-  }, [productPage])
-  return <div className={productPage ? 'home-insurance-page' : undefined}><a href="#main" className="skip-link">Skip to content</a><div id="top" /><Header productPage={productPage} /><main id="main">{productPage ? <HomeInsuranceContent /> : <><Hero /><CoverSection /><ReviewsSection /><FaqSection /><QuickLinksSection /><NewsSection /><NewsletterSection /></>}</main><Footer productPage={productPage} /></div>
+    document.title = pageTitle ? `${pageTitle} — KennCo Insurance` : "KennCo Insurance — Cover for life's journeys"
+  }, [pageTitle])
+  return <div className={pageClass}>
+    <a href="#main" className="skip-link">Skip to content</a>
+    <div id="top" />
+    <Header productPage={productPage} homePrefix={homePrefix} quoteHref={quoteHref} />
+    <main id="main">
+      {helpPage ? <HelpCentre /> : informationPage ? <InformationPage page={informationPage}><ReviewsSection about /><QuickLinksSection about /></InformationPage> : productPage ? <HomeInsuranceContent /> : <>
+        <Hero /><CoverSection /><ReviewsSection /><FaqSection /><QuickLinksSection /><NewsSection /><NewsletterSection />
+      </>}
+    </main>
+    <Footer homeHref={homePrefix || '#top'} />
+  </div>
 }

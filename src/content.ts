@@ -6,6 +6,7 @@ export const links = {
   quote: '#choose-cover',
   renew: 'https://www.kennco.ie/renewals/',
   contact: 'https://www.kennco.ie/contact-us/',
+  help: '/help-centre/',
   about: 'https://www.kennco.ie/about-us/',
   documents: 'https://www.kennco.ie/downloads/',
   blog: 'https://www.kennco.ie/blog/',
@@ -70,7 +71,7 @@ export const supportLinks = [
   { name: 'Contact Us', href: links.contact, icon: 'phone' },
   { name: 'Policy Downloads', href: links.documents, icon: 'document' },
   { name: 'Fees & Commissions', href: links.fees, icon: 'document' },
-  { name: 'Help Centre', href: '#faqs', icon: 'help' },
+  { name: 'Help Centre', href: links.help, icon: 'help' },
   { name: 'Complaints Procedure', href: links.complaints, icon: 'chat' },
   { name: 'User Guide', href: links.documents, icon: 'book' },
 ] as const
