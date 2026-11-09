@@ -15,11 +15,11 @@
   max-width: 50%;
 }
 
-.information-hero .insurance-breadcrumb {
+.information-hero-inner:not(.about-hero-inner) .insurance-breadcrumb {
   margin-bottom: .375rem;
 }
 
-.information-hero h1 {
+.information-hero-inner:not(.about-hero-inner) h1 {
   font-size: clamp(1.875rem, 4vw, 2.875rem);
   line-height: 1.12;
   text-wrap: balance;
@@ -48,10 +48,16 @@
   mask-composite: intersect;
 }
 
+.help-hero-inner {
+  align-items: start;
+  padding-block-start: var(--page-hero-top);
+}
+
 @media (min-width: 1024px) {
   .help-hero-inner {
     position: relative;
     isolation: isolate;
+    padding-block-end: 2rem;
   }
 
   .help-hero-photo {
@@ -71,11 +77,8 @@
 
 .about-hero-inner {
   min-height: 26rem;
-  padding-block: 2rem;
-}
-
-.about-hero-inner h1 {
-  font-size: clamp(2rem, 3.3vw, 3.25rem);
+  align-items: start;
+  padding-block: var(--page-hero-top) 2rem;
 }
 
 .about-hero-photo {
@@ -116,7 +119,7 @@
   .about-hero-inner {
     min-height: auto;
     gap: .75rem;
-    padding-block: 1rem 0;
+    padding-block: var(--page-hero-top) 0;
   }
 
   .about-hero-inner .information-hero-copy {
