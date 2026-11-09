@@ -52,7 +52,6 @@
   .help-hero-inner {
     position: relative;
     isolation: isolate;
-    min-height: 26rem;
   }
 
   .help-hero-photo {
@@ -62,6 +61,9 @@
     bottom: 0;
     width: min(65%, 67rem);
     max-width: none;
+    height: 140%;
+    object-fit: contain;
+    object-position: right bottom;
     mask-image: linear-gradient(to right, transparent 8%, #000 30% 85%, transparent),
       linear-gradient(to bottom, transparent, #000 33%);
   }
