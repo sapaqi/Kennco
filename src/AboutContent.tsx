@@ -10,10 +10,10 @@ const highlights = [
 ] as const
 
 const supportNumbers = [
-  { label: 'KennCo Insurance', display: '01 409 2600', phone: '+35314092600' },
-  { label: '24-Hour Breakdown', display: '01 499 8316', phone: '+35314998316' },
-  { label: 'Travel Claim (emergency)', display: '+353 91 545 997', phone: '+35391545997' },
-  { label: 'Travel Claim (non-emergency)', display: '091 545 997', phone: '+35391545997' },
+  { label: 'KennCo Insurance', display: '01 409 2600', phone: '+35314092600', icon: 'general' },
+  { label: '24-Hour Breakdown', display: '01 499 8316', phone: '+35314998316', icon: 'breakdown' },
+  { label: 'Travel Claim (emergency)', display: '+353 91 545 997', phone: '+35391545997', icon: 'emergency' },
+  { label: 'Travel Claim (non-emergency)', display: '091 545 997', phone: '+35391545997', icon: 'travel' },
 ]
 
 export function AboutContent({ children }: { children: ReactNode }) {
@@ -49,9 +49,11 @@ export function AboutContent({ children }: { children: ReactNode }) {
           <h2 id="about-service" className="section-title">Always on hand to help</h2>
           <p className="mt-3 text-sm leading-relaxed text-muted">For general enquiries, quotes or claims — from the moment you contact us to the day you renew, we take great care of you.</p>
           <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-            {supportNumbers.map(({ label, display, phone }) => <li key={label}>
+            {supportNumbers.map(({ label, display, phone, icon }) => <li key={label}>
               <a href={`tel:${phone}`} className="flex h-full items-center gap-4 rounded-xl bg-pale-green p-4 hover:underline">
-                <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white text-brand-blue"><Icon name="phone" className="size-5" /></span>
+                <span className="grid size-11 shrink-0 place-items-center rounded-full bg-white">
+                  <img src={`/assets/about-support-${icon}.svg`} alt="" width="24" height="24" />
+                </span>
                 <span><strong className="block font-heading text-brand-blue">{display}</strong><span className="block text-sm">{label}</span></span>
               </a>
             </li>)}
