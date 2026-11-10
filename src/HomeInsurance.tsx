@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { FaqAccordion } from './FaqAccordion'
 import { ButtonLink, Icon, Reveal } from './ui'
 import { homeInsurance as content, homeOptionalExtras } from './home-insurance-content'
 
@@ -77,15 +77,6 @@ function HomeIncluded() {
   </div></section>
 }
 
-function HomeFaq() {
-  const [open, setOpen] = useState<number | null>(0)
-  const [showAll, setShowAll] = useState(false)
-  return <section className="insurance-faq section-space" id="faqs" aria-labelledby="home-faq-title"><div className="container-shell">
-    <Reveal><div className="insurance-faq-heading"><h2 className="section-title" id="home-faq-title">Home insurance FAQs</h2><button className="text-link" type="button" aria-pressed={showAll} onClick={() => setShowAll(value => !value)}>View all FAQs<Icon name="arrow" /></button></div></Reveal>
-    <Reveal><div className="faq-list">{content.faqs.map((faq, index) => {const expanded = showAll || open === index; return <div key={index} className={`faq-item ${expanded ? 'faq-open' : ''}`}><h3><button className="faq-trigger" type="button" id={`home-faq-button-${index}`} aria-expanded={expanded} aria-controls={`home-faq-answer-${index}`} onClick={() => {setShowAll(false);setOpen(expanded ? null : index)}}>{faq.question}<span className="faq-plus" aria-hidden="true"><span /><span /></span></button></h3><div className="faq-answer" role="region" id={`home-faq-answer-${index}`} aria-labelledby={`home-faq-button-${index}`} hidden={!expanded}><p>{faq.answer}</p></div></div>})}</div></Reveal>
-  </div></section>
-}
-
 function HomeDocuments() {
   return <section className="insurance-documents section-space" aria-labelledby="documents-title"><div className="container-shell"><Reveal><h2 className="section-title" id="documents-title">House Insurance Documents</h2></Reveal><div className="insurance-documents-grid">{documents.map((document, index) => <Reveal key={document.title} delay={index * 50}><a className="insurance-document" href={document.href}><span className="insurance-feature-icon" aria-hidden="true"><Icon name="document" /></span><span className="insurance-document-title"><h3>{document.title}</h3><span className="insurance-document-badge">{document.badge}</span></span><Icon name="arrow" className="insurance-document-arrow" /></a></Reveal>)}</div></div></section>
 }
@@ -95,5 +86,5 @@ function HomeRelated() {
 }
 
 export function HomeInsuranceContent() {
-  return <><HomeInsuranceHero /><HomeOptionalExtras /><HomeHelp /><HomeSavings /><HomeIncluded /><HomeFaq /><HomeDocuments /><HomeRelated /></>
+  return <><HomeInsuranceHero /><HomeOptionalExtras /><HomeHelp /><HomeSavings /><HomeIncluded /><FaqAccordion title="Home insurance FAQs" faqs={content.faqs} /><HomeDocuments /><HomeRelated /></>
 }

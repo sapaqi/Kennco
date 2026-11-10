@@ -1,3 +1,4 @@
+import { FaqAccordion } from './FaqAccordion'
 import { useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import { links } from './content'
@@ -148,18 +149,6 @@ export function HelpCentre() {
       </div>
     </section>
 
-    <section className="section-space pt-0" aria-labelledby="help-faq-heading">
-      <div className="container-shell">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-5 flex flex-wrap items-center justify-between gap-3"><h2 id="help-faq-heading" className="section-title text-brand-blue">FAQ’s</h2><a href="/#faqs" className="text-link">View all FAQs<Icon name="arrow" /></a></div>
-          <div className="grid gap-3">
-            {faqs.map((faq, index) => <details key={faq.question} name="help-faq" open={index === 0} className="group rounded-lg border border-[#c6e0f1] open:border-transparent open:bg-pale-green">
-              <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-heading font-bold text-brand-blue [&::-webkit-details-marker]:hidden">{faq.question}<Icon name="chevron" className="shrink-0 group-open:rotate-180" /></summary>
-              <p className="px-4 pb-4 text-sm leading-relaxed text-muted [&_a]:text-brand-blue [&_a]:underline">{faq.answer}</p>
-            </details>)}
-          </div>
-        </div>
-      </div>
-    </section>
+    <FaqAccordion title="FAQ’s" faqs={faqs} />
   </>
 }
