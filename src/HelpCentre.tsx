@@ -55,7 +55,7 @@ function DirectoryPanel({ title, icon, rows, id }: { title: string; icon: IconNa
   return <div id={id} className={panelStyle}>
     <PanelTitle icon={icon} green>{title}</PanelTitle>
     <dl className="mt-4 divide-y divide-[#d8e8f2] border-y border-[#d8e8f2]">
-      {rows.map(row => <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 py-3 text-sm" key={row.label}>
+      {rows.map(row => <div className="flex flex-wrap justify-between gap-x-4 gap-y-1 py-2.5 text-sm" key={row.label}>
         <dt className="font-semibold">{row.label}{row.detail && <span className="block font-normal text-muted">{row.detail}</span>}</dt>
         <dd><a className="break-all text-brand-blue underline underline-offset-2" href={row.href}>{row.value}</a></dd>
       </div>)}
@@ -114,17 +114,19 @@ export function HelpCentre() {
       </div>
     </section>
 
-    <section className="section-space bg-pale-blue" aria-labelledby="department-heading">
+    <section className="bg-pale-blue py-10 lg:py-12" aria-labelledby="department-heading">
       <div className="container-shell">
         <h2 id="department-heading" className="section-title text-center text-brand-blue">Department directory</h2>
         <p className="mt-3 text-center text-sm text-muted">Reach the right team directly. Lines are open during office hours unless marked as 24-hour.</p>
-        <div className="mx-auto mt-8 grid max-w-5xl gap-5 md:grid-cols-2">
-          <DirectoryPanel title="General & Sales" icon="phone" rows={general} />
-          <DirectoryPanel title="Claims" icon="edit" rows={claims} id="claims-directory" />
-          <div className={panelStyle + ' md:col-span-2'}>
-            <PanelTitle icon="external">Driving abroad?</PanelTitle>
-            <p className="mt-3 text-sm leading-relaxed text-muted">Taking your car overseas — see the full list of our overseas claims representation offices at <a className="font-semibold text-brand-blue underline" href="https://www.vanameyde.com/offices/">vanameyde.com/offices</a>.</p>
+        <div className="mt-6 grid items-start gap-4 md:grid-cols-2">
+          <div className="grid min-w-0 gap-4">
+            <DirectoryPanel title="General & Sales" icon="phone" rows={general} />
+            <div className={panelStyle}>
+              <PanelTitle icon="external">Driving abroad?</PanelTitle>
+              <p className="mt-3 text-sm leading-relaxed text-muted">Taking your car overseas — see the full list of our overseas claims representation offices at <a className="font-semibold text-brand-blue underline" href="https://www.vanameyde.com/offices/">vanameyde.com/offices</a>.</p>
+            </div>
           </div>
+          <DirectoryPanel title="Claims" icon="edit" rows={claims} id="claims-directory" />
         </div>
       </div>
     </section>
