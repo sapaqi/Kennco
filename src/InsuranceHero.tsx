@@ -6,7 +6,7 @@ export function InsuranceHero({ label, title, intro, quote, photo, rows }: {
   title: ReactNode
   intro: string
   quote: { href: string; label: string }
-  photo: { src: string; width: number; height: number }
+  photo: { src: string; width: number; height: number; softFade?: boolean }
   rows: readonly { label: string; value: ReactNode }[]
 }) {
   return <section className="insurance-hero" aria-labelledby="insurance-title">
@@ -20,7 +20,7 @@ export function InsuranceHero({ label, title, intro, quote, photo, rows }: {
         <ButtonLink href={quote.href}>{quote.label}</ButtonLink>
       </div>
       <Reveal className="insurance-glance-scene">
-        <div className="insurance-glance-photo">
+        <div className={`insurance-glance-photo${photo.softFade ? ' insurance-glance-photo-soft' : ''}`}>
           <img src={photo.src} width={photo.width} height={photo.height} alt="" fetchPriority="high" />
         </div>
         <div className="insurance-glance">

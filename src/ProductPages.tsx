@@ -94,7 +94,7 @@ export function TravelInsurancePage() {
   return <>
     <InsuranceHero label="Travel Insurance" title={<>{t[0].replace(/peace of mind$/, '')}<span className="hero-highlight">peace of mind</span></>} intro={t[1]}
       quote={{ href: '#trip-cover', label: t[2] }}
-      photo={{ src: '/assets/travel-insurance-hero.webp', width: 1700, height: 850 }}
+      photo={{ src: '/assets/travel-insurance-coast.webp', width: 1700, height: 740, softFade: true }}
       rows={t.slice(4, 8).map((label, index) => ({ label, value: <strong>{t[8 + index]}</strong> }))} />
     <PageSection id="trip-cover" title={options[1]} eyebrow={options[0]}>
       <p className="mb-5 text-muted">{options[2]}</p>
