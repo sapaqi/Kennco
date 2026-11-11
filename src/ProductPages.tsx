@@ -2,9 +2,10 @@ import type { ReactNode } from 'react'
 import { links } from './content'
 import { FaqAccordion } from './FaqAccordion'
 import { InsuranceHero } from './InsuranceHero'
+import { InsuranceExtras } from './InsuranceExtras'
 import { carFaqs, vanFaqs } from './faq-design'
 import * as design from './product-design'
-import { PageHero, PageSection, pagePanel } from './AdditionalPageUI'
+import { PageSection, pagePanel } from './AdditionalPageUI'
 import { ButtonLink, Icon, InsuranceExtraArt, Reveal } from './ui'
 
 const travelQuote = 'https://www.kennco.ie/travel-insurance-quote/'
@@ -41,8 +42,8 @@ function RelatedCover({ labels, destinations, fallback }: { labels: readonly str
   </nav>
 }
 
-function QuoteCard({ href, inHero = false }: { href: string; inHero?: boolean }) {
-  return <div id="start-quote" className={inHero ? 'insurance-glance insurance-hero-quote' : pagePanel}>
+function QuoteCard({ href }: { href: string }) {
+  return <div id="start-quote" className="insurance-glance insurance-hero-quote">
     <h2 className="section-title mb-3">Start your quote</h2>
     <p className="mb-4 text-sm text-muted">Have your vehicle registration to hand. No obligation.</p>
     <ButtonLink href={href}>Get quote</ButtonLink>
@@ -50,29 +51,65 @@ function QuoteCard({ href, inHero = false }: { href: string; inHero?: boolean })
 }
 
 export function CarInsurancePage() {
+  const hero = design.carHero
   const comparison = design.carComparison
+  const extraIcons = ['shield', 'car', 'sliders', 'people'] as const
+  const extraTones = ['blue', 'green', 'teal', 'amber'] as const
+  const includedIcons = ['clock-24', 'wrench', 'shield', 'map', 'graduation-cap'] as const
   return <>
-    <PageHero label="Car Insurance" title={design.carHero[0]} intro={design.carHero[1]}>
-      <ul className="mt-5 flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">{design.carHero.slice(2).map(item => <li key={item} className="flex items-center gap-2"><Icon name="check" className="text-brand-blue" />{item}</li>)}</ul>
-    </PageHero>
-    <div className="container-shell py-8"><QuoteCard href={links.car} /></div>
+    <InsuranceHero label="Car Insurance"
+      title={<>{hero[0].replace(/car insurance quote$/, '')}<span className="hero-highlight">car insurance quote</span></>}
+      intro={hero[1]}
+      photo={{ src: '/assets/car-insurance-hero.webp', width: 1700, height: 1133, softFade: true }}>
+      <ul className="grid w-fit max-w-full gap-2 text-sm font-semibold">
+        {hero.slice(2).map(item => <li key={item} className="flex items-center gap-2 rounded-full border border-[#c9e5b5] bg-pale-green px-3 py-2 text-ink"><Icon name="check" className="size-4 shrink-0 text-brand-blue" />{item}</li>)}
+      </ul>
+    </InsuranceHero>
+    <section id="start-quote" className="container-shell mt-8 md:mt-12" aria-labelledby="start-quote-title">
+      <div className="insurance-extra insurance-extra-featured block!">
+        <h2 id="start-quote-title" className="font-heading text-2xl font-bold">Start your quote</h2>
+        <form action={links.car} className="mt-6 grid items-center gap-3 sm:grid-cols-[minmax(0,1fr)_auto]">
+          <label htmlFor="car-quote-registration" className="sr-only">Vehicle registration</label>
+          <input id="car-quote-registration" type="text" required pattern=".*\S.*" autoCapitalize="characters" spellCheck={false} aria-describedby="car-quote-note"
+            placeholder="REG — E.G. 221-D-4567" className="min-h-12 w-full rounded-md border border-brand-blue bg-pale-blue px-4 text-sm text-brand-blue placeholder:text-brand-blue" />
+          <button className="button button-primary" type="submit">Get quote<Icon name="chevron" className="size-4 -rotate-90" /></button>
+        </form>
+        <p id="car-quote-note" className="mt-3 flex items-center gap-1.5 text-xs!">
+          <span aria-hidden="true" className="size-2 shrink-0 rounded-full bg-pale-green" />
+          Takes about xx minutes · No obligation
+        </p>
+      </div>
+    </section>
     <PageSection title={comparison[1]} eyebrow={comparison[0]}>
       <div className="overflow-hidden rounded-xl border border-[#d8e8f2]">
         <table className="w-full table-fixed text-sm">
           <thead className="bg-pale-blue"><tr><th scope="col" className="w-2/5 p-3 text-left">Cover</th>{comparison.slice(8, 10).map(label => <th key={label} scope="col" className="p-3 text-center">{label}</th>)}</tr></thead>
           <tbody>{comparison.slice(2, 8).map((label, index) => <tr className="border-t border-[#d8e8f2]" key={label}>
             <th scope="row" className="p-3 text-left font-medium">{label}</th>
-            {[index !== 2 && index !== 3, true].map((included, column) => <td key={column} className="p-3 text-center"><Icon name={included ? 'check' : 'close'} className="mx-auto text-brand-blue" /><span className="sr-only">{included ? 'Included' : 'Not included'}</span></td>)}
+            {[index !== 2 && index !== 3, true].map((included, column) => <td key={column} className="p-3 text-center">
+              <span className={`inline-grid size-8 place-items-center rounded-full ${included ? 'bg-pale-green text-[#2d641e]' : 'bg-red-50 text-red-700'}`}>
+                <Icon name={included ? 'check' : 'close'} className="size-5 stroke-[2.4]" />
+              </span>
+              <span className="sr-only">{included ? 'Included' : 'Not included'}</span>
+            </td>)}
           </tr>)}</tbody>
         </table>
       </div>
       <p className="mt-4 text-sm text-muted">{comparison[10]}</p>
     </PageSection>
-    <PageSection title={design.carExtras[1]} eyebrow={design.carExtras[0]} tint><ProductCards items={pairs(design.carExtras.slice(2))} /></PageSection>
+    <InsuranceExtras eyebrow={design.carExtras[0]} title={design.carExtras[1]} items={pairs(design.carExtras.slice(2)).map((extra, index) => ({
+      ...extra, icon: extraIcons[index], tone: extraTones[index],
+    }))} />
     <PageSection title={design.carIncluded[0]}>
       <div className="grid items-center gap-6 md:grid-cols-2">
-        <dl className="divide-y divide-[#d8e8f2]">{pairs(design.carIncluded.slice(1)).map(({ title, body }) => <div className="py-3" key={title}><dt className="font-heading font-bold">{title}</dt><dd className="mt-1 text-sm text-muted">{body}</dd></div>)}</dl>
-        <img src="/assets/car-cover-detail.webp" className="aspect-video w-full rounded-2xl object-cover" alt="" width="1440" height="2160" loading="lazy" />
+        <dl className="divide-y divide-[#d8e8f2]">{pairs(design.carIncluded.slice(1)).map(({ title, body }, index) => <div className="relative py-3 pl-11" key={title}>
+          <dt className="font-heading font-bold">
+            <span className="absolute top-3 left-0 grid size-8 place-items-center rounded-full bg-pale-blue text-brand-blue"><Icon name={includedIcons[index]} className="size-4" /></span>
+            {title}
+          </dt>
+          <dd className="mt-1 text-sm text-muted">{body}</dd>
+        </div>)}</dl>
+        <img src="/assets/car-cover-detail.webp" className="aspect-video w-full -scale-x-100 rounded-2xl object-cover" alt="" width="1440" height="2160" loading="lazy" />
       </div>
     </PageSection>
     <ProductFaqs title="Car insurance FAQs" questions={carFaqs} href={links.car} />
@@ -159,7 +196,7 @@ export function VanInsurancePage() {
       title={<>{hero[0].replace(/keeps you working$/, '')}<span className="hero-highlight">keeps you working</span></>}
       intro={hero[1]}
       photo={{ src: '/assets/van-insurance-road.webp', width: 1700, height: 1133, softFade: true, mirrored: true }}
-      panel={<QuoteCard href={vanQuote} inHero />}
+      panel={<QuoteCard href={vanQuote} />}
       badge={<><strong>{hero[8]}</strong><span>{hero[7]}</span></>} />
     <div className="insurance-savings van-highlights">
       <ul className="container-shell flex flex-wrap justify-center gap-x-16 gap-y-3 py-5 text-sm font-semibold">

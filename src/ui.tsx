@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
 export type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login' | 'alarm' | 'sliders' | 'personal-items' | 'calendar' | 'people' | 'star' | 'download' | 'clock' | 'pin' | 'edit' | 'share' | 'file' | 'eye' | 'percent'
+  | 'car' | 'clock-24' | 'wrench' | 'map' | 'graduation-cap'
 
 export function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
@@ -15,6 +16,11 @@ export function Icon({ name, className = '' }: { name: IconName; className?: str
     check: <path d="m5 12 4 4L19 6" />,
     download: <path d="M12 3v12m-4-4 4 4 4-4M4 16v4h16v-4" />,
     clock: <><circle cx="12" cy="12" r="9" /><path d="M12 7v5l3 2" /></>,
+    'clock-24': <><path d="M21 16a9.5 9.5 0 1 1 0-8m0-4v4h-4" /><path d="M7 10a1.5 1.5 0 1 1 2.6 1L7 14h3.5m5-5-3 4h5m-1-4v6" /></>,
+    car: <><path d="m5 10 2-5h10l2 5M5 17v1a1.5 1.5 0 0 0 3 0v-1m8 0v1a1.5 1.5 0 0 0 3 0v-1" /><rect x="3" y="10" width="18" height="7" rx="2" /><path d="M6.5 13.5h1m9 0h1" /></>,
+    wrench: <path d="M21 6a5 5 0 0 1-6.5 6.5L7 20a2.1 2.1 0 0 1-3-3l7.5-7.5A5 5 0 0 1 18 3l-3 3v2l2 1 4-3Z" />,
+    map: <path d="m3 5 6-2 6 2 6-2v16l-6 2-6-2-6 2V5Zm6-2v16m6-14v16" />,
+    'graduation-cap': <><path d="m2 9 10-5 10 5-10 5-10-5Zm4 2v5c3 3 9 3 12 0v-5m4-2v7" /></>,
     pin: <><path d="M19 10c0 5-7 11-7 11s-7-6-7-11a7 7 0 1 1 14 0Z" /><circle cx="12" cy="10" r="2" /></>,
     edit: <><path d="M12 5H5v14h14v-7M10 14l1-4 8-8 3 3-8 8-4 1Z" /></>,
     calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M7 3v4m10-4v4M3 10h18" /></>,
