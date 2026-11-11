@@ -90,14 +90,18 @@ export function FaqDirectoryPage() {
       setCategory(value)
       setPage(1)
     }} />
-    <div id="faq-results" className="container-shell section-space space-y-8">
+    <div id="faq-results" className="container-shell faq-directory section-space space-y-8">
       {!results.length && <p role="status">No questions match your search.</p>}
       {visibleGroups.map(group => <section key={group.title}>
         <h2 className="section-title mb-4">{group.title}</h2>
-        <div className="grid gap-2">
-          {group.faqs.map(faq => <details key={faq.question} className="group rounded-lg border border-[#d8e8f2] bg-white open:bg-pale-green">
-            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-4 px-4 py-3 font-heading font-semibold text-brand-blue [&::-webkit-details-marker]:hidden">{faq.question}<Icon name="chevron" className="shrink-0 group-open:rotate-180" /></summary>
-            <p className="px-4 pb-4 text-sm leading-relaxed text-muted">{faq.answer ?? <>For help with this question, <a className="font-semibold text-brand-blue underline" href="/help-centre/#send-message">contact the KennCo team</a>.</>}</p>
+        <div className="faq-list">
+          {group.faqs.map(faq => <details key={faq.question} className="faq-item">
+            <summary className="faq-trigger cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+              {faq.question}<span className="faq-plus" aria-hidden="true"><span /><span /></span>
+            </summary>
+            <div className="faq-answer [&_a]:text-brand-blue [&_a]:underline">
+              <p>{faq.answer ?? <>For help with this question, <a href="/help-centre/#send-message">contact the KennCo team</a>.</>}</p>
+            </div>
           </details>)}
         </div>
       </section>)}

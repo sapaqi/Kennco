@@ -151,8 +151,8 @@ img { display: block; max-width: 100%; }
 .faq-plus { position: relative; display: flex; align-items: center; justify-content: center; width: 1.5rem; height: 1.5rem; flex: 0 0 1.5rem; border-radius: 50%; background: #eff6f9; }
 .faq-plus span { position: absolute; width: 0.625rem; height: 0.09375rem; background: #035086; transition: transform 180ms; }
 .faq-plus span:last-child { transform: rotate(90deg); }
-.faq-open .faq-plus { background: #dff5d1; }
-.faq-open .faq-plus span:last-child { transform: rotate(0); }
+:is(.faq-open, .faq-item[open]) .faq-plus { background: #dff5d1; }
+:is(.faq-open, .faq-item[open]) .faq-plus span:last-child { transform: rotate(0); }
 .faq-answer { font-size: 0.8125rem; line-height: 1.9; color: #526779; padding: 0 2.5rem 1.3125rem 0; }
 .faq-answer:not([hidden]) { animation: faq-in 200ms ease-out; }
 @keyframes faq-in { from { opacity: 0; transform: translateY(-0.1875rem); } to { opacity: 1; transform: none; } }
