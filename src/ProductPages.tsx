@@ -189,7 +189,6 @@ const vanHighlightIcons = ['shield', 'people', 'clock'] as const
 
 export function VanInsurancePage() {
   const hero = design.vanHero
-  const privateVan = design.vanPrivate
   const support = design.vanSupport
   return <>
     <InsuranceHero label="Van Insurance"
@@ -203,17 +202,30 @@ export function VanInsurancePage() {
         {design.vanHighlights.map((item, index) => <li key={item} className="flex items-center gap-2"><Icon name={vanHighlightIcons[index]} className="shrink-0 text-white" />{item}</li>)}
       </ul>
     </div>
-    <section className="section-space van-private-section" aria-labelledby="private-van-title">
-      <div className="container-shell">
-        <article className="grid overflow-hidden rounded-2xl border border-[#d8e8f2] bg-white shadow-card md:grid-cols-2">
-          <div className="insurance-extra-featured p-6 sm:p-8">
-            <span className="insurance-plan-badge">{privateVan[0]}</span>
-            <h2 className="section-title mt-3" id="private-van-title">{privateVan[1]}</h2>
-            <p className="mt-3 leading-relaxed">{privateVan[2]}</p>
-            <ButtonLink className="mt-5" href={vanQuote}>{privateVan[3]}</ButtonLink>
+    <section className="section-space van-private-section" aria-label="Van insurance options">
+      <div className="container-shell grid gap-5 md:grid-cols-2">
+        {[design.vanPrivate, design.vanCommercial].map(([badge, title, intro, quoteLabel, featuresTitle, ...details]) => <article key={title}
+          className="grid overflow-hidden rounded-2xl border border-[#d8e8f2] bg-white shadow-card md:row-span-2 md:grid-rows-subgrid md:gap-0">
+          <div className="insurance-extra-featured flex flex-col items-start p-6 sm:p-8">
+            <span className="insurance-plan-badge bg-pale-green! text-ink!">{badge}</span>
+            <h2 className="section-title mt-3">{title}</h2>
+            <p className="mt-3 mb-5 leading-relaxed">{intro}</p>
+            <ButtonLink className="mt-auto" href={vanQuote}>{quoteLabel}</ButtonLink>
           </div>
-          <div className="p-6 sm:p-8"><h3 className="eyebrow">{privateVan[4]}</h3><dl className="mt-4 grid gap-4 sm:grid-cols-2">{pairs(privateVan.slice(5, 13)).map(({ title, body }) => <div key={title}><dt className="font-semibold">{title}</dt><dd className="mt-1 text-sm text-muted">{body}</dd></div>)}</dl><a href={links.van} className="text-link mt-5">{privateVan[13]}<Icon name="arrow" /></a></div>
-        </article>
+          <div className="flex flex-col items-start p-6 sm:p-8">
+            <h3 className="eyebrow">{featuresTitle}</h3>
+            <dl className="mt-4 mb-5 grid gap-4">
+              {pairs(details.slice(0, -1)).map(({ title, body }) => <div className="relative pl-9" key={title}>
+                <dt className="font-semibold">
+                  <span className="absolute top-0 left-0 grid size-6 place-items-center rounded-full bg-pale-green text-[#2d641e]"><Icon name="check" className="size-4" /></span>
+                  {title}
+                </dt>
+                <dd className="mt-1 text-sm text-muted">{body}</dd>
+              </div>)}
+            </dl>
+            <a href={links.van} className="text-link mt-auto">{details[8]}<Icon name="arrow" /></a>
+          </div>
+        </article>)}
       </div>
     </section>
     <PageSection title={design.vanSteps[1]} eyebrow={design.vanSteps[0]}><ProductCards items={[2, 5, 8].map(index => ({ tag: design.vanSteps[index], title: design.vanSteps[index + 1], body: design.vanSteps[index + 2] }))} /></PageSection>

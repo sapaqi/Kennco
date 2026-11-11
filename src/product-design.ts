@@ -175,6 +175,23 @@ export const vanPrivate = [
   "Personal van insurance"
 ] as const
 
+export const vanCommercial = [
+  "Business Use",
+  "Commercial Van",
+  "For carrying your own goods or hire and reward in the course of business.",
+  "Quote commercial van",
+  "WHAT YOU GET",
+  "Vans up to two tonnes",
+  "Cover for drivers aged 21 to 69.",
+  "Goods in transit and liability",
+  "Covers business activities as well as personal use.",
+  "24-hour breakdown",
+  "Roadside assistance and Home Start as standard.",
+  "Up to 50% no claims bonus",
+  "With five or more claim-free years.",
+  "Commercial van insurance"
+] as const
+
 export const vanSteps = [
   "How it works",
   "Covered in three steps",
