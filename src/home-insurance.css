@@ -30,9 +30,52 @@
   align-self: stretch;
   padding-top: var(--glance-photo-space);
 }
-.insurance-glance-scene:has(tr:nth-child(4)) {
+.insurance-glance-scene:has(tr:nth-child(4)),
+.insurance-quote-scene {
   padding-top: calc(var(--glance-photo-space) - var(--glance-row-height));
 }
+.insurance-quote-scene {
+  /* Match the Travel hero's four rows, caption, and card border. */
+  min-block-size: calc(var(--glance-photo-space) + 3 * var(--glance-row-height) + 3.25rem + 3px);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.insurance-hero-quote { padding: 1.25rem; }
+.insurance-hero-quote .section-title { font-size: 1.25rem; }
+.insurance-hero-badge {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .25rem;
+  width: 10.5rem;
+  max-width: 100%;
+  padding: 1.125rem 1.25rem;
+  border-radius: 1.125rem;
+  background: var(--color-brand-blue);
+  color: #fff;
+  font-size: .6875rem;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  mask:
+    linear-gradient(#000 0 0) center / calc(100% - 10px) calc(100% - 10px) no-repeat,
+    radial-gradient(ellipse 6px 5px, #000 95%, transparent) left top / 10px 10px repeat-x,
+    radial-gradient(ellipse 6px 5px, #000 95%, transparent) left bottom / 10px 10px repeat-x,
+    radial-gradient(ellipse 5px 6px, #000 95%, transparent) left top / 10px 10px repeat-y,
+    radial-gradient(ellipse 5px 6px, #000 95%, transparent) right top / 10px 10px repeat-y;
+}
+.insurance-hero-badge::before {
+  content: '';
+  position: absolute;
+  inset: .5rem;
+  border: 1px solid #fff;
+  border-radius: .75rem;
+  pointer-events: none;
+}
+.insurance-hero-badge strong { font-family: var(--font-heading); font-size: 2.375rem; line-height: 1; }
 .insurance-glance-photo {
   position: absolute;
   inset: -.5rem -5rem calc(-1 * var(--hero-bottom-space)) clamp(-24rem, -21vw, -9rem);
@@ -100,6 +143,7 @@
 .insurance-eligibility li svg { width: 1rem; height: 1rem; margin-top: .25rem; flex-shrink: 0; color: #437a1f; }
 .insurance-savings { background: #035086; color: #fff; position: relative; isolation: isolate; overflow: hidden; }
 .insurance-savings::before { content: ''; position: absolute; z-index: -1; inset: 0; background: radial-gradient(ellipse at 0 0, rgb(117 192 68 / 35%), transparent 65%); }
+.van-highlights::before { background: linear-gradient(to right, rgb(117 192 68 / 35%), transparent); }
 .insurance-savings-orbit { position: absolute; z-index: -1; width: 32rem; height: 32rem; left: -20rem; bottom: -23rem; border: 1px solid rgb(255 255 255 / 15%); border-radius: 50%; box-shadow: 0 0 0 2rem rgb(255 255 255 / 4%), 0 0 0 4rem rgb(255 255 255 / 4%); }
 .insurance-savings-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 5rem; align-items: center; }
 .insurance-savings .eyebrow { color: #dff5d1; }
@@ -226,10 +270,7 @@
 }
 .insurance-extra-featured p { color: #edf6fc; }
 .insurance-extra-featured .travel-cover-check { color: #dff0d1; }
-.travel-popular-badge {
-  position: absolute;
-  inset-block-start: 1rem;
-  inset-inline-end: 1.25rem;
+.insurance-plan-badge {
   display: inline-flex;
   align-items: center;
   gap: .375rem;
@@ -241,7 +282,14 @@
   font-weight: 700;
   letter-spacing: .05em;
 }
-.travel-popular-badge svg { width: .875rem; height: .875rem; }
+.insurance-plan-badge svg { width: .875rem; height: .875rem; }
+.travel-popular-badge { position: absolute; inset-block-start: 1rem; inset-inline-end: 1.25rem; }
+.van-private-section { padding-block-end: 2.375rem; }
+.van-private-section + .section-space { padding-block-start: 2.375rem; }
+@media (max-width: 767px) {
+  .van-private-section { padding-block-end: 1.625rem; }
+  .van-private-section + .section-space { padding-block-start: 1.625rem; }
+}
 .insurance-extras + .insurance-help { padding-top: 3.5rem; }
 @media (max-width: 1023px) {
   .insurance-extras-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }

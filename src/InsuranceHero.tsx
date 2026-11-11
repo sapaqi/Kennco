@@ -1,14 +1,15 @@
 import type { ReactNode } from 'react'
 import { ButtonLink, Reveal } from './ui'
 
-export function InsuranceHero({ label, title, intro, quote, photo, rows }: {
+export function InsuranceHero({ label, title, intro, quote, photo, rows, panel, badge }: {
   label: string
   title: ReactNode
   intro: string
-  quote: { href: string; label: string }
-  photo: { src: string; width: number; height: number; softFade?: boolean }
-  rows: readonly { label: string; value: ReactNode }[]
-}) {
+  photo: { src: string; width: number; height: number; softFade?: boolean; mirrored?: boolean }
+} & (
+  | { quote: { href: string; label: string }; rows: readonly { label: string; value: ReactNode }[]; panel?: never; badge?: never }
+  | { panel: ReactNode; badge: ReactNode; quote?: never; rows?: never }
+)) {
   return <section className="insurance-hero" aria-labelledby="insurance-title">
     <div className="container-shell page-hero-heading insurance-hero-layout">
       <div className="insurance-hero-copy">
@@ -17,13 +18,14 @@ export function InsuranceHero({ label, title, intro, quote, photo, rows }: {
         </nav>
         <h1 id="insurance-title">{title}</h1>
         <p>{intro}</p>
-        <ButtonLink href={quote.href}>{quote.label}</ButtonLink>
+        {quote && <ButtonLink href={quote.href}>{quote.label}</ButtonLink>}
+        {badge && <div className="insurance-hero-badge">{badge}</div>}
       </div>
-      <Reveal className="insurance-glance-scene">
+      <Reveal className={panel ? 'insurance-glance-scene insurance-quote-scene' : 'insurance-glance-scene'}>
         <div className={`insurance-glance-photo${photo.softFade ? ' insurance-glance-photo-soft' : ''}`}>
-          <img src={photo.src} width={photo.width} height={photo.height} alt="" fetchPriority="high" />
+          <img className={photo.mirrored ? '-scale-x-100' : undefined} src={photo.src} width={photo.width} height={photo.height} alt="" fetchPriority="high" />
         </div>
-        <div className="insurance-glance">
+        {rows ? <div className="insurance-glance">
           <table>
             <caption>At A Glance</caption>
             <tbody>{rows.map(row => <tr key={row.label}>
@@ -31,7 +33,7 @@ export function InsuranceHero({ label, title, intro, quote, photo, rows }: {
               <td>{row.value}</td>
             </tr>)}</tbody>
           </table>
-        </div>
+        </div> : panel}
       </Reveal>
     </div>
   </section>
