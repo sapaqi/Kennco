@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { CSSProperties, ReactNode } from 'react'
 
-export type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login' | 'alarm' | 'sliders' | 'personal-items' | 'calendar' | 'people' | 'star' | 'download' | 'clock' | 'pin' | 'edit'
+export type IconName = 'arrow' | 'chevron' | 'phone' | 'document' | 'help' | 'chat' | 'book' | 'check' | 'close' | 'menu' | 'mail' | 'shield' | 'external' | 'login' | 'alarm' | 'sliders' | 'personal-items' | 'calendar' | 'people' | 'star' | 'download' | 'clock' | 'pin' | 'edit' | 'share' | 'file'
 
 export function Icon({ name, className = '' }: { name: IconName; className?: string }) {
   const paths: Record<IconName, ReactNode> = {
@@ -23,6 +23,8 @@ export function Icon({ name, className = '' }: { name: IconName; className?: str
     close: <path d="m6 6 12 12M6 18 18 6" />,
     menu: <path d="M4 7h16M4 12h16M4 17h16" />,
     mail: <><rect x="3" y="5" width="18" height="14" rx="2" /><path d="m3 6 9 7 9-7" /></>,
+    share: <><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7" /><path d="m16 6-4-4-4 4m4-4v14" /></>,
+    file: <><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9Z" /><path d="M13 2v7h7" /></>,
     shield: <><path d="m12 3 8 3v6c0 5-8 9-8 9s-8-4-8-9V6l8-3Z" /><path d="m8 12 3 3 5-6" /></>,
     alarm: <><path d="M6 15V9a6 6 0 0 1 12 0v6l2 3H4l2-3ZM10 21h4M12 2V1M3 5 1 3M21 5l2-2" /><circle cx="12" cy="10" r="2" /></>,
     sliders: <><path d="M5 3v8M5 15v6M12 3v2M12 9v12M19 3v11M19 18v3" /><circle cx="5" cy="13" r="2" /><circle cx="12" cy="7" r="2" /><circle cx="19" cy="16" r="2" /></>,

@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
+import { StorySection } from './AdditionalPageUI'
 import { CoverSection } from './CoverSection'
-import { Icon, Reveal } from './ui'
+import { Icon } from './ui'
 
 const highlights = [
   { label: 'Founded 2008', icon: 'calendar' },
@@ -27,18 +28,10 @@ export function AboutContent({ children }: { children: ReactNode }) {
       </ul>
     </div>
 
-    <section className="section-space border-b border-slate-100" aria-labelledby="about-story">
-      <div className="container-shell grid gap-5 md:grid-cols-[1fr_1.4fr] md:items-start md:gap-12 lg:gap-16">
-        <Reveal>
-          <p className="eyebrow mb-3 text-brand-blue"><span className="eyebrow-line" aria-hidden="true" />Who are we?</p>
-          <h2 id="about-story" className="section-title max-w-96">A 100% Irish-owned company, proud of our roots</h2>
-        </Reveal>
-        <Reveal>
-          <p className="max-w-prose leading-relaxed text-muted">KennCo Insurance, established in 2008, operates as part of KennCo Underwriting Limited — one of Ireland’s largest underwriting agencies. We’re proudly based in Rathfarnham, Co. Dublin, where our dedicated team works diligently to serve our clients’ needs.</p>
-          <p className="mt-4 max-w-prose leading-relaxed text-muted">Our growth is built on competitively priced policies that never compromise on quality. We prioritise security and stability so our clients feel safe and supported — whether they’re insuring a car, a home, a trip or a van.</p>
-        </Reveal>
-      </div>
-    </section>
+    <StorySection id="about-story" eyebrow="Who are we?" title="A 100% Irish-owned company, proud of our roots" paragraphs={[
+      'KennCo Insurance, established in 2008, operates as part of KennCo Underwriting Limited — one of Ireland’s largest underwriting agencies. We’re proudly based in Rathfarnham, Co. Dublin, where our dedicated team works diligently to serve our clients’ needs.',
+      'Our growth is built on competitively priced policies that never compromise on quality. We prioritise security and stability so our clients feel safe and supported — whether they’re insuring a car, a home, a trip or a van.',
+    ]} />
 
     <CoverSection about />
     {children}

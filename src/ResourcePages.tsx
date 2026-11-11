@@ -32,7 +32,7 @@ export function PolicyDownloadsPage() {
     ...group, files: group.files.filter(([name, type]) => (name + ' ' + type).toLowerCase().includes(query.toLowerCase())),
   })).filter(group => group.files.length)
   return <>
-    <PageHero label="Policy downloads" title="Policy documents & downloads" intro="Download IPIDs, policy booklets and forms. Documents are updated as needed — older versions live in the archive.">
+    <PageHero label="Policy downloads" title="Policy documents & downloads" intro="Download IPIDs, policy booklets and forms. Documents are updated as needed — older versions live in the archive." cars>
       <PageSearch label="Search documents" onSearch={setQuery} />
     </PageHero>
     <PageFilters options={['All', ...documents.map(group => group.title)]} current={category} onChange={setCategory} />

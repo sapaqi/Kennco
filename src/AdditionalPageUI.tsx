@@ -1,7 +1,27 @@
 import { useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
+import { Reveal } from './ui'
 
 export const pagePanel = 'rounded-2xl border border-[#d8e8f2] bg-white p-5 shadow-card sm:p-7'
+
+export function StorySection({ id, eyebrow, title, paragraphs }: {
+  id: string
+  eyebrow: string
+  title: string
+  paragraphs: readonly string[]
+}) {
+  return <section className="section-space border-b border-slate-100" aria-labelledby={id}>
+    <div className="container-shell grid gap-5 md:grid-cols-[1fr_1.4fr] md:items-start md:gap-12 lg:gap-16">
+      <Reveal>
+        <p className="eyebrow mb-3 text-brand-blue"><span className="eyebrow-line" aria-hidden="true" />{eyebrow}</p>
+        <h2 id={id} className="section-title max-w-96">{title}</h2>
+      </Reveal>
+      <Reveal>
+        {paragraphs.map(paragraph => <p key={paragraph} className="max-w-prose leading-relaxed text-muted [&+p]:mt-4">{paragraph}</p>)}
+      </Reveal>
+    </div>
+  </section>
+}
 
 export function HeroCars() {
   return <img className="car-hero-photo" src="/assets/help-centre-hero.webp" alt="" width="1700" height="711" fetchPriority="high" />

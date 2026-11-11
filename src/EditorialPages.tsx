@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { articles } from './content'
 import { article, blogHero, featured, mediaHero, mediaPanels, mediaStory } from './editorial-design'
-import { PageFilters, PageHero, PageSearch, PageSection, pagePanel } from './AdditionalPageUI'
+import { PageFilters, PageHero, PageSearch, PageSection, StorySection, pagePanel } from './AdditionalPageUI'
 import { Pagination } from './Pagination'
 import { ButtonLink, Icon } from './ui'
 
@@ -139,22 +139,29 @@ export function BlogArticlePage() {
   </>
 }
 
+function MediaResourceTitle({ icon, title }: { icon: 'mail' | 'share' | 'file'; title: string }) {
+  return <h3 className="flex items-center gap-3 font-heading text-xl font-bold">
+    <span className="grid size-14 shrink-0 place-items-center rounded-full bg-[#d3ecfd] text-brand-blue"><Icon name={icon} className="size-8" /></span>
+    {title}
+  </h3>
+}
+
 export function MediaCentrePage() {
   return <>
-    <PageHero label="Media Centre" title={mediaHero[0]} intro={mediaHero[1]}><ButtonLink className="mt-5" href="#press-releases" variant="outline">Latest news</ButtonLink></PageHero>
-    <PageSection title={mediaStory[1]} eyebrow={mediaStory[0]}><p className="max-w-3xl whitespace-pre-line leading-relaxed text-muted">{mediaStory[2]}</p></PageSection>
+    <PageHero label="Media Centre" title={mediaHero[0]} intro={mediaHero[1]} cars><ButtonLink className="mt-5" href="#press-releases" variant="outline">Latest news</ButtonLink></PageHero>
+    <StorySection id="media-about-story" title={mediaStory[1]} eyebrow={mediaStory[0]} paragraphs={mediaStory[2].split('\n')} />
     <PageSection title="Media resources" tint>
       <div className="grid gap-5 md:grid-cols-2">
         <article className={pagePanel}>
-          <h3 className="font-heading text-xl font-bold">{mediaPanels[0]}</h3><p className="mt-3 leading-relaxed text-muted">{mediaPanels[1]}</p>
+          <MediaResourceTitle icon="mail" title={mediaPanels[0]} /><p className="mt-3 leading-relaxed text-muted">{mediaPanels[1]}</p>
           <div className="mt-5 rounded-xl bg-pale-green p-4"><p className="eyebrow">{mediaPanels[2]}</p><p className="mt-2 font-semibold">{mediaPanels[3]}</p><a className="text-link mt-2 break-all" href={`mailto:${mediaPanels[4]}`}>{mediaPanels[4]}</a></div>
         </article>
         <article className={pagePanel}>
-          <h3 className="font-heading text-xl font-bold">{mediaPanels[5]}</h3><p className="mt-3 leading-relaxed text-muted">{mediaPanels[6]}</p>
+          <MediaResourceTitle icon="share" title={mediaPanels[5]} /><p className="mt-3 leading-relaxed text-muted">{mediaPanels[6]}</p>
           <ul className="mt-4 grid list-disc gap-2 pl-5 text-sm sm:grid-cols-2">{[...mediaPanels[8].split('\n'), ...mediaPanels[7].split('\n')].map(item => <li key={item}>{item}</li>)}</ul>
         </article>
         <article className={pagePanel + ' md:col-span-2'}>
-          <h3 className="font-heading text-xl font-bold">{mediaPanels[9]}</h3><div className="mt-4 grid gap-5 md:grid-cols-2">{mediaPanels.slice(10).map(entry => {
+          <MediaResourceTitle icon="file" title={mediaPanels[9]} /><div className="mt-4 grid gap-5 md:grid-cols-2">{mediaPanels.slice(10).map(entry => {
             const [heading, body] = entry.split('\u2028')
             return <div key={heading}><h4 className="font-semibold">{heading}</h4><p className="mt-2 text-sm leading-relaxed text-muted">{body.replace('[Name@email.com ]', mediaPanels[4])}</p></div>
           })}</div>
