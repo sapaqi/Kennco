@@ -15,7 +15,7 @@ const relatedHref = (name: string) => name === 'Landlord insurance'
 
 function HomeInsuranceHero() {
   return <section className="insurance-hero" aria-labelledby="insurance-title">
-    <div className="container-shell insurance-hero-layout">
+    <div className="container-shell page-hero-heading insurance-hero-layout">
       <div className="insurance-hero-copy">
         <nav aria-label="Breadcrumb" className="insurance-breadcrumb"><ol><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Home Insurance</li></ol></nav>
         <h1 id="insurance-title">Cover for the place<br className="hidden xl:block" /> that <span className="hero-highlight">matters most</span></h1>

@@ -8,7 +8,7 @@ export const links = {
   contact: 'https://www.kennco.ie/contact-us/',
   help: '/help-centre/',
   about: 'https://www.kennco.ie/about-us/',
-  documents: 'https://www.kennco.ie/downloads/',
+  documents: '/downloads/',
   blog: 'https://www.kennco.ie/blog/',
   portal: 'https://www.virtualcabinetportal.com/MyPortal/Login?org=kenncounderwritingltd',
   privacy: 'https://www.kennco.ie/privacy-statement/',
@@ -18,9 +18,9 @@ export const links = {
 } as const
 
 export const covers = [
-  { name: 'Car', key: 'car', image: 'cover-car', href: links.car, width: 640, height: 249 },
-  { name: 'Van', key: 'van', image: 'cover-van', href: links.van, width: 640, height: 270 },
-  { name: 'Travel', key: 'travel', image: 'cover-travel', href: links.travel, width: 433, height: 440 },
+  { name: 'Car', key: 'car', image: 'cover-car', href: '/car-insurance/', width: 640, height: 249 },
+  { name: 'Van', key: 'van', image: 'cover-van', href: '/van-insurance/', width: 640, height: 270 },
+  { name: 'Travel', key: 'travel', image: 'cover-travel', href: '/travel-insurance/', width: 433, height: 440 },
   { name: 'Home', key: 'home', image: 'cover-home', href: links.home, width: 455, height: 440 },
 ] as const
 
@@ -85,8 +85,8 @@ export const guideLinks = [
 ]
 
 export const footerGroups = [
-  { title: 'Products', items: [{ name: 'Car', href: links.car }, { name: 'Van', href: links.van }, { name: 'Travel', href: links.travel }, { name: 'Home', href: links.home }, { name: 'Business Insurance', href: 'https://www.kennco.ie/professional-indemnity-insurance/' }] },
+  { title: 'Products', items: [...['car', 'van', 'travel', 'home'].map(key => covers.find(cover => cover.key === key)!), { name: 'Business Insurance', href: 'https://www.kennco.ie/professional-indemnity-insurance/' }] },
   { title: 'Quick Links', items: [{ name: 'Make a Claim', href: links.contact }, { name: 'Resume quote', href: links.car }, { name: 'Your Portal', href: links.portal }, { name: 'Customer Survey', href: 'https://www.kennco.ie/kennco-customer-satisfaction-2025/' }, { name: 'Complaints Procedure', href: links.complaints }] },
   { title: 'About us', items: [{ name: 'Meet the Team', href: links.about }, { name: 'Our Story & Regulatory Status', href: links.about }, { name: 'Careers', href: 'https://www.kennco.ie/careers/' }, { name: 'Fees & Commissions', href: links.fees }, { name: 'Capital Providers', href: 'https://www.kennco.ie/capitalproviders/' }] },
-  { title: 'Media', items: [{ name: 'Blog', href: links.blog }, { name: 'News', href: 'https://www.kennco.ie/category/news/' }, { name: 'Media centre', href: 'https://www.kennco.ie/media-centre/' }, { name: 'Learn', href: links.blog }] },
+  { title: 'Media', items: [{ name: 'Blog', href: '/blog/' }, { name: 'News', href: 'https://www.kennco.ie/category/news/' }, { name: 'Media centre', href: '/media-centre/' }, { name: 'Learn', href: links.blog }] },
 ]

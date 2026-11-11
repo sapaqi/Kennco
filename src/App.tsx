@@ -4,6 +4,9 @@ import { ButtonLink, Icon, Reveal } from './ui'
 import { HomeInsuranceContent, homeQuoteUrl } from './HomeInsurance'
 import { CoverSection } from './CoverSection'
 import { HelpCentre } from './HelpCentre'
+import { ArticleCard, articlePath, BlogArticlePage, BlogPage, MediaCentrePage } from './EditorialPages'
+import { FaqDirectoryPage, PolicyDownloadsPage } from './ResourcePages'
+import { CarInsurancePage, TravelInsurancePage, VanInsurancePage } from './ProductPages'
 import { findInformationPage, InformationPage } from './InformationPage'
 import { articles, covers, faqs, footerGroups, guideLinks, links, reviews, supportLinks } from './content'
 
@@ -63,7 +66,7 @@ function Header({ productPage, homePrefix, quoteHref }: { productPage: boolean; 
           return <a className="nav-link" key={cover.key} href={cover.href} aria-current={productPage && cover.key === 'home' ? 'page' : undefined}>{cover.name}</a>
         })}
         <HeaderDropdown label="About Us" items={footerGroups.find(group => group.title === 'About us')!.items} />
-        <HeaderDropdown label="Help Centre" items={supportLinks} />
+        <HeaderDropdown label="Help Centre" items={[...supportLinks, { name: 'FAQs', href: '/faqs/' }]} />
         <a href={links.renew} className="nav-link">Renew Now</a>
       </nav>
       <div className="header-actions hidden lg:flex">
@@ -176,18 +179,10 @@ function QuickLinksSection({ about = false }: { about?: boolean }) {
 
 function NewsSection() {
   return <section className="section-space" aria-labelledby="news-heading"><div className="container-shell">
-    <Reveal><div className="mb-9 flex flex-wrap items-end justify-between gap-4"><div><span className="eyebrow mb-3 block">A little local knowledge</span><h2 className="section-title" id="news-heading">Latest news and articles</h2></div><a href={links.blog} className="text-link">View all blog<Icon name="arrow" /></a></div></Reveal>
+    <Reveal><div className="mb-9 flex flex-wrap items-end justify-between gap-4"><div><span className="eyebrow mb-3 block">A little local knowledge</span><h2 className="section-title" id="news-heading">Latest news and articles</h2></div><a href="/blog/" className="text-link">View all blog<Icon name="arrow" /></a></div></Reveal>
     <div className="grid gap-7 md:grid-cols-3">
       {articles.map((article, index) => <Reveal key={article.title} delay={index * 45} className="h-full">
-        <article className="news-card">
-          <a href={article.href} className="news-image-link" tabIndex={-1} aria-hidden="true"><img src={`/assets/${article.image}-800.webp`} srcSet={`/assets/${article.image}-480.webp 480w, /assets/${article.image}-800.webp 800w`} sizes="(min-width: 768px) 33vw, 100vw" width="800" height="533" loading="lazy" alt={article.alt} /></a>
-          <div className="news-content">
-            <div className="article-meta"><span className={`news-category category-${article.category.toLowerCase()}`}>{article.category}</span><time dateTime={article.dateTime}>{article.date}</time></div>
-            <h3 className="mt-4 font-heading text-lg font-bold leading-[1.5]"><a href={article.href}>{article.title}</a></h3>
-            <p className="mt-3 grow text-sm leading-7 text-muted">{article.excerpt}</p>
-            <a href={article.href} className="text-link mt-5 text-sm">{article.linkLabel}<Icon name="arrow" /></a>
-          </div>
-        </article>
+        <ArticleCard item={article} />
       </Reveal>)}
     </div>
   </div></section>
@@ -222,14 +217,24 @@ function Footer({ homeHref }: { homeHref: string }) {
 
 export function App() {
   const path = window.location.pathname
+  const additionalPage = [
+    { path: '/blog/', title: 'Blog', Content: BlogPage },
+    { path: articlePath, title: 'Who Pays for Fire Brigade Charges After a Car Accident?', Content: BlogArticlePage },
+    { path: '/media-centre/', title: 'Media Centre', Content: MediaCentrePage },
+    { path: '/downloads/', title: 'Policy documents & downloads', Content: PolicyDownloadsPage },
+    { path: '/faqs/', title: 'Frequently Asked Questions', Content: FaqDirectoryPage },
+    { path: '/car-insurance/', title: 'Car Insurance', Content: CarInsurancePage, quote: '#start-quote' },
+    { path: '/travel-insurance/', title: 'Travel Insurance', Content: TravelInsurancePage, quote: '#trip-cover' },
+    { path: '/van-insurance/', title: 'Van Insurance', Content: VanInsurancePage, quote: '#start-quote' },
+  ].find(page => page.path === path || page.path === path + '/')
   const productPage = /^\/home-insurance\/?$/.test(path)
   const helpPage = /^\/help-centre\/?$/.test(path)
   const informationPage = findInformationPage(path)
   const aboutPage = informationPage?.path === '/about'
-  const pageTitle = helpPage ? 'Help Centre' : aboutPage ? 'About Us' : informationPage?.title ?? (productPage ? 'Home Insurance' : undefined)
+  const pageTitle = additionalPage?.title ?? (helpPage ? 'Help Centre' : aboutPage ? 'About Us' : informationPage?.title ?? (productPage ? 'Home Insurance' : undefined))
   const homePrefix = pageTitle ? '/' : ''
-  const quoteHref = productPage ? homeQuoteUrl : aboutPage ? links.quote : homePrefix + links.quote
-  const pageClass = productPage ? 'home-insurance-page' : informationPage || helpPage ? 'information-page' : undefined
+  const quoteHref = productPage ? homeQuoteUrl : additionalPage?.quote ?? (aboutPage ? links.quote : homePrefix + links.quote)
+  const pageClass = productPage ? 'home-insurance-page' : informationPage || helpPage || additionalPage ? 'information-page' : undefined
   useEffect(() => {
     document.title = pageTitle ? `${pageTitle} — KennCo Insurance` : "KennCo Insurance — Cover for life's journeys"
   }, [pageTitle])
@@ -238,7 +243,7 @@ export function App() {
     <div id="top" />
     <Header productPage={productPage} homePrefix={homePrefix} quoteHref={quoteHref} />
     <main id="main">
-      {helpPage ? <HelpCentre /> : informationPage ? <InformationPage page={informationPage}><ReviewsSection about /><QuickLinksSection about /></InformationPage> : productPage ? <HomeInsuranceContent /> : <>
+      {additionalPage ? <additionalPage.Content /> : helpPage ? <HelpCentre /> : informationPage ? <InformationPage page={informationPage}><ReviewsSection about /><QuickLinksSection about /></InformationPage> : productPage ? <HomeInsuranceContent /> : <>
         <Hero /><CoverSection /><ReviewsSection /><FaqSection /><QuickLinksSection /><NewsSection /><NewsletterSection />
       </>}
     </main>

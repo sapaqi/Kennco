@@ -30,7 +30,7 @@ export function findInformationPage(path: string) {
 
 export function InformationHero({ title, about = false }: { title: string; about?: boolean }) {
   return <section className="information-hero" aria-labelledby="information-title">
-    <div className={`container-shell information-hero-inner${about ? ' about-hero-inner' : ''}`}>
+    <div className={`container-shell page-hero-heading information-hero-inner${about ? ' about-hero-inner' : ''}`}>
       {about
         ? <img className="about-hero-photo" src="/assets/about-hero.webp" width="2600" height="1164" alt="" fetchPriority="high" />
         : <img className="information-hero-photo" src="/assets/information-hero.webp" alt="" fetchPriority="high" />}

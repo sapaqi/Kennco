@@ -1,4 +1,5 @@
 import { FaqAccordion } from './FaqAccordion'
+import { HeroCars } from './AdditionalPageUI'
 import { useState } from 'react'
 import type { FormEvent, ReactNode } from 'react'
 import { links } from './content'
@@ -90,7 +91,7 @@ function MessageForm() {
 export function HelpCentre() {
   return <>
     <section className="information-hero" aria-labelledby="help-title">
-      <div className="container-shell help-hero-inner grid lg:grid-cols-[1.1fr_1fr] lg:gap-5">
+      <div className="container-shell page-hero-heading car-photo-hero-inner grid lg:grid-cols-[1.1fr_1fr] lg:gap-5">
         <div>
           <nav className="insurance-breadcrumb" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Help Centre</li></ol></nav>
           <h1 id="help-title" className="font-heading font-extrabold tracking-tight text-brand-blue">How can we help you?</h1>
@@ -100,7 +101,7 @@ export function HelpCentre() {
         <aside aria-label="Important information" className="my-4 w-full max-w-[30rem] rounded-xl border border-[#d8e8f2] border-s-4 border-s-brand-blue bg-white px-5 py-4 text-sm leading-normal shadow-card lg:my-0 lg:justify-self-end lg:self-end">
           <p><strong>Please note:</strong> For policies purchased through a broker, contact your broker. Details of which can be found on your purchase email or receipt. Stay vigilant against fraudulent emails. KennCo will only contact you from official company addresses.</p>
         </aside>
-        <img className="help-hero-photo" src="/assets/help-centre-hero.webp" alt="" width="1700" height="711" fetchPriority="high" />
+        <HeroCars />
       </div>
     </section>
 

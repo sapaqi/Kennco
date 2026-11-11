@@ -1,8 +1,8 @@
 .home-insurance-page, .information-page { --insurance-hero-background: linear-gradient(105deg, #edf9e7, #e0f2ee 46%, #d1eafa); }
 .home-insurance-page .site-header, .information-page .site-header, .insurance-hero, .information-hero { background: var(--insurance-hero-background); }
-:is(.insurance-hero, .about-hero-inner, .help-hero-inner) { --page-hero-top: 1rem; }
-:is(.insurance-hero, .about-hero-inner, .help-hero-inner) .insurance-breadcrumb { margin-bottom: .75rem; }
-:is(.insurance-hero-layout, .about-hero-inner, .help-hero-inner) h1 {
+.page-hero-heading { --page-hero-top: 1rem; }
+.page-hero-heading .insurance-breadcrumb { margin-bottom: .75rem; }
+.page-hero-heading h1 {
   font-family: var(--font-heading);
   color: var(--color-brand-blue);
   font-weight: 800;
@@ -12,7 +12,7 @@
   text-wrap: balance;
 }
 @media (min-width: 1024px) {
-  :is(.insurance-hero, .about-hero-inner, .help-hero-inner) { --page-hero-top: 1.5rem; }
+  .page-hero-heading { --page-hero-top: 1.5rem; }
 }
 .insurance-hero { position: relative; isolation: isolate; overflow: hidden; }
 .insurance-hero-layout { --hero-bottom-space: 2.5rem; display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); gap: 4rem; align-items: start; padding-block: var(--page-hero-top) var(--hero-bottom-space); }
