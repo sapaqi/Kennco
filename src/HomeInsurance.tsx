@@ -1,5 +1,6 @@
 import { FaqAccordion } from './FaqAccordion'
-import { ButtonLink, Icon, Reveal } from './ui'
+import { InsuranceHero } from './InsuranceHero'
+import { Icon, InsuranceExtraArt, Reveal } from './ui'
 import { homeInsurance as content, homeOptionalExtras } from './home-insurance-content'
 
 export const homeQuoteUrl = 'https://www.kennco.ie/home-insurance-quote/'
@@ -14,32 +15,15 @@ const relatedHref = (name: string) => name === 'Landlord insurance'
   : name.startsWith('Buildings') ? '#standard-cover' : 'https://www.kennco.ie/home-insurance/'
 
 function HomeInsuranceHero() {
-  return <section className="insurance-hero" aria-labelledby="insurance-title">
-    <div className="container-shell page-hero-heading insurance-hero-layout">
-      <div className="insurance-hero-copy">
-        <nav aria-label="Breadcrumb" className="insurance-breadcrumb"><ol><li><a href="/">Home</a></li><li aria-hidden="true">/</li><li aria-current="page">Home Insurance</li></ol></nav>
-        <h1 id="insurance-title">Cover for the place<br className="hidden xl:block" /> that <span className="hero-highlight">matters most</span></h1>
-        <p>{content.hero.intro}</p>
-        <ButtonLink href={homeQuoteUrl}>{content.hero.cta}</ButtonLink>
-      </div>
-      <Reveal className="insurance-glance-scene">
-        <div className="insurance-glance-photo">
-          <img src="/assets/home-insurance-house.png" width="1121" height="548" alt="" fetchPriority="high" />
-        </div>
-        <div className="insurance-glance">
-          <table>
-            <caption>At A Glance</caption>
-            <tbody>{content.glance.map(([label, value], index) => (
-              <tr key={label}>
-                <th scope="row">{label}</th>
-                <td>{index === 0 ? <strong>{value}</strong> : <span className="included-value"><Icon name="check" />{value}</span>}</td>
-              </tr>
-            ))}</tbody>
-          </table>
-        </div>
-      </Reveal>
-    </div>
-  </section>
+  return <InsuranceHero label="Home Insurance"
+    title={<>Cover for the place<br className="hidden xl:block" /> that <span className="hero-highlight">matters most</span></>}
+    intro={content.hero.intro}
+    quote={{ href: homeQuoteUrl, label: content.hero.cta }}
+    photo={{ src: '/assets/home-insurance-house.png', width: 1121, height: 548 }}
+    rows={content.glance.map(([label, value], index) => ({
+      label,
+      value: index === 0 ? <strong>{value}</strong> : <span className="included-value"><Icon name="check" />{value}</span>,
+    }))} />
 }
 
 function HomeOptionalExtras() {
@@ -48,7 +32,7 @@ function HomeOptionalExtras() {
       <Reveal><div className="insurance-section-heading"><span className="eyebrow">Optional extras</span><h2 id="extras-title" className="section-title mt-3">Tailor your policy</h2></div></Reveal>
       <div className="insurance-extras-grid">{homeOptionalExtras.map((extra, index) => <Reveal key={extra.title} className="h-full" delay={index * 45}>
         <article className={`insurance-extra insurance-extra-${extra.tone}`}>
-          <div className="insurance-extra-art" aria-hidden="true"><span className="insurance-extra-disc" /><span className="insurance-extra-orbit" /><span className="insurance-extra-dot" /><Icon name={extra.icon} /></div>
+          <InsuranceExtraArt icon={extra.icon} />
           <h3>{extra.title}</h3><p>{extra.body}</p>
         </article>
       </Reveal>)}</div>

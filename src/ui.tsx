@@ -39,6 +39,15 @@ export function ButtonLink({ href, children, variant = 'primary', className = ''
   return <a href={href} className={`button button-${variant} ${className}`}>{children}{arrow && <Icon name="arrow" className="button-arrow" />}</a>
 }
 
+export function InsuranceExtraArt({ icon }: { icon: IconName }) {
+  return <div className="insurance-extra-art" aria-hidden="true">
+    <span className="insurance-extra-disc" />
+    <span className="insurance-extra-orbit" />
+    <span className="insurance-extra-dot" />
+    <Icon name={icon} />
+  </div>
+}
+
 export function Reveal({ children, className = '', delay = 0 }: { children: ReactNode; className?: string; delay?: number }) {
   const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {

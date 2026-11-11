@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { PageFilters, PageHero, PageSearch, PageSection, pagePanel } from './AdditionalPageUI'
 import { faqGroups } from './faq-design'
+import { Pagination } from './Pagination'
 import { ButtonLink, Icon } from './ui'
 
 const mainFiles = 'https://www.kennco.ie/files/'
@@ -57,24 +58,41 @@ export function PolicyDownloadsPage() {
 }
 
 const faqCategories = ['All', 'Car', 'Home', 'Travel', 'Van'] as const
+const faqGroupsPerPage = 3
 
 export function FaqDirectoryPage() {
   const [query, setQuery] = useState('')
   const [category, setCategory] = useState('All')
+  const [page, setPage] = useState(1)
   const results = faqGroups.map(group => ({
     ...group,
     faqs: group.faqs.filter(faq => !faq.question.startsWith('Lorem ipsum') && (
       category === 'All' || !/\b(car|home|travel|van)s?\b/i.test(faq.question) || new RegExp(`\\b${category}s?\\b`, 'i').test(faq.question)
     ) && (faq.question + ' ' + (faq.answer ?? '')).toLowerCase().includes(query.toLowerCase())),
   })).filter(group => group.faqs.length)
+  const pageCount = Math.ceil(results.length / faqGroupsPerPage)
+  const visibleGroups = results.slice((page - 1) * faqGroupsPerPage, page * faqGroupsPerPage)
+
+  function changePage(nextPage: number) {
+    if (nextPage === page) return
+    setPage(nextPage)
+    document.getElementById('faq-results')?.scrollIntoView()
+  }
+
   return <>
-    <PageHero label="Frequently Asked Questions" title="Insurance questions, answered" intro="Choose a product below to see the questions we're asked most — about cover, claims, discounts and payments.">
-      <PageSearch label="Search any insurance question" onSearch={setQuery} />
+    <PageHero label="Frequently Asked Questions" title="Insurance questions, answered" intro="Choose a product below to see the questions we're asked most — about cover, claims, discounts and payments." cars>
+      <PageSearch label="Search any insurance question" onSearch={value => {
+        setQuery(value)
+        setPage(1)
+      }} />
     </PageHero>
-    <PageFilters options={faqCategories} current={category} onChange={setCategory} />
-    <div className="container-shell section-space space-y-8">
+    <PageFilters options={faqCategories} current={category} onChange={value => {
+      setCategory(value)
+      setPage(1)
+    }} />
+    <div id="faq-results" className="container-shell section-space space-y-8">
       {!results.length && <p role="status">No questions match your search.</p>}
-      {results.map(group => <section key={group.title}>
+      {visibleGroups.map(group => <section key={group.title}>
         <h2 className="section-title mb-4">{group.title}</h2>
         <div className="grid gap-2">
           {group.faqs.map(faq => <details key={faq.question} className="group rounded-lg border border-[#d8e8f2] bg-white open:bg-pale-green">
@@ -83,6 +101,7 @@ export function FaqDirectoryPage() {
           </details>)}
         </div>
       </section>)}
+      <Pagination page={page} pageCount={pageCount} onPageChange={changePage} label="FAQ pages" />
     </div>
     <PageSection title="Didn’t find an answer?" tint>
       <p className="mb-5 text-muted">Our team is happy to help during office hours.</p>

@@ -23,7 +23,16 @@
 .insurance-breadcrumb [aria-current] { color: #06385b; }
 .insurance-hero-copy > p { margin-block: 1.5rem 2rem; font-size: 1rem; line-height: 1.85; max-width: 35rem; }
 .insurance-hero-copy { position: relative; z-index: 1; }
-.insurance-glance-scene { position: relative; align-self: stretch; padding-top: clamp(8.5rem, 14vw, 15rem); }
+.insurance-glance-scene {
+  --glance-photo-space: clamp(8.5rem, 14vw, 15rem);
+  --glance-row-height: 3.3125rem;
+  position: relative;
+  align-self: stretch;
+  padding-top: var(--glance-photo-space);
+}
+.insurance-glance-scene:has(tr:nth-child(4)) {
+  padding-top: calc(var(--glance-photo-space) - var(--glance-row-height));
+}
 .insurance-glance-photo {
   position: absolute;
   inset: -.5rem -5rem calc(-1 * var(--hero-bottom-space)) clamp(-24rem, -21vw, -9rem);
@@ -46,6 +55,7 @@
   box-shadow: var(--shadow-card);
 }
 .insurance-glance table { border-collapse: separate; border-spacing: 0; width: 100%; font-size: .8125rem; }
+.insurance-glance tr { height: var(--glance-row-height); }
 .insurance-glance caption {
   padding: .875rem 1.25rem;
   border-bottom: 1px solid #e0e3e6;
@@ -130,6 +140,7 @@
 }
 @media (max-width: 1023px) {
   .insurance-hero-layout { gap: 1.5rem; }
+  .insurance-glance-scene { --glance-row-height: 3.5rem; }
   .insurance-glance table { font-size: .75rem; }
   .insurance-glance td strong { font-size: .8125rem; }
   .insurance-glance th, .insurance-glance td { padding: 1rem .75rem; }
@@ -143,7 +154,7 @@
   .insurance-hero-layout { --hero-bottom-space: 2rem; grid-template-columns: 1fr; gap: 2.25rem; }
   .insurance-hero-copy > p { font-size: .9375rem; line-height: 1.85; margin-block: 1.25rem 1.5rem; }
   .insurance-hero-copy > .button { width: 100%; }
-  .insurance-glance-scene { padding-top: clamp(8.5rem, 36vw, 14rem); }
+  .insurance-glance-scene { --glance-photo-space: clamp(8.5rem, 36vw, 14rem); }
   .insurance-glance-photo { inset: 0 -1.5rem calc(-1 * var(--hero-bottom-space)); translate: none; mask-image: linear-gradient(to right, transparent, #000 23% 77%, transparent), linear-gradient(to bottom, transparent, #000 23%); }
   .insurance-glance { width: 100%; }
   .insurance-glance table { font-size: .8125rem; }
@@ -197,6 +208,35 @@
 .insurance-extra-art > svg { position: relative; width: 3.5rem; height: 3.5rem; color: var(--extra-ink); stroke-width: 1.35; filter: drop-shadow(0 .25rem .125rem rgb(3 80 134 / 8%)); }
 .insurance-extra h3 { min-height: 3.2625rem; font-family: var(--font-heading); font-size: 1.125rem; font-weight: 700; line-height: 1.45; letter-spacing: -.02em; text-wrap: balance; margin-bottom: .75rem; }
 .insurance-extra p { font-size: .875rem; line-height: 1.8; color: #526779; }
+.travel-cover-option { display: flex; flex-direction: column; }
+.travel-cover-option h3 { min-height: 0; }
+.travel-cover-option .button { white-space: normal; }
+.travel-cover-check { color: var(--color-brand-blue); }
+.insurance-extra-featured {
+  --extra-disc: #dff0d1;
+  --extra-ink: #28591f;
+  --extra-accent: #a6d580;
+  background: linear-gradient(145deg, #06385b, #035086);
+  color: #fff;
+}
+.insurance-extra-featured p { color: #edf6fc; }
+.insurance-extra-featured .travel-cover-check { color: #dff0d1; }
+.travel-popular-badge {
+  position: absolute;
+  inset-block-start: 1rem;
+  inset-inline-end: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .375rem;
+  border-radius: 999px;
+  padding: .375rem .75rem;
+  background: #ffebbd;
+  color: #563c0e;
+  font-size: .6875rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+}
+.travel-popular-badge svg { width: .875rem; height: .875rem; }
 .insurance-extras + .insurance-help { padding-top: 3.5rem; }
 @media (max-width: 1023px) {
   .insurance-extras-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -204,6 +244,7 @@
 @media (max-width: 599px) {
   .insurance-extras-grid { grid-template-columns: 1fr; gap: 1rem; }
   .insurance-extra { display: grid; grid-template-columns: 5rem minmax(0, 1fr); gap: .625rem 1rem; padding: 1.5rem 1.25rem; }
+  .travel-popular-badge { inset-block-start: .375rem; padding-block: .125rem; }
   .insurance-extra-art { grid-row: span 2; height: 5rem; margin: 0; }
   .insurance-extra-disc { width: 4rem; height: 4rem; }
   .insurance-extra-orbit { width: 4.75rem; height: 4.75rem; }

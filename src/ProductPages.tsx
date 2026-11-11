@@ -1,9 +1,10 @@
 import { links } from './content'
 import { FaqAccordion } from './FaqAccordion'
+import { InsuranceHero } from './InsuranceHero'
 import { carFaqs, vanFaqs } from './faq-design'
 import * as design from './product-design'
 import { PageHero, PageSection, pagePanel } from './AdditionalPageUI'
-import { ButtonLink, Icon, Reveal } from './ui'
+import { ButtonLink, Icon, InsuranceExtraArt, Reveal } from './ui'
 
 const travelQuote = 'https://www.kennco.ie/travel-insurance-quote/'
 const vanQuote = 'https://www.kennco.ie/van-insurance-quote/'
@@ -91,28 +92,45 @@ export function TravelInsurancePage() {
   const extras = design.travelExtras
   const support = design.travelSupport
   return <>
-    <PageHero label="Travel Insurance" title={t[0]} intro={t[1]} aside={<div className={pagePanel + ' lg:justify-self-end lg:w-full lg:max-w-sm'}>
-      <h2 className="font-heading text-xl font-bold">{t[3]}</h2>
-      <dl className="mt-3 divide-y divide-[#d8e8f2] text-sm">{t.slice(4, 8).map((label, index) => <div className="flex justify-between gap-3 py-3" key={label}><dt>{label}</dt><dd className="text-right font-bold text-brand-blue">{t[8 + index]}</dd></div>)}</dl>
-    </div>}>
-      <ButtonLink href="#trip-cover" className="mt-5">{t[2]}</ButtonLink>
-    </PageHero>
+    <InsuranceHero label="Travel Insurance" title={<>{t[0].replace(/peace of mind$/, '')}<span className="hero-highlight">peace of mind</span></>} intro={t[1]}
+      quote={{ href: '#trip-cover', label: t[2] }}
+      photo={{ src: '/assets/travel-insurance-hero.webp', width: 1700, height: 850 }}
+      rows={t.slice(4, 8).map((label, index) => ({ label, value: <strong>{t[8 + index]}</strong> }))} />
     <PageSection id="trip-cover" title={options[1]} eyebrow={options[0]}>
       <p className="mb-5 text-muted">{options[2]}</p>
       <div className="grid gap-5 md:grid-cols-2">
-        {[{ title: options[3], body: options[4], features: options.slice(5, 8), cta: options[8] }, { title: options[10], body: options[11], features: options.slice(12, 15), cta: options[15], tag: options[9] }].map(option => <article className={pagePanel} key={option.title}>
-          {option.tag && <p className="eyebrow mb-2">{option.tag}</p>}
-          <h3 className="font-heading text-2xl font-bold">{option.title}</h3>
-          <p className="mt-2 text-muted">{option.body}</p>
-          <ul className="my-5 space-y-3">{option.features.map(feature => <li key={feature} className="flex gap-2 text-sm"><Icon name="check" className="shrink-0 text-brand-blue" />{feature}</li>)}</ul>
-          <ButtonLink href={travelQuote}>{option.cta}</ButtonLink>
+        {([
+          { title: options[3], body: options[4], features: options.slice(5, 8), cta: options[8], icon: 'personal-items', tone: 'teal', tag: null },
+          { title: options[10], body: options[11], features: options.slice(12, 15), cta: options[15], icon: 'calendar', tone: 'featured', tag: options[9] },
+        ] as const).map(option => <article className={`insurance-extra insurance-extra-${option.tone} travel-cover-option`} key={option.title}>
+          {option.tag && <span className="travel-popular-badge"><Icon name="star" />{option.tag}</span>}
+          <InsuranceExtraArt icon={option.icon} />
+          <div className="flex min-w-0 flex-1 flex-col items-start">
+            <h3>{option.title}</h3>
+            <p>{option.body}</p>
+            <ul className="my-5 space-y-3">{option.features.map(feature => <li key={feature} className="flex gap-2 text-sm"><Icon name="check" className="travel-cover-check shrink-0" />{feature}</li>)}</ul>
+            <ButtonLink className="mt-auto" href={travelQuote}>{option.cta}</ButtonLink>
+          </div>
         </article>)}
       </div>
     </PageSection>
     <PageSection title={design.travelIncluded[1]} eyebrow={design.travelIncluded[0]} tint>
       <ProductCards items={pairs(design.travelIncluded.slice(3))} />
     </PageSection>
-    <PageSection title={extras[7]} eyebrow={extras[6]}><p className="mb-6 text-muted">{extras[8]}</p><ProductCards items={pairs(extras.slice(0, 6)).map(item => ({ title: item.body, body: item.title }))} /></PageSection>
+    <section className="insurance-savings section-space" aria-labelledby="travel-extras-title">
+      <div className="insurance-savings-orbit" aria-hidden="true" />
+      <div className="container-shell insurance-savings-layout">
+        <div>
+          <span className="eyebrow">{extras[6]}</span>
+          <h2 className="section-title mt-3" id="travel-extras-title">{extras[7]}</h2>
+          <p className="mt-4 leading-relaxed">{extras[8]}</p>
+        </div>
+        <ul className="insurance-saving-list">{pairs(extras.slice(0, 6)).map(({ title: body, body: title }) => <li key={title}>
+          <span className="insurance-saving-check"><Icon name="check" /></span>
+          <span><strong className="block">{title}</strong>{body}</span>
+        </li>)}</ul>
+      </div>
+    </section>
     <div className="container-shell section-space grid gap-5 md:grid-cols-2">
       <section className={pagePanel}><h2 className="section-title">{support[0]}</h2><p className="mt-3 text-muted">{support[1]}</p><a className="text-link mt-5" href="tel:+35391545997">{support[2]}<Icon name="phone" /></a><p className="mt-1 text-sm text-muted">{support[3]}</p></section>
       <section className={pagePanel}><h2 className="section-title">{support[4]}</h2><p className="mt-3 text-muted">{support[5]}</p><ButtonLink className="mt-5" href={travelQuote}>{support[6]}</ButtonLink></section>
