@@ -199,13 +199,83 @@
   .insurance-savings-layout { gap: 2rem; }
   .insurance-document { padding: 1.5rem; gap: 1rem; }
 }
+/* On smaller screens the photo spans the viewport, while the card follows the text gutter. */
+@media (max-width: 1023px) {
+  .insurance-hero-layout {
+    --hero-bottom-space: 1.75rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .insurance-glance-scene,
+  .insurance-glance-scene:has(tr:nth-child(4)) {
+    --glance-photo-space: clamp(8rem, 26vw, 15rem);
+    --glance-photo-overlap: clamp(.75rem, 3vw, 1.75rem);
+    --glance-photo-mask: linear-gradient(to bottom, transparent, #000 28% 78%, transparent);
+    min-block-size: 0;
+    margin-block-start: calc(-1 * var(--glance-photo-overlap));
+    padding-block-start: var(--glance-photo-space);
+  }
+
+  .insurance-glance-photo,
+  .insurance-glance-photo.insurance-glance-photo-soft {
+    inset: 0 auto auto 50%;
+    width: 100vw;
+    height: calc(var(--glance-photo-space) + 3.5rem);
+    translate: -50% 0;
+    mask-image: var(--glance-photo-mask);
+  }
+
+  .insurance-glance-photo img {
+    height: 100%;
+    object-position: center 55%;
+  }
+
+  /* Give the coast a taller frame and a curved transition into the copy. */
+  .insurance-glance-scene:not(.insurance-quote-scene):has(.insurance-glance-photo-soft) {
+    --glance-photo-space: clamp(11rem, 34vw, 20rem);
+    --glance-photo-overlap: clamp(1.5rem, 5vw, 3rem);
+    --glance-photo-mask: radial-gradient(ellipse 175% 115% at 67% 110%, #000 49%, rgb(0 0 0 / 86%) 65%, rgb(0 0 0 / 45%) 80%, transparent 100%),
+      linear-gradient(to bottom, transparent, rgb(0 0 0 / 24%) 12%, rgb(0 0 0 / 68%) 26%, #000 43% 83%, transparent);
+  }
+
+  .insurance-glance-photo:not(.insurance-glance-photo-soft) img {
+    scale: 1.12;
+    transform-origin: center 60%;
+  }
+
+  .insurance-quote-scene:has(.insurance-hero-quote) {
+    --glance-photo-space: clamp(12rem, 36vw, 21rem);
+    --glance-photo-overlap: clamp(2rem, 6vw, 3.75rem);
+    --glance-photo-mask: linear-gradient(to bottom, transparent, rgb(0 0 0 / 12%) 17%, rgb(0 0 0 / 46%) 36%, rgb(0 0 0 / 84%) 56%, #000 69% 87%, transparent);
+  }
+
+  .insurance-quote-scene:has(.insurance-hero-quote) .insurance-glance-photo img {
+    transform: scale(1.12);
+    transform-origin: center 64%;
+  }
+
+  /* Start the car image behind the benefit pills and keep the car visible below them. */
+  .insurance-quote-scene:not(:has(.insurance-glance)) {
+    --glance-photo-overlap: clamp(6.25rem, 15vw, 8.5rem);
+    --glance-photo-space: calc(clamp(9rem, 27vw, 16rem) + var(--glance-photo-overlap));
+    --glance-photo-mask: linear-gradient(to bottom, transparent, rgb(0 0 0 / 10%) 18%, rgb(0 0 0 / 42%) 36%, rgb(0 0 0 / 82%) 55%, #000 70% 91%, transparent);
+  }
+
+  .insurance-quote-scene:not(:has(.insurance-glance)) .insurance-glance-photo {
+    height: calc(var(--glance-photo-space) + var(--hero-bottom-space));
+  }
+
+  .insurance-quote-scene:not(:has(.insurance-glance)) .insurance-glance-photo img {
+    object-position: center 75%;
+  }
+
+  .insurance-glance { width: 100%; }
+}
+
 @media (max-width: 767px) {
-  .insurance-hero-layout { --hero-bottom-space: 2rem; grid-template-columns: 1fr; gap: 2.25rem; }
   .insurance-hero-copy > p { font-size: .9375rem; line-height: 1.85; margin-block: 1.25rem 1.5rem; }
   .insurance-hero-copy > .button { width: 100%; }
-  .insurance-glance-scene { --glance-photo-space: clamp(8.5rem, 36vw, 14rem); }
-  .insurance-glance-photo { inset: 0 -1.5rem calc(-1 * var(--hero-bottom-space)); translate: none; mask-image: linear-gradient(to right, transparent, #000 23% 77%, transparent), linear-gradient(to bottom, transparent, #000 23%); }
-  .insurance-glance { width: 100%; }
   .insurance-glance table { font-size: .8125rem; }
   .insurance-glance th, .insurance-glance td { padding: 1rem; }
   .insurance-talk, .insurance-eligibility { padding: 1.5rem; }

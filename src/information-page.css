@@ -118,7 +118,8 @@
 @media (max-width: 1023px) {
   .about-hero-inner {
     min-height: auto;
-    gap: .75rem;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
     padding-block: var(--page-hero-top) 0;
   }
 
@@ -127,12 +128,17 @@
   }
 
   .about-hero-photo {
-    position: static;
+    position: relative;
+    inset: auto;
     grid-row: 2;
     justify-self: center;
-    width: min(100%, 44rem);
+    width: 144%;
+    margin-block-start: clamp(-6rem, -8.5vw, -2.75rem);
     height: auto;
-    mask-image: linear-gradient(to right, transparent, #000 23% 81%, transparent),
-      linear-gradient(to bottom, transparent, #000 17%);
+    mask-image: linear-gradient(to bottom, transparent 3%, #000 26%);
   }
+}
+
+@media (max-width: 599px) {
+  .about-hero-photo { width: 165%; }
 }
