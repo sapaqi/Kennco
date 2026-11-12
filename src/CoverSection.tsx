@@ -1,6 +1,10 @@
 import { covers } from './content'
 import { Icon, Reveal } from './ui'
 
+export function CoverIllustration({ cover }: { cover: typeof covers[number] }) {
+  return <div className="cover-illustration" aria-hidden="true"><span className="cover-disc" /><span className="cover-orbit" /><span className="cover-dot" /><img src={`/assets/${cover.image}.png`} alt="" width={cover.width} height={cover.height} className={`cover-icon cover-icon-${cover.key}`} /></div>
+}
+
 const aboutOffers = [
   { ...covers[0], name: 'Car Insurance', description: 'Cover for new, young and returning drivers – competitively priced with cover that fits your needs.' },
   { ...covers[2], name: 'Travel Insurance', description: 'Single-trip, annual multi-trip and family travel cover so you can go away with peace of mind.' },
@@ -21,7 +25,7 @@ export function CoverSection({ about = false }: { about?: boolean }) {
       </div></Reveal>
       <div className="cover-grid">
         {offers.map((cover, index) => <Reveal key={cover.key} delay={index * 45}><a href={cover.href} className={`cover-card cover-${cover.key}`} aria-label={`Explore ${cover.key} insurance cover`}>
-          <div className="cover-illustration" aria-hidden="true"><span className="cover-disc" /><span className="cover-orbit" /><span className="cover-dot" /><img src={`/assets/${cover.image}.png`} alt="" width={cover.width} height={cover.height} className={`cover-icon cover-icon-${cover.key}`} /></div>
+          <CoverIllustration cover={covers.find(item => item.key === cover.key)!} />
           <div className="relative">
             <h3 className="font-heading text-[22px] font-bold md:text-2xl">{cover.name}</h3>
             {'description' in cover ? <p className="mt-2 text-sm leading-relaxed text-muted">{cover.description}</p> : <span className="cover-link">Explore cover<Icon name="arrow" /></span>}
