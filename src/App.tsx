@@ -4,6 +4,7 @@ import { ButtonLink, Icon, Reveal } from './ui'
 import { HomeInsuranceContent, homeQuoteUrl } from './HomeInsurance'
 import { CoverSection } from './CoverSection'
 import { GetQuotePage } from './GetQuotePage'
+import { TravelQuote } from './TravelQuote'
 import { HelpCentre } from './HelpCentre'
 import { ArticleCard, articlePath, BlogArticlePage, BlogPage, MediaCentrePage } from './EditorialPages'
 import { FaqDirectoryPage, PolicyDownloadsPage } from './ResourcePages'
@@ -219,6 +220,7 @@ function Footer({ homeHref }: { homeHref: string }) {
 export function App() {
   const path = window.location.pathname
   const quotePage = /^\/get-a-quote\/?$/.test(path)
+  const travelQuotePage = /^\/get-a-quote\/travel\/?$/.test(path)
   const additionalPage = [
     { path: '/blog/', title: 'Blog', Content: BlogPage },
     { path: articlePath, title: 'Who Pays for Fire Brigade Charges After a Car Accident?', Content: BlogArticlePage },
@@ -233,7 +235,7 @@ export function App() {
   const helpPage = /^\/help-centre\/?$/.test(path)
   const informationPage = findInformationPage(path)
   const aboutPage = informationPage?.path === '/about'
-  const pageTitle = quotePage ? 'Get a quote' : additionalPage?.title ?? (helpPage ? 'Help Centre' : aboutPage ? 'About Us' : informationPage?.title ?? (productPage ? 'Home Insurance' : undefined))
+  const pageTitle = travelQuotePage ? 'Travel insurance quote' : quotePage ? 'Get a quote' : additionalPage?.title ?? (helpPage ? 'Help Centre' : aboutPage ? 'About Us' : informationPage?.title ?? (productPage ? 'Home Insurance' : undefined))
   const homePrefix = pageTitle ? '/' : ''
   const quoteHref = productPage ? homeQuoteUrl : additionalPage?.quote ?? links.quote
   const pageClass = productPage ? 'home-insurance-page' : informationPage || helpPage || additionalPage ? 'information-page' : undefined
@@ -241,6 +243,7 @@ export function App() {
     document.title = pageTitle ? `${pageTitle} — KennCo Insurance` : "KennCo Insurance — Cover for life's journeys"
   }, [pageTitle])
   if (quotePage) return <GetQuotePage />
+  if (travelQuotePage) return <TravelQuote />
   return <div className={pageClass}>
     <a href="#main" className="skip-link">Skip to content</a>
     <div id="top" />

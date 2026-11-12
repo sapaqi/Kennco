@@ -84,19 +84,10 @@ Validation: TypeScript and production build; DOM layout checks at 320, 360, 390,
 
 The supplied `das.jpg` adds Optional extras / Tailor your policy as the first section immediately after the product hero. Four cards preserve its wording, with large vector icons, layered circular motifs and blue, green, teal and amber accents. Layout uses four columns on desktop, two on tablet and one below 600 px. Related links above the footer use inline arrows with a 0.625 rem gap. Layout checks passed at 320, 390, 600, 768, 1024, 1440 and 2560 px without document overflow; four cards remain present at every size.
 
-## Full source delivery - 12 November 2026
+## Travel quote prototype
 
-This package includes all current pages and the Get a quote start screen at `/get-a-quote/`, using existing KennCo product icons and shared UI components.
+Open `/get-a-quote/` and select **Travel**, or go directly to `/get-a-quote/travel/`. The prototype covers travellers, destination and dates, email, a quote with optional extras, and traveller details. The prices are illustrative and form data stays in the browser. The other product cards on the quote start page are inactive in this demo.
 
-Unzip and upload the contents to the root of your GitHub repository (not the ZIP itself). Include `.gitignore`. This is the complete source project, not just changed files.
+This ZIP contains the complete project source. Extract the archive and copy its contents, including `.gitignore`, into the root of the GitHub repository. Run `pnpm install --frozen-lockfile` followed by `pnpm dev` for development or `pnpm build` for deployment. Publish `dist` with a fallback to `/index.html` for page routes. The included Netlify redirect handles that fallback.
 
-Prerequisites: Node.js 22.15+ or 24+ and pnpm. Install pnpm with `npm install -g pnpm` if needed.
-
-```sh
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-For hosting: run `pnpm build` and publish `dist`. Configure SPA fallback to `/index.html` for page routes; `public/_redirects` includes the Netlify fallback. Uploading source to GitHub alone does not publish a running website. GitHub Pages under a repository subpath requires additional base-path and routing configuration.
-
-Delivery validation: TypeScript passed on 12 November 2026. Production build was attempted but blocked by the execution environment (`spawn EPERM` starting esbuild), so this delivery's build and visual preview are not verified. Earlier validation notes above describe earlier revisions.
+The standalone Travel preview was exercised in a browser through all five screens, including price updates and Back navigation. TypeScript passed. The production build could not be verified in the packaging environment because starting esbuild via Vite returned `spawn EPERM`.

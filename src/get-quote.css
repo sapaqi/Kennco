@@ -2,7 +2,7 @@
 .quote-header { background: #fff; border-bottom: 1px solid #e3edf2; }
 .quote-header-inner { min-height: 6.5rem; display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; }
 .quote-help { text-align: right; }
-.quote-help a { display: flex; align-items: center; gap: .75rem; color: var(--color-brand-blue); font-size: .9375rem; min-height: 2.75rem; }
+.quote-help-contact { display: flex; align-items: center; gap: .75rem; color: var(--color-brand-blue); font-size: .9375rem; min-height: 2.75rem; }
 .quote-help strong { font-weight: 600; }
 .quote-phone-icon { display: flex; align-items: center; justify-content: center; width: 2.5rem; height: 2.5rem; background: var(--color-pale-green); border-radius: 50%; }
 .quote-help p { color: var(--color-muted); font-size: .75rem; margin-top: .125rem; }
@@ -16,8 +16,6 @@
 .quote-cover-card .cover-dot { right: calc(50% - 4.5rem); }
 .quote-cover-label { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
 .quote-cover-label h2 { font-family: var(--font-heading); font-size: 1.5rem; font-weight: 700; color: var(--color-brand-blue); }
-.quote-cover-arrow { width: 2.25rem; height: 2.25rem; display: flex; align-items: center; justify-content: center; border-radius: 50%; background: #fff; border: 1px solid #d8e8f2; color: var(--color-brand-blue); transition: background 200ms, border-color 200ms; }
-.quote-cover-card:hover .quote-cover-arrow { background: var(--color-brand-green); border-color: var(--color-brand-green); }
 .quote-existing { margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid #dbe8ee; }
 .quote-existing > h2 { font-family: var(--font-heading); font-weight: 700; font-size: 1.125rem; line-height: 1.5; margin-bottom: 1rem; }
 .quote-existing-links { display: grid; gap: .75rem; }
@@ -35,7 +33,7 @@
 @media (max-width: 600px) {
   .quote-header-inner { min-height: 5.5rem; padding-inline: 1.25rem; }
   .quote-header .brand-logo { width: 5.5rem; }
-  .quote-help a { font-size: .8125rem; gap: .375rem; }
+  .quote-help-contact { font-size: .8125rem; gap: .375rem; }
   .quote-help-label { display: none; }
   .quote-phone-icon { width: 1.75rem; height: 1.75rem; background: transparent; }
   .quote-phone-icon svg { width: 1rem; }
@@ -48,8 +46,6 @@
   .quote-cover-card .cover-illustration { height: 7.5rem; transform: scale(.8); transform-origin: center; }
   .quote-cover-label { gap: .375rem; }
   .quote-cover-label h2 { font-size: 1.125rem; }
-  .quote-cover-arrow { width: 1.75rem; height: 1.75rem; }
-  .quote-cover-arrow svg { width: 1rem; }
   .quote-existing { margin-top: 2rem; padding-top: 1.5rem; }
   .quote-existing > h2 { font-size: 1rem; }
   .quote-support-link { padding: 1rem .875rem; gap: .75rem; }
@@ -57,3 +53,4 @@
   .quote-support-copy strong { font-size: .8125rem; line-height: 1.5; }
   .quote-support-copy > span { font-size: .6875rem; }
 }
+.quote-cover-label .cover-link { margin: 0; }
