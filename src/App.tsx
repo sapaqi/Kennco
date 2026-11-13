@@ -8,6 +8,7 @@ import { TravelQuote } from './TravelQuote'
 import { HelpCentre } from './HelpCentre'
 import { Careers } from './Careers'
 import { MeetTheTeam } from './MeetTheTeam'
+import { CustomerSatisfaction, customerSatisfactionTitle, surveyTestimonials } from './CustomerSatisfaction'
 import { ArticleCard, articlePath, BlogArticlePage, BlogPage, MediaCentrePage } from './EditorialPages'
 import { FaqDirectoryPage, PolicyDownloadsPage } from './ResourcePages'
 import { CarInsurancePage, TravelInsurancePage, VanInsurancePage } from './ProductPages'
@@ -126,7 +127,13 @@ function Stars() {
   return <span className="rating-stars" role="img" aria-label="5 out of 5 stars">{[0, 1, 2, 3, 4].map(star => <svg key={star} viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect width="24" height="24" rx="2" fill="#00875b" /><path fill="white" d="m12 3 2.5 5.4 5.9.7-4.4 4 1.2 5.9-5.2-3-5.2 3 1.2-5.9-4.4-4 5.9-.7Z" /></svg>)}</span>
 }
 
-function ReviewsSection({ about = false }: { about?: boolean }) {
+function CustomerSatisfactionPage() {
+  return <CustomerSatisfaction>
+    <ReviewsSection about testimonials={surveyTestimonials} summary="/assets/trustpilot-survey.png" />
+  </CustomerSatisfaction>
+}
+
+function ReviewsSection({ about = false, testimonials = reviews, summary = '/assets/trustpilot-rating.png' }: { about?: boolean; testimonials?: typeof reviews; summary?: string }) {
   const track = useRef<HTMLDivElement>(null)
   const [canScrollBack, setCanScrollBack] = useState(false)
   const [canScrollForward, setCanScrollForward] = useState(true)
@@ -155,9 +162,9 @@ function ReviewsSection({ about = false }: { about?: boolean }) {
     <div className="container-shell">
       <Reveal><div className="mb-9 flex flex-wrap items-end justify-between gap-5"><div>{!about && <span className="eyebrow mb-3 block">Real people. Real peace of mind.</span>}<h2 className="section-title" id="reviews-heading">What our customers say</h2></div><a className="text-link" href="https://ie.trustpilot.com/review/kennco.ie">View all testimonials<Icon name="arrow" /></a></div></Reveal>
       <Reveal><div className="reviews-layout">
-        <a className="trustpilot-summary" href="https://ie.trustpilot.com/review/kennco.ie"><img src="/assets/trustpilot-rating.png" width="380" height="292" alt="Excellent. Based on 1,882 reviews. Trustpilot." /></a>
+        <a className="trustpilot-summary" href="https://ie.trustpilot.com/review/kennco.ie"><img src={summary} width="380" height={summary === '/assets/trustpilot-rating.png' ? 292 : 95} alt={summary === '/assets/trustpilot-rating.png' ? 'Excellent. Based on 1,882 reviews. Trustpilot.' : 'Rated Excellent on Trustpilot'} /></a>
         <div className="min-w-0"><div ref={track} className="review-track" role="region" aria-label="Customer testimonials" tabIndex={0}>
-          {reviews.map(review => <figure key={review.name} className="review-card"><div className="mb-6 flex items-center justify-between gap-4"><Stars /><span className="quote-mark" aria-hidden="true">“</span></div><blockquote className="grow text-[.875rem] leading-[1.85] text-ink">{review.text}</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-brand-blue/10 pt-5"><span className="review-avatar">{review.initials}</span><span className="font-heading text-sm font-bold">{review.name}</span></figcaption></figure>)}
+          {testimonials.map(review => <figure key={review.name} className="review-card"><div className="mb-6 flex items-center justify-between gap-4"><Stars /><span className="quote-mark" aria-hidden="true">“</span></div><blockquote className="grow text-[.875rem] leading-[1.85] text-ink">{review.text}</blockquote><figcaption className="mt-7 flex items-center gap-3 border-t border-brand-blue/10 pt-5"><span className="review-avatar">{review.initials}</span><span className="font-heading text-sm font-bold">{review.name}</span></figcaption></figure>)}
         </div><div className="review-controls"><button type="button" className="icon-button" aria-label="Previous testimonial" onClick={() => scrollReviews(-1)} disabled={!canScrollBack}><Icon name="arrow" className="rotate-180" /></button><button type="button" className="icon-button" aria-label="Next testimonial" onClick={() => scrollReviews(1)} disabled={!canScrollForward}><Icon name="arrow" /></button></div></div>
       </div></Reveal>
     </div>
@@ -233,6 +240,7 @@ export function App() {
     { path: '/faqs/', title: 'Frequently Asked Questions', Content: FaqDirectoryPage },
     { path: links.careers, title: 'Careers', Content: Careers },
     { path: links.meetTheTeam, title: 'Meet the Team', Content: MeetTheTeam },
+    { path: links.customerSatisfaction, title: customerSatisfactionTitle, Content: CustomerSatisfactionPage },
     { path: '/car-insurance/', title: 'Car Insurance', Content: CarInsurancePage, quote: '#start-quote' },
     { path: '/travel-insurance/', title: 'Travel Insurance', Content: TravelInsurancePage, quote: '#trip-cover' },
     { path: '/van-insurance/', title: 'Van Insurance', Content: VanInsurancePage, quote: '#start-quote' },

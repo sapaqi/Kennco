@@ -1,0 +1,179 @@
+.survey-intro {
+  max-width: 78ch;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.75;
+}
+
+.survey-intro p + p { margin-top: .875rem; }
+
+.survey-charts {
+  display: grid;
+  gap: clamp(2.5rem, 5vw, 4.5rem);
+}
+
+.survey-chart {
+  min-width: 0;
+  --survey-teal: #126c76;
+  --survey-grid: #d8e8f2;
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+}
+
+.survey-chart figcaption {
+  margin-bottom: clamp(1.125rem, 2vw, 1.75rem);
+  color: var(--color-brand-blue);
+  font-family: var(--font-heading);
+  letter-spacing: -.025em;
+  font-size: clamp(1.05rem, 1.65vw, 1.4rem);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.survey-chart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(13rem, 25%);
+  align-items: center;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.survey-plot { position: relative; min-width: 0; }
+.survey-bar-plot {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1px;
+  height: clamp(10rem, 20vw, 16rem);
+  border-inline: 1px solid var(--survey-grid);
+  border-inline-start-color: var(--color-brand-blue);
+  background: repeating-linear-gradient(to right, var(--survey-grid) 0 1px, transparent 1px var(--grid-step));
+}
+
+.survey-chart-bar { height: clamp(1.1rem, 2.5vw, 2rem); }
+.survey-chart .is-active { filter: brightness(.83); }
+
+.survey-axis {
+  display: flex;
+  justify-content: space-between;
+  margin: .625rem -.6em 0;
+  font-size: clamp(.72rem, 1.4vw, 1rem);
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+}
+.survey-axis span { width: 1.2em; text-align: center; }
+
+.survey-pie { display: block; width: min(100%, 19rem); height: auto; margin-inline: auto; }
+.survey-pie text {
+  fill: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  text-anchor: middle;
+  dominant-baseline: central;
+  pointer-events: none;
+}
+
+.survey-pie .survey-pie-label-dark { fill: var(--color-ink); }
+
+.survey-chart-legend button {
+  display: flex;
+  align-items: flex-start;
+  gap: .625rem;
+  padding: .375rem .25rem;
+  text-align: start;
+  line-height: 1.35;
+  font-size: clamp(.875rem, 1.45vw, 1.1rem);
+  cursor: pointer;
+}
+
+.survey-chart-legend button[aria-pressed='true'] { font-weight: 700; }
+.survey-swatch { width: 1.5rem; height: .875rem; margin-top: .2em; flex: none; }
+.survey-chart-pie .survey-swatch { width: .95rem; height: .95rem; border-radius: 50%; }
+
+.survey-chart-tooltip {
+  position: absolute;
+  z-index: 1;
+  inset: auto .5rem .5rem auto;
+  max-width: calc(100% - 1rem);
+  border: 1px solid var(--survey-grid);
+  border-radius: .5rem;
+  background: #fff;
+  padding: .625rem .875rem;
+  box-shadow: var(--shadow-card);
+  font-size: .875rem;
+  pointer-events: none;
+}
+.survey-chart-tooltip span { display: block; margin-top: .25rem; }
+
+@media (max-width: 639px) {
+  .survey-chart-layout { grid-template-columns: minmax(0, 1fr); gap: .875rem; }
+  .survey-pie { width: min(100%, 15rem); }
+  .survey-chart-legend {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: .5rem;
+  }
+}
+
+.survey-contact-section {
+  padding-block-start: 0;
+}
+
+.survey-contact {
+  border: 1px solid #d8e8f2;
+  border-radius: 1rem;
+  background: #f3f8fc;
+  padding: clamp(1.25rem, 4vw, 3rem);
+}
+
+.survey-contact > p {
+  margin-top: .75rem;
+  max-width: 43rem;
+  line-height: 1.7;
+}
+
+.survey-contact > p a {
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+}
+
+.survey-contact-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  margin-block: 1.5rem;
+}
+
+.survey-contact-number {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  min-height: 2.75rem;
+  color: var(--color-brand-blue);
+  font-size: .8125rem;
+}
+
+.survey-contact-number:hover .survey-phone {
+  text-decoration: underline;
+}
+
+.survey-contact-number .insurance-feature-icon {
+  flex: none;
+}
+
+.survey-phone {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+@media (max-width: 1023px) {
+  .survey-contact-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 479px) {
+  .survey-contact-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
