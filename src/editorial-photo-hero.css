@@ -1,0 +1,194 @@
+.editorial-photo-hero {
+  overflow: hidden;
+}
+
+.editorial-photo-hero-inner {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  align-items: center;
+  min-height: clamp(23rem, 32vw, 29rem);
+  padding-block: var(--page-hero-top) 2.5rem;
+}
+
+.editorial-photo-hero-copy {
+  position: relative;
+  z-index: 1;
+  width: min(46%, 36rem);
+}
+
+.editorial-photo-hero-copy > p,
+.career-intro {
+  max-width: 36rem;
+  margin-top: 1rem;
+  line-height: 1.8;
+}
+
+.editorial-photo-hero-actions {
+  margin-top: 1.5rem;
+}
+
+.editorial-photo-hero-image {
+  position: absolute;
+  inset-block: 0;
+  inset-inline-end: -2%;
+  width: 66%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: var(--photo-position, center);
+  pointer-events: none;
+  --photo-desktop-mask:
+    radial-gradient(ellipse 77% 84% at 66% 50%, #000 38%, rgb(0 0 0 / 84%) 60%, transparent 100%),
+    linear-gradient(114deg, transparent 5%, rgb(0 0 0 / 60%) 26%, #000 48% 90%, transparent),
+    var(--photo-vertical-mask, linear-gradient(to bottom, transparent, #000 17% 78%, transparent));
+  mask-image: var(--photo-desktop-mask);
+  mask-composite: intersect;
+}
+
+.editorial-photo-hero--help-centre-coffee {
+  --photo-position: 56% 53%;
+}
+
+.editorial-photo-hero--careers-workspace {
+  --photo-position: 58% 48%;
+  --careers-top-fade-shape: ellipse 129% 126% at 66% 111%;
+  --careers-top-fade: radial-gradient(var(--careers-top-fade-shape),
+    #000 44%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 35%) 66%,
+    rgb(0 0 0 / 10%) 78%, transparent 89%);
+  --photo-vertical-mask: var(--careers-top-fade),
+    linear-gradient(to bottom, transparent, #000 12% 78%, transparent);
+}
+
+.editorial-photo-hero--meet-the-team {
+  --photo-position: 55% 56%;
+  --team-top-fade: radial-gradient(var(--team-top-fade-shape),
+    #000 41%, rgb(0 0 0 / 78%) 53%, rgb(0 0 0 / 35%) 65%,
+    rgb(0 0 0 / 8%) 76%, transparent 87%);
+  --team-top-fade-shape: ellipse 149% 130% at 63% 114%;
+  --photo-vertical-mask: var(--team-top-fade),
+    linear-gradient(to bottom, transparent, #000 13% 78%, transparent),
+    linear-gradient(to right, transparent, #000 19%);
+}
+
+.help-broker-note {
+  margin-bottom: 1.5rem;
+  border: 1px solid #d8e8f2;
+  border-inline-start: .25rem solid var(--color-brand-blue);
+  border-radius: .75rem;
+  background: #fff;
+  padding: 1rem 1.25rem;
+  font-size: .875rem;
+  line-height: 1.65;
+}
+
+.career-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+
+.career-highlight {
+  height: 100%;
+  padding: 1.5rem;
+  border: 1px solid #d8e8f2;
+  border-radius: 1rem;
+  background: linear-gradient(145deg, #eff8ff, #fff 72%);
+  box-shadow: var(--shadow-card);
+}
+
+.career-highlight h3 {
+  margin-block: 1rem .5rem;
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-brand-blue);
+}
+
+.career-highlight p {
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+
+.career-opportunities {
+  padding-block: 0 clamp(2.75rem, 6vw, 5rem);
+}
+
+.career-opportunities-inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 3rem);
+  border-radius: 1rem;
+  background: linear-gradient(118deg, var(--color-ink), var(--color-brand-blue));
+  color: #fff;
+}
+
+.career-opportunities-inner p {
+  margin-top: .625rem;
+  line-height: 1.7;
+}
+
+@media (min-width: 1024px) {
+  .editorial-photo-hero-image {
+    mask-image: var(--photo-desktop-mask),
+      linear-gradient(to right, #000 72%, rgb(0 0 0 / 78%) 80%, rgb(0 0 0 / 26%) 90%, transparent 96%);
+  }
+}
+
+@media (max-width: 1023px) {
+  .editorial-photo-hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    min-height: 0;
+    padding-block-end: 0;
+  }
+
+  .editorial-photo-hero-copy {
+    width: 100%;
+  }
+
+  .editorial-photo-hero-image {
+    position: relative;
+    inset: auto;
+    justify-self: center;
+    width: 100vw;
+    height: clamp(13rem, 43vw, 24rem);
+    margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
+    mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 60%) 18%, #000 32% 73%, rgb(0 0 0 / 55%) 88%, transparent);
+  }
+
+  .editorial-photo-hero--careers-workspace {
+    --careers-top-fade-shape: ellipse 168% 145% at 66% 114%;
+  }
+
+  .editorial-photo-hero--careers-workspace .editorial-photo-hero-image {
+    mask-image: var(--careers-top-fade),
+      linear-gradient(to bottom, transparent, #000 12% 73%, rgb(0 0 0 / 55%) 88%, transparent);
+  }
+}
+
+@media (max-width: 1023px) {
+  .editorial-photo-hero--meet-the-team {
+    --photo-position: 53% 52%;
+    --team-top-fade-shape: ellipse 175% 138% at 64% 111%;
+  }
+
+  .editorial-photo-hero--meet-the-team .editorial-photo-hero-image {
+    mask-image: var(--team-top-fade),
+      linear-gradient(to bottom, transparent, #000 12% 76%, rgb(0 0 0 / 55%) 90%, transparent);
+  }
+}
+
+@media (min-width: 600px) and (max-width: 1023px) {
+  .editorial-photo-hero--careers-workspace {
+    --careers-top-fade-shape: ellipse 140% 123% at 68% 109%;
+  }
+}
+
+@media (max-width: 767px) {
+  .career-highlights { grid-template-columns: minmax(0, 1fr); }
+  .editorial-photo-hero-copy > p { font-size: .9375rem; }
+}

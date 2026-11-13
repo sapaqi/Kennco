@@ -7,6 +7,8 @@ export const links = {
   renew: 'https://www.kennco.ie/renewals/',
   contact: 'https://www.kennco.ie/contact-us/',
   help: '/help-centre/',
+  careers: '/careers/',
+  meetTheTeam: '/meet-the-team/',
   about: 'https://www.kennco.ie/about-us/',
   documents: '/downloads/',
   blog: 'https://www.kennco.ie/blog/',
@@ -87,6 +89,6 @@ export const guideLinks = [
 export const footerGroups = [
   { title: 'Products', items: [...['car', 'van', 'travel', 'home'].map(key => covers.find(cover => cover.key === key)!), { name: 'Business Insurance', href: 'https://www.kennco.ie/professional-indemnity-insurance/' }] },
   { title: 'Quick Links', items: [{ name: 'Make a Claim', href: links.contact }, { name: 'Resume quote', href: links.car }, { name: 'Your Portal', href: links.portal }, { name: 'Customer Survey', href: 'https://www.kennco.ie/kennco-customer-satisfaction-2025/' }, { name: 'Complaints Procedure', href: links.complaints }] },
-  { title: 'About us', items: [{ name: 'Meet the Team', href: links.about }, { name: 'Our Story & Regulatory Status', href: links.about }, { name: 'Careers', href: 'https://www.kennco.ie/careers/' }, { name: 'Fees & Commissions', href: links.fees }, { name: 'Capital Providers', href: 'https://www.kennco.ie/capitalproviders/' }] },
+  { title: 'About us', items: [{ name: 'Meet the Team', href: links.meetTheTeam }, { name: 'Our Story & Regulatory Status', href: links.about }, { name: 'Careers', href: links.careers }, { name: 'Fees & Commissions', href: links.fees }, { name: 'Capital Providers', href: 'https://www.kennco.ie/capitalproviders/' }] },
   { title: 'Media', items: [{ name: 'Blog', href: '/blog/' }, { name: 'News', href: 'https://www.kennco.ie/category/news/' }, { name: 'Media centre', href: '/media-centre/' }, { name: 'Learn', href: links.blog }] },
 ]

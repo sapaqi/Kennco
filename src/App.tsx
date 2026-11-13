@@ -6,6 +6,8 @@ import { CoverSection } from './CoverSection'
 import { GetQuotePage } from './GetQuotePage'
 import { TravelQuote } from './TravelQuote'
 import { HelpCentre } from './HelpCentre'
+import { Careers } from './Careers'
+import { MeetTheTeam } from './MeetTheTeam'
 import { ArticleCard, articlePath, BlogArticlePage, BlogPage, MediaCentrePage } from './EditorialPages'
 import { FaqDirectoryPage, PolicyDownloadsPage } from './ResourcePages'
 import { CarInsurancePage, TravelInsurancePage, VanInsurancePage } from './ProductPages'
@@ -89,6 +91,8 @@ function Header({ productPage, homePrefix, quoteHref }: { productPage: boolean; 
             return <a key={cover.key} href={cover.href} className="mobile-nav-link" onClick={closeMenu}>{cover.name}<Icon name="arrow" /></a>
           })}
           <a className="mobile-nav-link" href={links.about} onClick={closeMenu}>About Us<Icon name="arrow" /></a>
+          <a className="mobile-nav-link" href={links.meetTheTeam} onClick={closeMenu}>Meet the Team<Icon name="arrow" /></a>
+          <a className="mobile-nav-link" href={links.careers} onClick={closeMenu}>Careers<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.help} onClick={closeMenu}>Help Centre<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.renew} onClick={closeMenu}>Renew Now<Icon name="arrow" /></a>
           <a className="mobile-nav-link" href={links.portal} onClick={closeMenu}>Login<Icon name="external" /></a>
@@ -227,6 +231,8 @@ export function App() {
     { path: '/media-centre/', title: 'Media Centre', Content: MediaCentrePage },
     { path: '/downloads/', title: 'Policy documents & downloads', Content: PolicyDownloadsPage },
     { path: '/faqs/', title: 'Frequently Asked Questions', Content: FaqDirectoryPage },
+    { path: links.careers, title: 'Careers', Content: Careers },
+    { path: links.meetTheTeam, title: 'Meet the Team', Content: MeetTheTeam },
     { path: '/car-insurance/', title: 'Car Insurance', Content: CarInsurancePage, quote: '#start-quote' },
     { path: '/travel-insurance/', title: 'Travel Insurance', Content: TravelInsurancePage, quote: '#trip-cover' },
     { path: '/van-insurance/', title: 'Van Insurance', Content: VanInsurancePage, quote: '#start-quote' },
