@@ -6,9 +6,15 @@
   position: relative;
   isolation: isolate;
   display: grid;
-  align-items: center;
-  min-height: clamp(23rem, 32vw, 29rem);
+  align-items: start;
+  min-height: var(--editorial-hero-min-height, clamp(23rem, 32vw, 29rem));
   padding-block: var(--page-hero-top) 2.5rem;
+}
+
+.editorial-photo-hero--careers-workspace,
+.editorial-photo-hero--meet-the-team {
+  --editorial-hero-min-height: clamp(18rem, 24vw, 21rem);
+  --editorial-photo-small-height: clamp(11.5rem, 37vw, 20rem);
 }
 
 .editorial-photo-hero-copy {
@@ -71,8 +77,18 @@
     linear-gradient(to right, transparent, #000 19%);
 }
 
+.editorial-photo-hero-side {
+  position: relative;
+  z-index: 1;
+  grid-column: 2;
+  grid-row: 1;
+  align-self: end;
+  justify-self: end;
+  width: min(100%, 30rem);
+}
+
 .help-broker-note {
-  margin-bottom: 1.5rem;
+  box-shadow: var(--shadow-card);
   border: 1px solid #d8e8f2;
   border-inline-start: .25rem solid var(--color-brand-blue);
   border-radius: .75rem;
@@ -133,6 +149,17 @@
 }
 
 @media (min-width: 1024px) {
+  .editorial-photo-hero--help-centre-coffee .editorial-photo-hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 2rem;
+  }
+
+  .editorial-photo-hero--help-centre-coffee .editorial-photo-hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+    width: min(100%, 36rem);
+  }
+
   .editorial-photo-hero-image {
     mask-image: var(--photo-desktop-mask),
       linear-gradient(to right, #000 72%, rgb(0 0 0 / 78%) 80%, rgb(0 0 0 / 26%) 90%, transparent 96%);
@@ -150,12 +177,20 @@
     width: 100%;
   }
 
+  .editorial-photo-hero-side {
+    grid-column: 1;
+    grid-row: auto;
+    justify-self: stretch;
+    width: 100%;
+    margin-block: .5rem 1.5rem;
+  }
+
   .editorial-photo-hero-image {
     position: relative;
     inset: auto;
     justify-self: center;
     width: 100vw;
-    height: clamp(13rem, 43vw, 24rem);
+    height: var(--editorial-photo-small-height, clamp(13rem, 43vw, 24rem));
     margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
     mask-image: linear-gradient(to bottom, transparent, rgb(0 0 0 / 60%) 18%, #000 32% 73%, rgb(0 0 0 / 55%) 88%, transparent);
   }

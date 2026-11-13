@@ -14,6 +14,7 @@ const panelStyle = 'min-w-0 rounded-2xl border border-[#d8e8f2] bg-white p-5 sha
 const actions = [
   { title: 'Make a claim', description: 'Start a car, home or travel claim and see what you’ll need to hand.', label: 'Start a claim', href: '#claims-directory', icon: 'edit' },
   { title: 'Complaints procedure', description: 'Find out the necessary steps to make a complaint.', label: 'View procedure', href: links.complaints, icon: 'document' },
+  { title: 'Find an approved broker', description: 'Prefer to buy through a broker? Find a KennCo-appointed broker.', label: 'Find a broker', href: links.contact, icon: 'check' },
   { title: 'Policy downloads', description: 'Download policy documents, booklets and archived forms.', label: 'View downloads', href: links.documents, icon: 'download' },
 ] as const
 
@@ -95,17 +96,17 @@ export function HelpCentre() {
       breadcrumb="Help Centre"
       description="From a quick quote to getting you covered, the KennCo team makes organising your car, home, travel or van insurance as painless as possible."
       image="help-centre-coffee"
+      sideContent={
+        <aside aria-label="Important information" className="help-broker-note">
+          <p><strong>Please note:</strong> For policies purchased through a broker, contact your broker. Details of which can be found on your purchase email or receipt. Stay vigilant against fraudulent emails. KennCo will only contact you from official company addresses.</p>
+        </aside>
+      }
     >
       <a href="#send-message" className="button bg-ink text-white hover:bg-brand-blue">Send us a message</a>
     </EditorialPhotoHero>
 
     <section className="section-space" aria-label="Help centre services">
-      <div className="container-shell">
-        <aside aria-label="Important information" className="help-broker-note">
-          <p><strong>Please note:</strong> For policies purchased through a broker, contact your broker. Details of which can be found on your purchase email or receipt. Stay vigilant against fraudulent emails. KennCo will only contact you from official company addresses.</p>
-        </aside>
-      </div>
-      <div className="container-shell grid gap-4 md:grid-cols-3">
+      <div className="container-shell cover-grid">
         {actions.map((action, index) => <Reveal key={action.title}><a href={action.href} className={`cover-card gap-3 ${index === 0 ? 'cover-van' : ''}`}>
           <IconBadge icon={action.icon} green={index === 0} />
           <div><h2 className="font-heading text-xl font-bold text-brand-blue">{action.title}</h2><p className="mt-2 text-sm leading-relaxed text-muted">{action.description}</p></div>

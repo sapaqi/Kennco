@@ -6,6 +6,7 @@ type EditorialPhotoHeroProps = {
   description: string
   image: 'help-centre-coffee' | 'careers-workspace' | 'meet-the-team'
   children?: ReactNode
+  sideContent?: ReactNode
 }
 
 const imageHeights = {
@@ -14,7 +15,7 @@ const imageHeights = {
   'meet-the-team': 1076,
 }
 
-export function EditorialPhotoHero({ title, breadcrumb, description, image, children }: EditorialPhotoHeroProps) {
+export function EditorialPhotoHero({ title, breadcrumb, description, image, children, sideContent }: EditorialPhotoHeroProps) {
   return <section className={`information-hero editorial-photo-hero editorial-photo-hero--${image}`} aria-labelledby="editorial-photo-title">
     <div className="container-shell page-hero-heading editorial-photo-hero-inner">
       <div className="editorial-photo-hero-copy">
@@ -35,6 +36,7 @@ export function EditorialPhotoHero({ title, breadcrumb, description, image, chil
         alt=""
         fetchPriority="high"
       />
+      {sideContent && <div className="editorial-photo-hero-side">{sideContent}</div>}
     </div>
   </section>
 }
