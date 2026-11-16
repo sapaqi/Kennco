@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en-IE">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <title>KennCo · Pic2</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap">
+  <style>
+    :root {
+      --font-heading: "Plus Jakarta Sans", sans-serif;
+      --font-sans: Poppins, sans-serif;
+      --color-brand-blue: #035086;
+      --color-ink: #06385b;
+      font-family: var(--font-sans);
+      color: var(--color-ink);
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    .hero { overflow: hidden; background: linear-gradient(105deg, #edf9e7, #e0f2ee 46%, #d1eafa); }
+    .hero-inner {
+      width: min(calc(100% - 3rem), clamp(83rem, 81vw, 110rem));
+      margin-inline: auto;
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      align-items: start;
+      min-block-size: clamp(18rem, 24vw, 21rem);
+      padding-block: 1.5rem 2.5rem;
+    }
+    .hero-title {
+      position: relative;
+      z-index: 1;
+      width: min(46%, 36rem);
+      margin: 3.5rem 0 0;
+      color: var(--color-brand-blue);
+      font: 800 clamp(2rem, 3.3vw, 3.25rem)/1.12 var(--font-heading);
+      letter-spacing: -.04em;
+    }
+    .hero-photo {
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: -2%;
+      display: block;
+      inline-size: 66%;
+      block-size: 100%;
+      object-fit: cover;
+      object-position: var(--photo-position);
+      --upper-fade: radial-gradient(var(--upper-shape, ellipse 129% 126% at 66% 111%),
+        #000 44%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 35%) 66%, rgb(0 0 0 / 10%) 78%, transparent 89%);
+      mask-image:
+        radial-gradient(ellipse 77% 84% at 66% 50%, #000 38%, rgb(0 0 0 / 84%) 60%, transparent 100%),
+        linear-gradient(114deg, transparent 5%, rgb(0 0 0 / 60%) 26%, #000 48% 90%, transparent),
+        var(--upper-fade),
+        linear-gradient(to bottom, transparent, #000 12% 78%, transparent),
+        linear-gradient(to right, #000 72%, rgb(0 0 0 / 78%) 80%, rgb(0 0 0 / 26%) 90%, transparent 96%);
+      mask-composite: intersect;
+    }
+    .pic1 { --photo-position: 50% 56%; }
+    .pic2 { --photo-position: 63% 39%; }
+    .pic3 { --photo-position: 64% 4%; --upper-shape: ellipse 158% 154% at 67% 111%; }
+
+    @media (min-width: 1440px) {
+      :root { font-size: clamp(16px, calc(10.857px + .35714vw), 22px); }
+    }
+    @media (max-width: 1023px) {
+      .hero-inner { min-block-size: 0; grid-template-columns: minmax(0, 1fr); padding-block: 1rem 0; }
+      .hero-title { width: 100%; }
+      .hero-photo {
+        position: relative;
+        inset: auto;
+        justify-self: center;
+        width: 100vw;
+        height: clamp(11.5rem, 37vw, 20rem);
+        margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
+        mask-image: var(--upper-fade),
+          linear-gradient(to bottom, transparent, #000 12% 73%, rgb(0 0 0 / 55%) 88%, transparent);
+      }
+      .pic1 { --photo-position: 50% 55%; }
+      .pic2 { --photo-position: 65% 37%; }
+      .pic3 { --photo-position: 67% 3%; }
+      .hero { --upper-shape: ellipse 168% 145% at 66% 114%; }
+      .pic3 { --upper-shape: ellipse 179% 160% at 67% 110%; }
+    }
+    @media (min-width: 600px) and (max-width: 1023px) {
+      .hero-inner { width: calc(100% - 5rem); }
+      .hero { --upper-shape: ellipse 140% 123% at 68% 109%; }
+      .pic3 { --upper-shape: ellipse 153% 148% at 67% 110%; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section class="hero pic2" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <h1 class="hero-title" id="hero-title">Pic2</h1>
+        <img class="hero-photo" src="assets/shutterstock_521078383.jpg" alt="" width="2048" height="1365" fetchpriority="high">
+      </div>
+    </section>
+  </main>
+</body>
+</html>
