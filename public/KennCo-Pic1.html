@@ -71,7 +71,7 @@
       position: absolute;
       inset-block: 0;
       inset-inline-end: clamp(0rem, 2vw, 2.5rem);
-      inline-size: min(63%, 43rem);
+      inline-size: min(56%, 38rem);
       overflow: hidden;
       mask-image:
         radial-gradient(ellipse 83% 118% at 56% 48%, #000 44%, rgb(0 0 0 / 84%) 60%, transparent 100%),
@@ -120,10 +120,12 @@
         position: relative;
         inset: auto;
         justify-self: center;
-        inline-size: 100vw;
+        inline-size: 90vw;
         block-size: clamp(11.5rem, 37vw, 20rem);
         margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
-        mask-image: linear-gradient(to bottom, #000 93%, rgb(0 0 0 / 60%) 97%, transparent);
+        mask-image:
+          linear-gradient(to bottom, #000 93%, rgb(0 0 0 / 60%) 97%, transparent),
+          linear-gradient(to right, transparent, #000 8% 92%, transparent);
       }
     }
     @media (min-width: 600px) and (max-width: 1023px) {
