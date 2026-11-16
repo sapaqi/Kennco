@@ -65,28 +65,44 @@
       letter-spacing: -.04em;
     }
     .hero-photo {
+      --headroom-rows: 36;
+      --headroom: calc(var(--headroom-rows) * 1px);
+      --photo-source: url("assets/shutterstock_1653287707.jpg");
       position: absolute;
       inset-block: 0;
       inset-inline-end: clamp(0rem, 2vw, 2.5rem);
       display: block;
       inline-size: min(63%, 43rem);
       block-size: 100%;
-      object-fit: cover;
-      object-position: var(--photo-position);
-      --upper-fade: radial-gradient(var(--upper-shape, ellipse 129% 126% at 66% 111%),
-        #000 44%, rgb(0 0 0 / 76%) 54%, rgb(0 0 0 / 35%) 66%, rgb(0 0 0 / 10%) 78%, transparent 89%);
       mask-image:
-        radial-gradient(ellipse 83% 88% at 56% 53%, #000 38%, rgb(0 0 0 / 84%) 60%, transparent 100%),
+        radial-gradient(ellipse 83% 118% at 56% 48%, #000 44%, rgb(0 0 0 / 84%) 60%, transparent 100%),
         linear-gradient(108deg, transparent, rgb(0 0 0 / 70%) 22%, #000 43% 90%, transparent),
         linear-gradient(to right, transparent 4%, rgb(0 0 0 / 32%) 15%, #000 34%),
-        var(--upper-fade),
-        linear-gradient(to bottom, transparent, #000 12% 84%, transparent),
+        linear-gradient(to bottom, transparent, #000 calc(var(--headroom) - 6px) 84%, transparent),
         linear-gradient(to right, #000 72%, rgb(0 0 0 / 78%) 80%, rgb(0 0 0 / 26%) 90%, transparent 96%);
       mask-composite: intersect;
     }
-    .pic1 { --photo-position: 50% 56%; }
-    .pic2 { --photo-position: 63% 39%; }
-    .pic1 { --photo-position: 57% 36%; --upper-shape: ellipse 158% 154% at 57% 111%; }
+    /* Continue the top edge of the photo into the space reserved for the fade. */
+    .hero-photo::before {
+      content: "";
+      position: absolute;
+      inset-inline: 0;
+      inset-block-start: calc(var(--headroom) - 1px);
+      block-size: 1px;
+      background: var(--photo-source) center top / 100% auto no-repeat;
+      transform: scaleY(var(--headroom-rows));
+      transform-origin: bottom;
+    }
+    .hero-photo img {
+      position: absolute;
+      inset-inline: 0;
+      inset-block-start: calc(var(--headroom) - .5px);
+      display: block;
+      inline-size: 100%;
+      block-size: calc(100% - var(--headroom) + .5px);
+      object-fit: cover;
+      object-position: center top;
+    }
 
     @media (min-width: 1440px) {
       :root { font-size: clamp(16px, calc(10.857px + .35714vw), 22px); }
@@ -96,25 +112,19 @@
       .hero-copy { width: min(100%, 36rem); }
       .hero-title { margin-block-start: 1.25rem; }
       .hero-photo {
+        --headroom-rows: 30;
         position: relative;
         inset: auto;
         justify-self: center;
         inline-size: 100vw;
-        block-size: clamp(12.5rem, 43vw, 24rem);
+        block-size: min(clamp(12.5rem, 43vw, 24rem), calc(66.65vw + var(--headroom)));
         margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
-        mask-image: var(--upper-fade),
-          linear-gradient(to bottom, transparent, #000 12% 81%, rgb(0 0 0 / 55%) 88%, transparent);
+        mask-image: linear-gradient(to bottom, transparent,
+          #000 calc(var(--headroom) - 6px) 81%, rgb(0 0 0 / 55%) 88%, transparent);
       }
-      .pic1 { --photo-position: 50% 55%; }
-      .pic2 { --photo-position: 65% 37%; }
-      .pic1 { --photo-position: 60% 35%; }
-      .hero { --upper-shape: ellipse 168% 145% at 66% 114%; }
-      .pic1 { --upper-shape: ellipse 179% 160% at 67% 110%; }
     }
     @media (min-width: 600px) and (max-width: 1023px) {
       .hero-inner { width: calc(100% - 5rem); }
-      .hero { --upper-shape: ellipse 140% 123% at 68% 109%; }
-      .pic1 { --upper-shape: ellipse 153% 148% at 67% 110%; }
     }
   </style>
 </head>
@@ -133,7 +143,9 @@
           <h1 class="hero-title" id="hero-title">Pic1</h1>
           <p class="hero-description">KennCo Insurance is a growing company that understands the importance of nurturing a motivated and skilled workforce.</p>
         </div>
-        <img class="hero-photo" src="assets/shutterstock_1653287707.jpg" alt="" width="2048" height="1365" fetchpriority="high">
+        <div class="hero-photo">
+          <img src="assets/shutterstock_1653287707.jpg" alt="" width="2048" height="1365" fetchpriority="high">
+        </div>
       </div>
     </section>
   </main>
