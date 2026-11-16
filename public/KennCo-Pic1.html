@@ -85,14 +85,11 @@
     .hero-photo-frame {
       position: relative;
       padding-block-start: var(--headroom);
-      /* Keep a shallow fade above the head and let it reach deeper into the background. */
-      mask-image:
-        linear-gradient(to bottom, transparent, #000 12px),
-        radial-gradient(ellipse 31% 87% at 61% 73%, #000 81%, rgb(0 0 0 / 82%) 86%,
-          rgb(0 0 0 / 35%) 93%, transparent 100%),
-        radial-gradient(ellipse 112% 105% at 61% 102%, #000 56%, rgb(0 0 0 / 85%) 67%,
-          rgb(0 0 0 / 45%) 79%, rgb(0 0 0 / 10%) 89%, transparent 99%);
-      mask-composite: intersect, add, add;
+      /* A broad, off-centre fade blends the extension and the photo together. */
+      mask-image: radial-gradient(ellipse 108% 110% at 62% 109%,
+        #000 78%, rgb(0 0 0 / 96%) 82%, rgb(0 0 0 / 84%) 86%,
+        rgb(0 0 0 / 60%) 90%, rgb(0 0 0 / 32%) 94%,
+        rgb(0 0 0 / 9%) 97%, transparent 99%);
     }
     /* Extend the top row into the added headroom. Both use the same mask. */
     .hero-photo-frame::before {
