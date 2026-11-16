@@ -33,10 +33,9 @@
       display: grid;
       align-items: start;
       min-block-size: clamp(18rem, 24vw, 21rem);
+      padding-block: 1.5rem 2.5rem;
     }
     .hero-copy {
-      grid-area: 1 / 1;
-      padding-block: 1.5rem 2.5rem;
       position: relative;
       z-index: 1;
       width: min(50%, 36rem);
@@ -69,11 +68,11 @@
       --headroom-rows: 36;
       --headroom: calc(var(--headroom-rows) * 1px);
       --photo-source: url("assets/shutterstock_1653287707.jpg");
-      position: relative;
-      grid-area: 1 / 1;
-      justify-self: end;
-      margin-inline-end: clamp(0rem, 2vw, 2.5rem);
+      position: absolute;
+      inset-block: 0;
+      inset-inline-end: clamp(0rem, 2vw, 2.5rem);
       inline-size: min(63%, 43rem);
+      overflow: hidden;
       mask-image:
         radial-gradient(ellipse 83% 118% at 56% 48%, #000 44%, rgb(0 0 0 / 84%) 60%, transparent 100%),
         linear-gradient(108deg, transparent, rgb(0 0 0 / 70%) 22%, #000 43% 90%, transparent),
@@ -113,16 +112,17 @@
       :root { font-size: clamp(16px, calc(10.857px + .35714vw), 22px); }
     }
     @media (max-width: 1023px) {
-      .hero-inner { min-block-size: 0; grid-template-columns: minmax(0, 1fr); }
-      .hero-copy { width: min(100%, 36rem); padding-block: 1rem 0; }
+      .hero-inner { min-block-size: 0; grid-template-columns: minmax(0, 1fr); padding-block: 1rem 0; }
+      .hero-copy { width: min(100%, 36rem); }
       .hero-title { margin-block-start: 1.25rem; }
       .hero-photo {
         --headroom-rows: 30;
-        grid-area: auto;
+        position: relative;
+        inset: auto;
         justify-self: center;
         inline-size: 100vw;
-        margin-inline-end: 0;
-        margin-block-start: -.875rem;
+        block-size: clamp(11.5rem, 37vw, 20rem);
+        margin-block-start: clamp(-2rem, -3.5vw, -.875rem);
         mask-image: linear-gradient(to bottom, #000 93%, rgb(0 0 0 / 60%) 97%, transparent);
       }
     }
