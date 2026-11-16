@@ -7,6 +7,13 @@
   <title>KennCo · Pic2</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@800&display=swap">
   <style>
+    @font-face {
+      font-family: Poppins;
+      src: url("assets/fonts/poppins-regular-latin.woff2") format("woff2");
+      font-style: normal;
+      font-weight: 400;
+      font-display: swap;
+    }
     :root {
       --font-heading: "Plus Jakarta Sans", sans-serif;
       --font-sans: Poppins, sans-serif;
@@ -28,11 +35,31 @@
       min-block-size: clamp(18rem, 24vw, 21rem);
       padding-block: 1.5rem 2.5rem;
     }
-    .hero-title {
+    .hero-copy {
       position: relative;
       z-index: 1;
-      width: min(46%, 36rem);
-      margin: 3.5rem 0 0;
+      width: min(50%, 36rem);
+    }
+    .hero-breadcrumb ol {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: .5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: .875rem;
+      line-height: 1.5;
+    }
+    .hero-breadcrumb a { color: inherit; text-underline-offset: .15em; }
+    .hero-description {
+      margin: .875rem 0 0;
+      font-size: clamp(.9375rem, 1.15vw, 1.0625rem);
+      line-height: 1.65;
+      text-wrap: balance;
+    }
+    .hero-title {
+      margin: 2.1875rem 0 0;
       color: var(--color-brand-blue);
       font: 800 clamp(2rem, 3.3vw, 3.25rem)/1.12 var(--font-heading);
       letter-spacing: -.04em;
@@ -51,6 +78,7 @@
       mask-image:
         radial-gradient(ellipse 77% 84% at 66% 50%, #000 38%, rgb(0 0 0 / 84%) 60%, transparent 100%),
         linear-gradient(114deg, transparent 5%, rgb(0 0 0 / 60%) 26%, #000 48% 90%, transparent),
+        linear-gradient(to right, transparent 4%, rgb(0 0 0 / 40%) 15%, #000 30%),
         var(--upper-fade),
         linear-gradient(to bottom, transparent, #000 12% 78%, transparent),
         linear-gradient(to right, #000 72%, rgb(0 0 0 / 78%) 80%, rgb(0 0 0 / 26%) 90%, transparent 96%);
@@ -65,7 +93,8 @@
     }
     @media (max-width: 1023px) {
       .hero-inner { min-block-size: 0; grid-template-columns: minmax(0, 1fr); padding-block: 1rem 0; }
-      .hero-title { width: 100%; }
+      .hero-copy { width: min(100%, 36rem); }
+      .hero-title { margin-block-start: 1.25rem; }
       .hero-photo {
         position: relative;
         inset: auto;
@@ -93,7 +122,17 @@
   <main>
     <section class="hero pic2" aria-labelledby="hero-title">
       <div class="hero-inner">
-        <h1 class="hero-title" id="hero-title">Pic2</h1>
+        <div class="hero-copy">
+          <nav class="hero-breadcrumb" aria-label="Breadcrumb">
+            <ol>
+              <li><a href="/">Home</a></li>
+              <li aria-hidden="true">/</li>
+              <li aria-current="page">Pic2</li>
+            </ol>
+          </nav>
+          <h1 class="hero-title" id="hero-title">Pic2</h1>
+          <p class="hero-description">KennCo Insurance is a growing company that understands the importance of nurturing a motivated and skilled workforce.</p>
+        </div>
         <img class="hero-photo" src="assets/shutterstock_521078383.jpg" alt="" width="2048" height="1365" fetchpriority="high">
       </div>
     </section>
