@@ -49911,4 +49911,18 @@ body :focus-visible { outline: 3px solid #12616b !important; outline-offset: 4px
   #main-content .kennco-info-item { padding-inline:.75rem; gap:.35rem .5rem; }
   #main-content .kennco-info-item > span:last-child > span { font-size:.65rem; }
 }
+</style><style id="brokers-responsive-refinements">
+/* Shorter tablet/mobile hero and simplified section decoration. */
+#main-content [aria-label="Key figures"]::after { display:none !important; }
+#main-content .kennco-info-item { border-inline-start:0 !important; }
+@media(max-width:1023px) {
+  #main-content .kennco-about-hero-photo {
+    height:clamp(12rem,31vw,19rem) !important;
+    object-fit:cover !important;
+    object-position:center top !important;
+    -webkit-mask-image:linear-gradient(to bottom,transparent 0%,rgb(0 0 0 / .12) 12%,rgb(0 0 0 / .55) 27%,#000 43%) !important;
+    mask-image:linear-gradient(to bottom,transparent 0%,rgb(0 0 0 / .12) 12%,rgb(0 0 0 / .55) 27%,#000 43%) !important;
+  }
+  #main-content .kennco-co-hl::after { display:none !important; }
+}
 </style></body></html>
